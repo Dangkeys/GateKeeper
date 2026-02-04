@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 8d9f5147ca9e1244db8b05b1bd4039df
+timeCreated: 1530585741
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 0
+  packageName: POLYGON Mini Fantasy Characters
+  packageVersion: 1.6.2
+  assetPath: Assets/ThirdParty/PolygonMiniFantasyCharacters/Prefabs/Props/Prop_CrystalSwordDouble_01.prefab
+  uploadId: 0
