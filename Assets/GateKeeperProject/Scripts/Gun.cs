@@ -68,7 +68,7 @@ public class Gun : MonoBehaviour
 
             foreach (var hit in hits)
             {
-                currentDamage *= 0.7f;
+                currentDamage *= data.damageReduction;
                 penetrationCount++;
 
                 if (penetrationCount >= data.penetration)

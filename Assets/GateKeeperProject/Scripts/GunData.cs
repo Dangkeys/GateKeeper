@@ -10,6 +10,8 @@ public class GunData : ScriptableObject
     public float headshotMultiplier = 2f;
     public float range = 100f;
     public float penetration = 1f;
+    public float damageReduction = 0.7f;
+
 
     [Header("Fire Settings")]
     public float fireRate = 5f; 
