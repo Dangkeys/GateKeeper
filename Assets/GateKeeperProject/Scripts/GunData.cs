@@ -5,6 +5,7 @@ public class GunData : ScriptableObject
 {
     [Header("Type")]
     public bool isAutoGun = true;
+    public WeaponType type = WeaponType.Pistol;
     [Header("Damage")]
     public float flatDamage = 20f;
     public float headshotMultiplier = 2f;

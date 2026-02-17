@@ -9,16 +9,29 @@ public class Gun : MonoBehaviour
     [SerializeField] private GunData data;
     [SerializeField] private float recoilReturnSpeed = 8f;
     [SerializeField] private TMP_Text ammoText;  
+    [SerializeField] private AmmoSystem ammoSystem;
     private float recoilTarget;
     private float recoilCurrent; 
     private float nextFireTime;
     private int currentAmmo;
+    private float currentReload;
+    private int ammo;
 
     void Start()
     {
         data = Instantiate(data);
         currentAmmo = data.magazineSize;
         UpdateAmmo();
+    }
+
+    void OnEnable()
+    {
+        ammoSystem.OnAmmoChanged += UpdateUI;
+    }
+
+    void OnDisable()
+    {
+        ammoSystem.OnAmmoChanged -= UpdateUI;
     }
 
     void Update()
@@ -32,8 +45,16 @@ public class Gun : MonoBehaviour
         }
         if(currentAmmo == 0)
         {
-            currentAmmo = data.magazineSize;
-            UpdateAmmo();
+            if(currentReload > data.reloadTime)
+            {
+                currentReload = 0;
+                currentAmmo = ammoSystem.UseAmmo(data.type, data.magazineSize);
+                UpdateAmmo();
+            }
+            else
+            {
+                currentReload += Time.deltaTime;
+            }
         }
     }
 
@@ -60,7 +81,7 @@ public class Gun : MonoBehaviour
 
             Debug.DrawRay(ray.origin, ray.direction * data.range, Color.red, 1f);
 
-            RaycastHit[] hits = Physics.RaycastAll(ray, data.range);
+            RaycastHit[] hits = Physics.SphereCastAll(ray, data.bulletSize, data.range);
             System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
             int penetrationCount = 0;
@@ -121,8 +142,16 @@ public class Gun : MonoBehaviour
         }
     }
 
+    private void UpdateUI(WeaponType type, int newAmmo)
+    {
+        if(type == data.type)
+        {
+            ammo = newAmmo;
+        }
+    }
+
     private void UpdateAmmo()
     {
-        ammoText.text = currentAmmo.ToString() + " / " + data.magazineSize.ToString();
+        ammoText.text = currentAmmo.ToString() + " / " + ammo.ToString();
     }
 }
