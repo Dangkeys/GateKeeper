@@ -14,24 +14,24 @@ public class Gun : MonoBehaviour
     private float recoilCurrent; 
     private float nextFireTime;
     private int currentAmmo;
-    private float currentReload;
-    private int ammo;
+    private float currentReloadTime;
+    private int totalAmmo;
 
     void Start()
     {
         data = Instantiate(data);
         currentAmmo = data.magazineSize;
-        UpdateAmmo();
+        UpdateAmmoUI();
     }
 
     void OnEnable()
     {
-        ammoSystem.OnAmmoChanged += UpdateUI;
+        ammoSystem.OnAmmoChanged += UpdateAmmo;
     }
 
     void OnDisable()
     {
-        ammoSystem.OnAmmoChanged -= UpdateUI;
+        ammoSystem.OnAmmoChanged -= UpdateAmmo;
     }
 
     void Update()
@@ -45,15 +45,14 @@ public class Gun : MonoBehaviour
         }
         if(currentAmmo == 0)
         {
-            if(currentReload > data.reloadTime)
+            if(currentReloadTime > data.reloadTime)
             {
-                currentReload = 0;
-                currentAmmo = ammoSystem.UseAmmo(data.type, data.magazineSize);
-                UpdateAmmo();
+                currentReloadTime = 0;
+                ammoSystem.UseAmmo(data.type, data.magazineSize);
             }
             else
             {
-                currentReload += Time.deltaTime;
+                currentReloadTime += Time.deltaTime;
             }
         }
     }
@@ -70,7 +69,7 @@ public class Gun : MonoBehaviour
             Random.Range(0f, 100f) > data.freeAmmoPercent)
         {
             currentAmmo--;
-            UpdateAmmo();
+            UpdateAmmoUI();
         }
 
         for (int i = 0; i < data.pelletCount; i++)
@@ -142,16 +141,18 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private void UpdateUI(WeaponType type, int newAmmo)
+    private void UpdateAmmo(WeaponType type, int recieve, int total)
     {
         if(type == data.type)
         {
-            ammo = newAmmo;
+            currentAmmo += recieve;
+            totalAmmo = total;
+            UpdateAmmoUI();
         }
     }
 
-    private void UpdateAmmo()
+    private void UpdateAmmoUI()
     {
-        ammoText.text = currentAmmo.ToString() + " / " + ammo.ToString();
+        ammoText.text = currentAmmo.ToString() + " / " + totalAmmo.ToString();
     }
 }
