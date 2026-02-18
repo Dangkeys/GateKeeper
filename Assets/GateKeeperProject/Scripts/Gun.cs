@@ -9,16 +9,29 @@ public class Gun : MonoBehaviour
     [SerializeField] private GunData data;
     [SerializeField] private float recoilReturnSpeed = 8f;
     [SerializeField] private TMP_Text ammoText;  
+    [SerializeField] private AmmoSystem ammoSystem;
     private float recoilTarget;
     private float recoilCurrent; 
     private float nextFireTime;
     private int currentAmmo;
+    private float currentReloadTime;
+    private int totalAmmo;
 
     void Start()
     {
         data = Instantiate(data);
         currentAmmo = data.magazineSize;
-        UpdateAmmo();
+        UpdateAmmoUI();
+    }
+
+    void OnEnable()
+    {
+        ammoSystem.OnAmmoChanged += UpdateAmmo;
+    }
+
+    void OnDisable()
+    {
+        ammoSystem.OnAmmoChanged -= UpdateAmmo;
     }
 
     void Update()
@@ -32,8 +45,15 @@ public class Gun : MonoBehaviour
         }
         if(currentAmmo == 0)
         {
-            currentAmmo = data.magazineSize;
-            UpdateAmmo();
+            if(currentReloadTime > data.reloadTime)
+            {
+                currentReloadTime = 0;
+                ammoSystem.UseAmmo(data.type, data.magazineSize);
+            }
+            else
+            {
+                currentReloadTime += Time.deltaTime;
+            }
         }
     }
 
@@ -49,7 +69,7 @@ public class Gun : MonoBehaviour
             Random.Range(0f, 100f) > data.freeAmmoPercent)
         {
             currentAmmo--;
-            UpdateAmmo();
+            UpdateAmmoUI();
         }
 
         for (int i = 0; i < data.pelletCount; i++)
@@ -60,7 +80,7 @@ public class Gun : MonoBehaviour
 
             Debug.DrawRay(ray.origin, ray.direction * data.range, Color.red, 1f);
 
-            RaycastHit[] hits = Physics.RaycastAll(ray, data.range);
+            RaycastHit[] hits = Physics.SphereCastAll(ray, data.bulletSize, data.range);
             System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
             int penetrationCount = 0;
@@ -121,8 +141,18 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private void UpdateAmmo()
+    private void UpdateAmmo(WeaponType type, int recieve, int total)
     {
-        ammoText.text = currentAmmo.ToString() + " / " + data.magazineSize.ToString();
+        if(type == data.type)
+        {
+            currentAmmo += recieve;
+            totalAmmo = total;
+            UpdateAmmoUI();
+        }
+    }
+
+    private void UpdateAmmoUI()
+    {
+        ammoText.text = currentAmmo.ToString() + " / " + totalAmmo.ToString();
     }
 }
