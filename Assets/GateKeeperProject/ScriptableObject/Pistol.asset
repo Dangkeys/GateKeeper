@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: Assembly-CSharp::GunData
   isAutoGun: 0
+  type: 0
   flatDamage: 10
   headshotMultiplier: 2
   range: 30
@@ -22,6 +23,7 @@ MonoBehaviour:
   recoil: 3
   recoilReduction: 0.5
   maximumRecoil: 15
+  RecoilRecoveryTime: 0.5
   magazineSize: 10
   reloadTime: 2
   freeAmmoPercent: 0

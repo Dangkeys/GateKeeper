@@ -16,6 +16,8 @@ public class Gun : MonoBehaviour
     private int currentAmmo;
     private float currentReloadTime;
     private int totalAmmo;
+    private float currentRecoveryTime;
+    private bool isRecovery;
 
     void Start()
     {
@@ -37,7 +39,6 @@ public class Gun : MonoBehaviour
     void Update()
     {
         bool isShooting = data.isAutoGun ? shootInput.action.IsPressed() : shootInput.action.WasPressedThisFrame();
-        UpdateRecoil(isShooting);
 
         if (isShooting)
         {
@@ -55,6 +56,20 @@ public class Gun : MonoBehaviour
                 currentReloadTime += Time.deltaTime;
             }
         }
+        if(isShooting)
+        {
+            currentRecoveryTime = 0;
+            isRecovery = false;
+        }
+        else if(currentRecoveryTime < data.RecoilRecoveryTime)
+        {
+            currentRecoveryTime += Time.deltaTime;
+        }
+        if(currentRecoveryTime >= data.RecoilRecoveryTime)
+        {
+            isRecovery = true;
+        }
+        UpdateRecoil();
     }
 
     private void TryShoot()
@@ -101,15 +116,16 @@ public class Gun : MonoBehaviour
 
     private Vector3 GetSpreadDirection()
     {
-        float randomX = Random.Range(-data.spreadAngle, data.spreadAngle);
-        float randomY = Random.Range(-data.spreadAngle, data.spreadAngle);
+        float spread = data.spreadAngle + recoilCurrent;
+        float randomX = Random.Range(-spread, spread);
+        float randomY = Random.Range(-spread, spread);
 
         Quaternion spreadRotation = Quaternion.Euler(randomX, randomY, 0f);
 
         return spreadRotation * firePoint.forward;
     }
 
-    private void UpdateRecoil(bool isShooting)
+    private void UpdateRecoil()
     {
         recoilCurrent = Mathf.Lerp(
             recoilCurrent,
@@ -117,7 +133,7 @@ public class Gun : MonoBehaviour
             15f * Time.deltaTime
         );
 
-        if (!isShooting)
+        if (isRecovery)
         {
             recoilTarget = Mathf.Lerp(
                 recoilTarget,
