@@ -19,6 +19,7 @@ public class GunData : ScriptableObject
     public float recoil = 2f;
     public float recoilReduction = 0.5f;
     public float maximumRecoil = 10f;
+    public float RecoilRecoveryTime = 0.5f;
 
     [Header("Ammo")]
     public int magazineSize = 30;
