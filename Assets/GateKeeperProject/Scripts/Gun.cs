@@ -11,7 +11,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private TMP_Text ammoText;  
     [SerializeField] private AmmoSystem ammoSystem;
     private float recoilTarget;
-    private float recoilCurrent; 
+    private float currentRecoil; 
     private float nextFireTime;
     private int currentAmmo;
     private float currentReloadTime;
@@ -116,7 +116,7 @@ public class Gun : MonoBehaviour
 
     private Vector3 GetSpreadDirection()
     {
-        float spread = data.spreadAngle + recoilCurrent;
+        float spread = data.spreadAngle + currentRecoil;
         float randomX = Random.Range(-spread, spread);
         float randomY = Random.Range(-spread, spread);
 
@@ -127,8 +127,8 @@ public class Gun : MonoBehaviour
 
     private void UpdateRecoil()
     {
-        recoilCurrent = Mathf.Lerp(
-            recoilCurrent,
+        currentRecoil = Mathf.Lerp(
+            currentRecoil,
             recoilTarget,
             15f * Time.deltaTime
         );
@@ -142,7 +142,7 @@ public class Gun : MonoBehaviour
             );
         }
 
-        transform.localRotation = Quaternion.Euler(-recoilCurrent, 0f, 0f);
+        transform.localRotation = Quaternion.Euler(-currentRecoil, 0f, 0f);
     }
 
     private void ApplyRecoil()
