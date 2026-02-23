@@ -1,0 +1,174 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class Gun : MonoBehaviour
+{
+    [SerializeField] private InputActionReference shootInput;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GunData data;
+    [SerializeField] private float recoilReturnSpeed = 8f;
+    [SerializeField] private TMP_Text ammoText;  
+    [SerializeField] private AmmoSystem ammoSystem;
+    private float recoilTarget;
+    private float currentRecoil; 
+    private float nextFireTime;
+    private int currentAmmo;
+    private float currentReloadTime;
+    private int totalAmmo;
+    private float currentRecoveryTime;
+    private bool isRecovery;
+
+    void Start()
+    {
+        data = Instantiate(data);
+        currentAmmo = data.magazineSize;
+        UpdateAmmoUI();
+    }
+
+    void OnEnable()
+    {
+        ammoSystem.OnAmmoChanged += UpdateAmmo;
+    }
+
+    void OnDisable()
+    {
+        ammoSystem.OnAmmoChanged -= UpdateAmmo;
+    }
+
+    void Update()
+    {
+        bool isShooting = data.isAutoGun ? shootInput.action.IsPressed() : shootInput.action.WasPressedThisFrame();
+
+        if (isShooting)
+        {
+            TryShoot();
+        }
+        if(currentAmmo == 0)
+        {
+            if(currentReloadTime > data.reloadTime)
+            {
+                currentReloadTime = 0;
+                ammoSystem.UseAmmo(data.type, data.magazineSize);
+            }
+            else
+            {
+                currentReloadTime += Time.deltaTime;
+            }
+        }
+        if(isShooting)
+        {
+            currentRecoveryTime = 0;
+            isRecovery = false;
+        }
+        else if(currentRecoveryTime < data.RecoilRecoveryTime)
+        {
+            currentRecoveryTime += Time.deltaTime;
+        }
+        if(currentRecoveryTime >= data.RecoilRecoveryTime)
+        {
+            isRecovery = true;
+        }
+        UpdateRecoil();
+    }
+
+    private void TryShoot()
+    {
+
+        if (Time.time < nextFireTime) return;
+        if (currentAmmo <= 0) return;
+
+        nextFireTime = Time.time + 1f / data.fireRate;
+
+        if (data.freeAmmoPercent <= 0f ||
+            Random.Range(0f, 100f) > data.freeAmmoPercent)
+        {
+            currentAmmo--;
+            UpdateAmmoUI();
+        }
+
+        for (int i = 0; i < data.pelletCount; i++)
+        {
+            Vector3 spreadDirection = GetSpreadDirection();
+
+            Ray ray = new Ray(firePoint.position, spreadDirection);
+
+            Debug.DrawRay(ray.origin, ray.direction * data.range, Color.red, 1f);
+
+            RaycastHit[] hits = Physics.SphereCastAll(ray, data.bulletSize, data.range);
+            System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+            int penetrationCount = 0;
+            float currentDamage = data.flatDamage;
+
+            foreach (var hit in hits)
+            {
+                currentDamage *= data.damageReduction;
+                penetrationCount++;
+
+                if (penetrationCount >= data.penetration)
+                    break;
+            }
+        }
+
+        ApplyRecoil();
+    }
+
+    private Vector3 GetSpreadDirection()
+    {
+        float spread = data.spreadAngle + currentRecoil;
+        float randomX = Random.Range(-spread, spread);
+        float randomY = Random.Range(-spread, spread);
+
+        Quaternion spreadRotation = Quaternion.Euler(randomX, randomY, 0f);
+
+        return spreadRotation * firePoint.forward;
+    }
+
+    private void UpdateRecoil()
+    {
+        currentRecoil = Mathf.Lerp(
+            currentRecoil,
+            recoilTarget,
+            15f * Time.deltaTime
+        );
+
+        if (isRecovery)
+        {
+            recoilTarget = Mathf.Lerp(
+                recoilTarget,
+                0f,
+                recoilReturnSpeed * Time.deltaTime
+            );
+        }
+
+        transform.localRotation = Quaternion.Euler(-currentRecoil, 0f, 0f);
+    }
+
+    private void ApplyRecoil()
+    {
+        float finalRecoil = data.recoil - data.recoilReduction;
+
+        recoilTarget += finalRecoil;
+
+        if(recoilTarget > data.maximumRecoil)
+        {
+            recoilTarget = data.maximumRecoil;
+        }
+    }
+
+    private void UpdateAmmo(WeaponType type, int recieve, int total)
+    {
+        if(type == data.type)
+        {
+            currentAmmo += recieve;
+            totalAmmo = total;
+            UpdateAmmoUI();
+        }
+    }
+
+    private void UpdateAmmoUI()
+    {
+        ammoText.text = currentAmmo.ToString() + " / " + totalAmmo.ToString();
+    }
+}
