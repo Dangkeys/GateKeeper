@@ -25,13 +25,13 @@ public class Sprint : MonoBehaviour
     void OnEnable()
     {
         sprintInput.action.started += TrySprint;
-        sprintInput.action.canceled += TryNotSprint;
+        sprintInput.action.canceled += CancelSprint;
     }
 
     void OnDisable()
     {
         sprintInput.action.started -= TrySprint;
-        sprintInput.action.canceled -= TryNotSprint;
+        sprintInput.action.canceled -= CancelSprint;
     }
 
     void Update()
@@ -70,7 +70,7 @@ public class Sprint : MonoBehaviour
         }
     }
 
-    private void TryNotSprint(InputAction.CallbackContext context)
+    private void CancelSprint(InputAction.CallbackContext context)
     {
         isSprint = false;
         dynamicMoveProvider.moveSpeed = initSpeed;
