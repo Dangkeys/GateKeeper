@@ -1,0 +1,119 @@
+@startmindmap
+<style>
+mindmapDiagram {
+  node {
+    BackgroundColor white
+    StrokeColor #333
+  }
+  :depth(0) {
+      BackgroundColor #8A2BE2
+      FontColor white
+      FontSize 20
+  }
+  :depth(1) {
+      BackgroundColor #E6E6FA
+      StrokeColor #8A2BE2
+  }
+}
+</style>
+
++ VR Ragnarok\n(Theme: God's Game Show)
+++ Player Controller
++++ Movement
+++++ Smooth Locomotion
+++++ Sprint & Stamina Logic
+++++ **Comfort: Tunneling/Vignette (Anti-Motion Sickness)?**
++++ Interaction
+++++ Dual Wielding (Akimbo System)
+++++ Weapon Wheel
+++++ Object Interaction
++++ Input Mapping
+++++ Left Hand (Move, Fire, Inventory Wheel)
+++++ Right Hand (Turn, Fire, Inventory Wheel, Utils)
+
+++ Combat System
++++ Weapon Mechanics
+++++ Projectile & Ballistics
+++++ Recoil Simulation
+++++ Reload Logic
++++ Arsenal
+++++ Pistol (Starter)
+++++ SMG (High Fire Rate)
+++++ Shotgun (Spread)
+++++ Sniper (No Zoom)
+++++ Assault Rifle
++++ Stats
+++++ Flat Damage
+++++ Fire rates
+++++ Magazine size
+++++ Reload time
+++++ Bullet size
+++++ Penentration
+++++ Head shot damage multiply
+++++ Reduce decoil
+++++ Range
+++++ Free Ammo % 
+
+++ Roguelike Loop
++++ **Game State**
+++++ **Lobby / Safe Zone (Tutorial Area?)**
+++++ **Pause State**
+++++ **Game Over State**
++++ Wave Manager
+++++ Enemy Spawning Logic
+++++ Difficulty Scaling
++++ Reward System (God's Store)
+++++ RNG Logic (Weighted Random)
+++++ Blesses
++++++ Reduce Damage Taken
++++++ Increase Max Health
++++++ Increase Damage dealt
++++++ Move speed
++++++ Increase Stamina
++++++ Increase ammo drop rate
++++++ Increase util drop rate
++++ Loot Drops
+++++ Ammo Packs
+++++ Utilities (Medkit, Potions)
+
+++ AI & Enemies
++++ Behaviors
+++++ Pathfinding (NavMesh)
+++++ Attack Patterns
++++ Enemy Types
+++++ Skeleton
+++++ Zombie (Tanky)
+++++ Demon
+++++ Orc Baby / Skeleton Baby
+
+++ Polish & Juice
++++ Audio
+++++ **Announcer Voice ("Wave Start!", "Double Kill!")**
+++++ Background Music
+++++ SFX (Footsteps, Gunshots)
++++ Visual Effects (VFX)
+++++ Blood Splat (On Hit)
+++++ Muzzle Flash / Bullet Trails
+++++ Enemy Dissolve (On Death)
+++++ **Damage Vignette (Red screen when hit)**
++++ Haptics
+++++ Controller Vibration
+
+++ Tech & Optimization
++++ **Object Pooling (Bullets, Enemies, Text popups)**
++++ **Occlusion Culling**
++++ **Baked Lighting (Lightmaps)**
++++ **Quality Settings (Low/Med/High)**
+
+++ User Interface
++++ HUD (Display over the wrist)
+++++ Health
+++++ Stamina
+++++ Ammo
+++++ Weapon Wheel
++++ God Blessing: Select 1 of 3 Cards
++++ Main Menu / Settings
++++ Leaderboard
++++ Death Screen
+
+@endmindmap
