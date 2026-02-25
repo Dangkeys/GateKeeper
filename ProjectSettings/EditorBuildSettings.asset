@@ -15,6 +15,7 @@ EditorBuildSettings:
     path: Assets/GateKeeperProject/Scenes/MainScene.unity
     guid: 42131e2225b8307469d43ced745e5524
   m_configObjects:
+    com.unity.dt.app-ui: {fileID: 11400000, guid: 99f9c9493070a9d4c979a8fec7c5a8d3, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: c79bd9251ea1c1641b4b30abb12bf470, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 59d7762653c725f43842bafd50150f91, type: 2}

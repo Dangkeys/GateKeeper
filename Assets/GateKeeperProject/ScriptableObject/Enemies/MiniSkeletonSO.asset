@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ed93ea1d1d7264d8ed6c472cb40f46, type: 3}
+  m_Name: MiniSkeletonSO
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDataSO
+  <EnemyPrefabVisualList>k__BackingField:
+  - {fileID: 1652301575089508, guid: 7281e574c8fc0fe4c9da63ce008ae54b, type: 3}
+  - {fileID: 1181921010304908, guid: ad5d192ff58055741beb3d8e0e2466e6, type: 3}
+  - {fileID: 1013326358641868, guid: 35986e10285ed2c4a859713deff1b9de, type: 3}
+  - {fileID: 1627716094429072, guid: 3ada75d5a14bfc7479435d96f13b248e, type: 3}
+  - {fileID: 1944628432748810, guid: fe9db8c6cb8cd5349a930a01b4931507, type: 3}
+  <Name>k__BackingField: MiniSkeleton
+  <MaxHealth>k__BackingField: 100
+  <DamageReductionRate>k__BackingField: 1
+  <MoveSpeed>k__BackingField: 5
+  <StoppingDistance>k__BackingField: 1.5
+  <RotationSpeed>k__BackingField: 120
+  <DealDamageAmount>k__BackingField: 10
+  <AttackRange>k__BackingField: 2
+  <AttackCooldown>k__BackingField: 1.5
+  <Type>k__BackingField: 1
+  <scoreValue>k__BackingField: 100

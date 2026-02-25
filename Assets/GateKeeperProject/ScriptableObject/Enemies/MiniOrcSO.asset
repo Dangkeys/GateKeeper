@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ed93ea1d1d7264d8ed6c472cb40f46, type: 3}
+  m_Name: MiniOrcSO
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDataSO
+  <EnemyPrefabVisualList>k__BackingField:
+  - {fileID: 1906022184173130, guid: 425a7a28888869b4bb0df40aa65e26bf, type: 3}
+  - {fileID: 1152512832814340, guid: 50818c83516699c47b45ef4e84cdba90, type: 3}
+  - {fileID: 1772087364770496, guid: badeb88086af5f2499be1af06a7bb438, type: 3}
+  - {fileID: 1880296544152820, guid: 7cba755559c5ca34da07bd8d24eeba60, type: 3}
+  - {fileID: 1895674993587318, guid: 55db12455fc8ee44c8568137898687d7, type: 3}
+  - {fileID: 1009295489438026, guid: 66e77aa60f5941c4fac8214300600242, type: 3}
+  <Name>k__BackingField: MiniOrc
+  <MaxHealth>k__BackingField: 100
+  <DamageReductionRate>k__BackingField: 1
+  <MoveSpeed>k__BackingField: 5
+  <StoppingDistance>k__BackingField: 1.5
+  <RotationSpeed>k__BackingField: 120
+  <DealDamageAmount>k__BackingField: 10
+  <AttackRange>k__BackingField: 2
+  <AttackCooldown>k__BackingField: 1.5
+  <Type>k__BackingField: 1
+  <scoreValue>k__BackingField: 100
