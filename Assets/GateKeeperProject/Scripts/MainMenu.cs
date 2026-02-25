@@ -18,5 +18,6 @@ public class MainMenuScript : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("MainScene");
+        Debug.Log("Start Game");
     }
 }
