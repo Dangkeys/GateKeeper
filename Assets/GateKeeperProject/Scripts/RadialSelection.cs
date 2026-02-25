@@ -12,7 +12,10 @@ public class RadialSelection : MonoBehaviour
     public Transform radialPartCanvas;
     public Transform handTranform;
     public float angleBetweenParts = 10f;
-    public float spawnDistance = 0.3f;
+    public float spawnDistance = 10.0f;
+    public Sprite[] icons;
+    public float iconDistance = 100f;
+    public float iconSize = 50f;
     public UnityEvent<int> onPartSelected;
     private List<GameObject> spawnedParts = new List<GameObject>();
     private int currentSelectedRadialPart = -1;
@@ -96,7 +99,34 @@ public class RadialSelection : MonoBehaviour
             spawnedRadialPart.transform.position = radialPartCanvas.position;
             spawnedRadialPart.transform.localEulerAngles = radialPartEulerAngles;
             spawnedRadialPart.GetComponent<Image>().fillAmount = (1f / (float)numberOfRadialPart) - (angleBetweenParts/360f);
-        
+
+            if (icons != null && i < icons.Length && icons[i] != null)
+            {
+                GameObject iconObj = new GameObject("Icon", typeof(RectTransform), typeof(Image));
+                iconObj.transform.SetParent(spawnedRadialPart.transform, false);
+
+                float fillAngle = ((360f / numberOfRadialPart) - angleBetweenParts);
+                float halfFillRad = (fillAngle / 2f) * Mathf.Deg2Rad;
+                Vector2 iconLocalPos = new Vector2(Mathf.Sin(halfFillRad), Mathf.Cos(halfFillRad)) * iconDistance;
+
+                RectTransform iconRect = iconObj.GetComponent<RectTransform>();
+                iconRect.anchoredPosition = iconLocalPos;
+
+                Rect spriteRect = icons[i].rect;
+                float aspect = spriteRect.width / spriteRect.height;
+                if (aspect >= 1f)
+                    iconRect.sizeDelta = new Vector2(iconSize, iconSize / aspect);
+                else
+                    iconRect.sizeDelta = new Vector2(iconSize * aspect, iconSize);
+
+                iconRect.localEulerAngles = new Vector3(0, 0, -angle);
+
+                Image iconImage = iconObj.GetComponent<Image>();
+                iconImage.sprite = icons[i];
+                iconImage.preserveAspect = true;
+                iconImage.raycastTarget = false;
+            }
+
             spawnedParts.Add(spawnedRadialPart);
         }
     }
