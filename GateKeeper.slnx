@@ -1,4 +1,4 @@
-<Solution>
+﻿<Solution>
   <Project Path="MoreMountains.Tools.csproj" />
   <Project Path="UniRx.csproj" />
   <Project Path="AssetInventory.Editor.csproj" />
@@ -6,11 +6,6 @@
   <Project Path="MoreMountains.Tools.Editor.csproj" />
   <Project Path="UniRx.Examples.csproj" />
   <Project Path="Lofelt.NiceVibrations.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
-  <Project Path="UniRx.Examples.csproj" />
-  <Project Path="Unity.XR.Management.Samples.csproj" />
-  <Project Path="Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj" />
-  <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.Samples.DeviceSimulator.csproj" />
   <Project Path="Lofelt.NiceVibrations.Demo.csproj" />
   <Project Path="Lofelt.NiceVibrations.Editor.csproj" />
@@ -18,7 +13,7 @@
   <Project Path="Unity.XR.Management.Samples.Editor.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.Samples.StarterAssets.csproj" />
   <Project Path="AssetInventory.JD.EditorAudioUtils.Editor.csproj" />
-  <Project Path="CodeStage.Package2Folder.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
   <Project Path="AssetInventory.Examples.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.Samples.StarterAssets.Editor.csproj" />
