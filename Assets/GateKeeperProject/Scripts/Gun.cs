@@ -104,7 +104,6 @@ public class Gun : MonoBehaviour
             foreach (var hit in hits)
             {
                 if (!hit.collider.CompareTag("Enemy") && !hit.collider.CompareTag("EnemyHead")) continue;
-                Debug.Log("Hi");
                 IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
                 if (damageable == null) continue;
 
