@@ -95,7 +95,7 @@ public class Gun : MonoBehaviour
 
             Debug.DrawRay(ray.origin, ray.direction * data.range, Color.red, 1f);
 
-            RaycastHit[] hits = Physics.SphereCastAll(ray, data.bulletSize, data.range);
+            RaycastHit[] hits = Physics.SphereCastAll(ray, data.bulletSize, data.range, 1 << 7, QueryTriggerInteraction.Collide);
             System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
             int penetrationCount = 0;
@@ -103,8 +103,19 @@ public class Gun : MonoBehaviour
 
             foreach (var hit in hits)
             {
+                if (!hit.collider.CompareTag("Enemy") && !hit.collider.CompareTag("EnemyHead")) continue;
+                IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
+                if (damageable == null) continue;
+
+                float finalDamage = currentDamage;
+
+                if (hit.collider.CompareTag("EnemyHead"))
+                    finalDamage *= data.headshotMultiplier;
+
+                damageable.TakeDamage(finalDamage);
+
                 currentDamage *= data.damageReduction;
-                penetrationCount++;
+                penetrationCount++; 
 
                 if (penetrationCount >= data.penetration)
                     break;
