@@ -33,13 +33,14 @@ public class Enemy : MonoBehaviour, IAttackable
     }
     private void DamageTakenEvent(float currentHealth)
     {
-        Debug.Log(gameObject.name +  " damaged!" + ", CurrentHealth:"  + currentHealth);
+        // Debug.Log(gameObject.name +  " damaged!" + ", CurrentHealth:"  + currentHealth);
     }
 
     private void DeathEvent()
     {
         agent.enabled = false;
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+        // gameObject.SetActive(false);
     }
 
     public void Initialize(EnemyStatSO stat)
