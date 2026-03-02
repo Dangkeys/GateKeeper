@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 1013326358641868, guid: 35986e10285ed2c4a859713deff1b9de, type: 3}
   - {fileID: 1627716094429072, guid: 3ada75d5a14bfc7479435d96f13b248e, type: 3}
   - {fileID: 1944628432748810, guid: fe9db8c6cb8cd5349a930a01b4931507, type: 3}
+  <SizeConfigSo>k__BackingField: {fileID: 11400000, guid: f0c9bcea5d48b724b8e34da7c579fd78, type: 2}
   <Name>k__BackingField: MiniSkeleton
   <MaxHealth>k__BackingField: 100
   <DamageReductionRate>k__BackingField: 1

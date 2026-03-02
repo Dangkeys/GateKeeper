@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "EnemyDataSO", menuName = "Scriptable Objects/EnemyDataSO")]
-public class EnemyDataSO : ScriptableObject
+[CreateAssetMenu(fileName = "EnemyStatSO", menuName = "Scriptable Objects/EnemyStatSO")]
+public class EnemyStatSO : ScriptableObject
 {
     public enum AgentType
     {
@@ -15,6 +16,9 @@ public class EnemyDataSO : ScriptableObject
     [Header("Visuals")]
     [Tooltip("List of possible prefabs for this enemy type to provide variety.")]
     [field: SerializeField] public List<GameObject> EnemyPrefabVisualList { get; private set; }
+
+
+    [Header("Collider")] [field: FormerlySerializedAs("<ColliderSO>k__BackingField")] [field: SerializeField] public EnemySizeConfigSO SizeConfigSo {get; private set;}
 
     [Header("Identity")]
     [field: SerializeField] public string Name { get; private set; }
@@ -69,4 +73,6 @@ public class EnemyDataSO : ScriptableObject
     {
         return GetNavMeshAgentID(Type.ToString());
     }
+    
+    
 }

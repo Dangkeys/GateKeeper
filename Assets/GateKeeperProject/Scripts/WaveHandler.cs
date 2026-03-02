@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Serialization;
 
 public class WaveHandler : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class WaveHandler : MonoBehaviour
 
             if (bestPoint != null)
             {
-                SpawnEnemy(selection.data, bestPoint);
+                SpawnEnemy(selection.stat, bestPoint);
                 currentBudget -= selection.cost;
             }
 
@@ -80,13 +81,13 @@ public class WaveHandler : MonoBehaviour
         return finalPoint.transform;
     }
 
-    private void SpawnEnemy(EnemyDataSO data, Transform spot)
+    private void SpawnEnemy(EnemyStatSO stat, Transform spot)
     {
 
         Vector2 randomOffset = Random.insideUnitCircle * randomSpawnOffset;
         Vector3 spawnPosition = spot.position + new Vector3(randomOffset.x, 0, randomOffset.y);
         Enemy enemy = Instantiate(enemyPrefab, spot.position, spot.rotation);
-        enemy.Initialize(data);
+        enemy.Initialize(stat);
 
     }
 }
@@ -94,6 +95,6 @@ public class WaveHandler : MonoBehaviour
 [System.Serializable]
 public class EnemySpawnConfig
 {
-    public EnemyDataSO data;
+    [FormerlySerializedAs("data")] public EnemyStatSO stat;
     public int cost;
 }
