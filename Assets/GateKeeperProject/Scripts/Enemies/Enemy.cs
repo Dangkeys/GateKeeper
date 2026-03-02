@@ -1,10 +1,12 @@
+using System;
 using System.Collections.Generic;
+using GateKeeperProject.Scripts;
 using JetBrains.Annotations;
 using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy : MonoBehaviour, IAttackable
 {
     private NavMeshAgent agent;
     private EnemyStatSO currentStat;
@@ -14,11 +16,30 @@ public class Enemy : MonoBehaviour, IDamageable
     private const string DistanceThresholdVariable = "distanceThreshold";
     private const string AnimatorSpeedVariable = "animatorSpeedParam";
 
+    [SerializeField] private Health health;
+
     private GameObject enemyVisual;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        health.OnDamageTaken += DamageTakenEvent;
+        health.OnDeath += DeathEvent;
+    }
+    private void OnDestroy()
+    {
+        health.OnDamageTaken -= DamageTakenEvent;
+        health.OnDeath -= DeathEvent;
+    }
+    private void DamageTakenEvent(float currentHealth)
+    {
+        Debug.Log(gameObject.name +  " damaged!" + ", CurrentHealth:"  + currentHealth);
+    }
+
+    private void DeathEvent()
+    {
+        agent.enabled = false;
+        gameObject.SetActive(false);
     }
 
     public void Initialize(EnemyStatSO stat)
@@ -28,12 +49,15 @@ public class Enemy : MonoBehaviour, IDamageable
         
         enemyVisual = Instantiate(currentStat.GetRandomVisual(), gameObject.transform);
         
+        health.InitAndSetMaxHealth(currentStat.MaxHealth);
+        
         InitializeColliders();
         InitializeAgent();
         InitializeBehaviorGraphAgent();
 
     }
-
+    
+    
     private void InitializeAgent()
     {
         // 2. Map NavMesh Agent Settings
@@ -116,28 +140,12 @@ public class Enemy : MonoBehaviour, IDamageable
 
         return null;
     }
+    
 
-    private void OnTriggerEnter(Collider other)
+    public void Attack(IDamageable damageable)
     {
-        OnTryAttackTarget(other.transform);
+        damageable.TakeDamage(currentStat.DealDamageAmount);
     }
 
-    private void OnTryAttackTarget(Transform target)
-    {
-        if (target.TryGetComponent(out IDamageable damageable))
-        {
-            damageable.TakeDamage(currentStat.DealDamageAmount);
-        }
-    }
 
-    public void Die()
-    {
-        agent.enabled = false;
-        gameObject.SetActive(false);
-    }
-
-    public void TakeDamage(float damage)
-    {
-        throw new System.NotImplementedException();
-    }
 }

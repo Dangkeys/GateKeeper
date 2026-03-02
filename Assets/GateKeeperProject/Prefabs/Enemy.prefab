@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4975761234889688716}
   - component: {fileID: 9107222080580354847}
   - component: {fileID: 7693366073175486830}
+  - component: {fileID: 3001398860691299661}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -97,3 +98,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a955c5a59fee804da51a3b8cce027e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  health: {fileID: 3001398860691299661}
+--- !u!114 &3001398860691299661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7917719041397130379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2039c5e773ad4b4c8e01d251db2d8572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GateKeeperProject.Scripts.Health
+  <MaxHealth>k__BackingField: 100
+  <CurrentHealth>k__BackingField: 0
+  <IsAlive>k__BackingField: 0

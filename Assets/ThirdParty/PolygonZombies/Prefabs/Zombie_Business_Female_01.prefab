@@ -7234,6 +7234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4172217394993850}
   - component: {fileID: 95466007142672090}
+  - component: {fileID: 448614246134471882}
   m_Layer: 0
   m_Name: Zombie_Business_Female_01
   m_TagString: Untagged
@@ -7329,6 +7330,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &448614246134471882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743311549795642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b806ddec34d4913beb7b7f35f1fff3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GateKeeperProject.Scripts.Enemies.EnemyAnimationHandler
 --- !u!1 &1745741715308508
 GameObject:
   m_ObjectHideFlags: 0

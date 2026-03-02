@@ -982,8 +982,28 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 400046, guid: a890656eebef5d94ab6c86843cebd735, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8489243774216259382}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100008, guid: a890656eebef5d94ab6c86843cebd735, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6960304024002062358}
   m_SourcePrefab: {fileID: 100100000, guid: a890656eebef5d94ab6c86843cebd735, type: 3}
+--- !u!1 &7823822887307492580 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100008, guid: a890656eebef5d94ab6c86843cebd735, type: 3}
+  m_PrefabInstance: {fileID: 7823822887307524684}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-6960304024002062358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7823822887307492580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b806ddec34d4913beb7b7f35f1fff3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GateKeeperProject.Scripts.Enemies.EnemyAnimationHandler
 --- !u!4 &7823822887307911394 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400046, guid: a890656eebef5d94ab6c86843cebd735, type: 3}

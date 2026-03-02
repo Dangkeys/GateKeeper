@@ -21,7 +21,6 @@ public enum EnemyHandType
 [System.Serializable]
 public class EnemyColliderConfig
 {
-    public EnemyHandType HandType = EnemyHandType.None;
     public List<string> ParentTransformNameList = new List<string>();
     public string GameObjectTag = "Enemy";
     public string GameObjectLayer = "Enemy";
