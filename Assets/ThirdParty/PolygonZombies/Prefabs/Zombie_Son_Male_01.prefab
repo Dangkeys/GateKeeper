@@ -279,6 +279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4647305449219068}
   - component: {fileID: 95036262881754472}
+  - component: {fileID: -8451316828517888736}
   m_Layer: 0
   m_Name: Zombie_Son_Male_01
   m_TagString: Untagged
@@ -374,6 +375,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-8451316828517888736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1055338902904486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b806ddec34d4913beb7b7f35f1fff3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GateKeeperProject.Scripts.Enemies.EnemyAnimationHandler
 --- !u!1 &1060637730933076
 GameObject:
   m_ObjectHideFlags: 0

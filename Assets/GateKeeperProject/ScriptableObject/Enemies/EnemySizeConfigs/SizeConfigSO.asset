@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6436a38975cb8e4aa01e57d6b56aa67, type: 3}
+  m_Name: SizeConfigSO
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySizeConfigSO
+  <ColliderConfigList>k__BackingField:
+  - HandType: 2
+    ParentTransformNameList:
+    - Hips
+    - pelvis
+    GameObjectTag: Enemy
+    GameObjectLayer: Enemy
+    Position: {x: 0.25, y: 0, z: 0}
+    Center: {x: 0, y: 0, z: 0}
+    Radius: 0.25
+    Height: 1.5
+    IsTrigger: 1
+    ShouldDisableOnAwake: 0
+  - HandType: 2
+    ParentTransformNameList:
+    - Neck
+    - neck_01
+    GameObjectTag: EnemyHead
+    GameObjectLayer: Enemy
+    Position: {x: 0, y: 0.05, z: 0}
+    Center: {x: 0, y: 0, z: 0}
+    Radius: 0.15
+    Height: 0
+    IsTrigger: 1
+    ShouldDisableOnAwake: 0
+  - HandType: 2
+    ParentTransformNameList:
+    - IndexFinger_01
+    - middle_01_l
+    GameObjectTag: Untagged
+    GameObjectLayer: Default
+    Position: {x: 0, y: 0, z: 0}
+    Center: {x: 0, y: 0, z: 0}
+    Radius: 0.13
+    Height: 0
+    IsTrigger: 1
+    ShouldDisableOnAwake: 1
+  - HandType: 2
+    ParentTransformNameList:
+    - IndexFinger_01 1
+    - middle_01_r
+    GameObjectTag: Untagged
+    GameObjectLayer: Default
+    Position: {x: 0, y: 0, z: 0}
+    Center: {x: 0, y: 0, z: 0}
+    Radius: 0.13
+    Height: 0
+    IsTrigger: 1
+    ShouldDisableOnAwake: 1
+  <AgentRadius>k__BackingField: 0.5
+  <AgentHeight>k__BackingField: 2

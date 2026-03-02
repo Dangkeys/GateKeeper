@@ -16,6 +16,7 @@ MonoBehaviour:
   - {fileID: 2286777291997127412, guid: 5d41f08de1a7e744e8d76efb3481a98a, type: 3}
   - {fileID: 7823822887307492580, guid: 34880828ef629984ba948845f44406f4, type: 3}
   - {fileID: 5831015403801387811, guid: 33e341256dd2780449a4a4323f7157e4, type: 3}
+  <SizeConfigSo>k__BackingField: {fileID: 11400000, guid: f0c9bcea5d48b724b8e34da7c579fd78, type: 2}
   <Name>k__BackingField: KidEnemy
   <MaxHealth>k__BackingField: 100
   <DamageReductionRate>k__BackingField: 1
