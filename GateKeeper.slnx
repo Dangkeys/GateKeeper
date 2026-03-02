@@ -1,12 +1,4 @@
 ﻿<Solution>
-  <Project Path="Unity.PlasticSCM.Editor.csproj" />
-  <Project Path="Unity.AppUI.csproj" />
-  <Project Path="Unity.ShaderGraph.Editor.csproj" />
-  <Project Path="Unity.ScriptableBuildPipeline.Editor.csproj" />
-  <Project Path="Unity.Mathematics.csproj" />
-  <Project Path="Unity.Multiplayer.Center.Editor.csproj" />
-  <Project Path="Unity.Behavior.GraphFramework.csproj" />
-  <Project Path="Unity.Behavior.Authoring.csproj" />
   <Project Path="MoreMountains.Tools.csproj" />
   <Project Path="UniRx.csproj" />
   <Project Path="Unity.VisualScripting.Core.Editor.csproj" />
@@ -80,17 +72,6 @@
   <Project Path="Unity.XR.Management.Editor.csproj" />
   <Project Path="Unity.AppUI.Navigation.csproj" />
   <Project Path="Lofelt.NiceVibrations.csproj" />
-  <Project Path="Unity.XR.Interaction.Toolkit.CodeSamples.Tests.csproj" />
-  <Project Path="Unity.XR.Interaction.Toolkit.Analytics.Hooks.Editor.csproj" />
-  <Project Path="Unity.Collections.CodeGen.csproj" />
-  <Project Path="Unity.Entities.Editor.Properties.csproj" />
-  <Project Path="Unity.Entities.UI.csproj" />
-  <Project Path="UniTask.TextMeshPro.csproj" />
-  <Project Path="Unity.Entities.CodeGen.csproj" />
-  <Project Path="Unity.AppUI.Editor.csproj" />
-  <Project Path="Unity.Transforms.csproj" />
-  <Project Path="Unity.Scenes.csproj" />
-  <Project Path="Unity.InputSystem.TestFramework.csproj" />
   <Project Path="Unity.XR.Interaction.Toolkit.Samples.DeviceSimulator.csproj" />
   <Project Path="Unity.VisualScripting.Shared.Editor.csproj" />
   <Project Path="Unity.SharpZipLib.Editor.csproj" />
@@ -123,12 +104,7 @@
   <Project Path="Unity.Entities.Graphics.Editor.csproj" />
   <Project Path="UnityEngine.XR.LegacyInputHelpers.csproj" />
   <Project Path="AssetInventory.JD.EditorAudioUtils.Editor.csproj" />
-  <Project Path="Unity.Transforms.Hybrid.csproj" />
-  <Project Path="Unity.InputSystem.ForUI.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
-  <Project Path="Unity.Serialization.Editor.csproj" />
-  <Project Path="Unity.Entities.Build.csproj" />
-  <Project Path="Unity.InputSystem.DocCodeSamples.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
   <Project Path="Unity.InternalAPIEngineBridge.004.csproj" />
   <Project Path="Unity.AppUI.InternalAPIBridge.csproj" />
