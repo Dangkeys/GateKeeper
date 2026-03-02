@@ -1,3 +1,4 @@
+using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,11 +6,11 @@ public class Enemy : MonoBehaviour
 {
     private NavMeshAgent agent;
     private EnemyDataSO currentData;
-
-    // Behavior Tree accessible variables
-    [HideInInspector] public float currentDamage;
-    [HideInInspector] public float currentAttackRange;
-
+    private BehaviorGraphAgent behaviorGraphAgent;
+    private const string AnimatorVariable = "animator";
+    private const string MoveSpeedVariable = "moveSpeed";
+    private const string DistanceThresholdVariable = "distanceThreshold";
+    private const string AnimatorSpeedVariable = "animatorSpeedParam";
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -17,31 +18,29 @@ public class Enemy : MonoBehaviour
 
     public void Initialize(EnemyDataSO data)
     {
+        behaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
         currentData = data;
-
+        Instantiate(currentData.GetRandomVisual(), gameObject.transform);
 
         // 2. Map NavMesh Agent Settings
-        if (agent != null)
+        int? typeID = data.GetNavMeshAgentID();
+        if (typeID.HasValue)
         {
-            // Set the Agent Type (Giant, Mini, Humanoid)
-            int? typeID = data.GetNavMeshAgentID();
-            if (typeID.HasValue)
-            {
-                agent.agentTypeID = typeID.Value;
-            }
-            else
-            {
-                Debug.LogWarning($"NavMesh Agent Type '{data.Type}' not found in Navigation Settings!");
-            }
-
-            // Apply movement stats
-            agent.speed = data.MoveSpeed;
-            agent.stoppingDistance = data.StoppingDistance;
-            agent.angularSpeed = data.RotationSpeed;
+            agent.agentTypeID = typeID.Value;
+        }
+        else
+        {
+            Debug.LogWarning($"NavMesh Agent Type '{data.Type}' not found in Navigation Settings!");
         }
 
-        currentDamage = data.DealDamageAmount;
-        currentAttackRange = data.AttackRange;
+        behaviorGraphAgent.SetVariableValue(AnimatorVariable, GetComponentInChildren<Animator>());
+        behaviorGraphAgent.SetVariableValue(MoveSpeedVariable, data.MoveSpeed);
+        behaviorGraphAgent.SetVariableValue(DistanceThresholdVariable, data.StoppingDistance);
+        behaviorGraphAgent.SetVariableValue(AnimatorSpeedVariable, "velocity");
+        agent.angularSpeed = data.RotationSpeed;
+
+
+
 
     }
 

@@ -86,7 +86,6 @@ public class WaveHandler : MonoBehaviour
         Vector2 randomOffset = Random.insideUnitCircle * randomSpawnOffset;
         Vector3 spawnPosition = spot.position + new Vector3(randomOffset.x, 0, randomOffset.y);
         Enemy enemy = Instantiate(enemyPrefab, spot.position, spot.rotation);
-        Instantiate(data.GetRandomVisual(), enemy.transform);
         enemy.Initialize(data);
 
     }
