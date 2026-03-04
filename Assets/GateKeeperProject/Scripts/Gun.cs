@@ -4,10 +4,16 @@ using UnityEngine.InputSystem;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField] private InputActionReference shootInput;
+    [Header("Input")]
+    [SerializeField] private InputActionReference shootInputLeft;
+    [SerializeField] private InputActionReference shootInputRight;
+    [Header("Transform")]
     [SerializeField] private Transform firePoint;
+    [Header("Gun info")]
     [SerializeField] private GunData data;
     [SerializeField] private float recoilReturnSpeed = 8f;
+    [SerializeField] private HandType currentHandType = HandType.None;
+    [Header("UI")]
     [SerializeField] private TMP_Text ammoText;  
     [SerializeField] private AmmoSystem ammoSystem;
     private float recoilTarget;
@@ -29,6 +35,7 @@ public class Gun : MonoBehaviour
     void OnEnable()
     {
         ammoSystem.OnAmmoChanged += UpdateAmmo;
+        UpdateAmmoUI();
     }
 
     void OnDisable()
@@ -38,7 +45,11 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        bool isShooting = data.isAutoGun ? shootInput.action.IsPressed() : shootInput.action.WasPressedThisFrame();
+        if (currentHandType == HandType.None) return;
+        
+        InputAction currentShootInputAction = currentHandType == HandType.Left ? shootInputLeft.action : shootInputRight.action;
+
+        bool isShooting = data.isAutoGun ? currentShootInputAction.IsPressed() : currentShootInputAction.WasPressedThisFrame();
 
         if (isShooting)
         {
@@ -181,5 +192,10 @@ public class Gun : MonoBehaviour
     private void UpdateAmmoUI()
     {
         ammoText.text = currentAmmo.ToString() + " / " + totalAmmo.ToString();
+    }
+
+    public void SetCurrentHandType(HandType hand)
+    {
+        currentHandType = hand;
     }
 }
