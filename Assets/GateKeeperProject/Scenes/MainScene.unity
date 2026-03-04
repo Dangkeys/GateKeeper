@@ -45395,7 +45395,7 @@ MonoBehaviour:
   firePoint: {fileID: 1588433103}
   data: {fileID: 11400000, guid: 73ac720174bc37a42be5cc5019a9d2a4, type: 2}
   recoilReturnSpeed: 2
-  currentHand: 2
+  currentHandType: 0
   ammoText: {fileID: 580666847}
   ammoSystem: {fileID: 1798504951}
 --- !u!1001 &979958427
@@ -49127,7 +49127,7 @@ MonoBehaviour:
   firePoint: {fileID: 922035615}
   data: {fileID: 11400000, guid: 3d60e13ac6581ce49b16460c83d497da, type: 2}
   recoilReturnSpeed: 2
-  currentHand: 0
+  currentHandType: 0
   ammoText: {fileID: 1123646335}
   ammoSystem: {fileID: 1798504951}
 --- !u!1001 &1068105913
@@ -59558,7 +59558,7 @@ MonoBehaviour:
   firePoint: {fileID: 98087825}
   data: {fileID: 11400000, guid: 8072defb6ddefcf4ebca42346bdee512, type: 2}
   recoilReturnSpeed: 2
-  currentHand: 0
+  currentHandType: 0
   ammoText: {fileID: 835654447}
   ammoSystem: {fileID: 1798504951}
 --- !u!1001 &1282827062
@@ -70717,7 +70717,7 @@ MonoBehaviour:
   firePoint: {fileID: 1384168709}
   data: {fileID: 11400000, guid: c4e22e1b8e9968b48bcd6b029ba6a2a3, type: 2}
   recoilReturnSpeed: 2
-  currentHand: 0
+  currentHandType: 0
   ammoText: {fileID: 1928274375}
   ammoSystem: {fileID: 1798504951}
 --- !u!1001 &1508925588
@@ -78742,7 +78742,7 @@ MonoBehaviour:
   firePoint: {fileID: 541094595}
   data: {fileID: 11400000, guid: d39d9f443077f9c4faba5d3ca3157773, type: 2}
   recoilReturnSpeed: 2
-  currentHand: 0
+  currentHandType: 0
   ammoText: {fileID: 17342933}
   ammoSystem: {fileID: 1798504951}
 --- !u!1001 &1689578638
@@ -87681,8 +87681,8 @@ MonoBehaviour:
   - {fileID: 1508528026}
   - {fileID: 1686260002}
   - {fileID: 1279762047}
-  leftHand: {fileID: 1218398413}
-  rightHand: {fileID: 1249272189}
+  leftHandTransform: {fileID: 1218398413}
+  rightHandTransform: {fileID: 1249272189}
   keepWeapon: {fileID: 446457346}
 --- !u!1001 &1897219005
 PrefabInstance:

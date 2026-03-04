@@ -11,7 +11,6 @@ public class Gun : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [Header("Gun info")]
     [SerializeField] private GunData data;
-    [SerializeField] private float recoilReturnSpeed = 8f;
     [SerializeField] private HandType currentHandType = HandType.None;
     [Header("UI")]
     [SerializeField] private TMP_Text ammoText;  
@@ -72,11 +71,11 @@ public class Gun : MonoBehaviour
             currentRecoveryTime = 0;
             isRecovery = false;
         }
-        else if(currentRecoveryTime < data.RecoilRecoveryTime)
+        else if(currentRecoveryTime < data.recoilRecoveryTime)
         {
             currentRecoveryTime += Time.deltaTime;
         }
-        if(currentRecoveryTime >= data.RecoilRecoveryTime)
+        if(currentRecoveryTime >= data.recoilRecoveryTime)
         {
             isRecovery = true;
         }
@@ -125,7 +124,7 @@ public class Gun : MonoBehaviour
 
                 damageable.TakeDamage(finalDamage);
 
-                currentDamage *= data.damageReduction;
+                currentDamage *= 1 - data.damagePenetrationReduction;
                 penetrationCount++; 
 
                 if (penetrationCount >= data.penetration)
@@ -160,7 +159,7 @@ public class Gun : MonoBehaviour
             recoilTarget = Mathf.Lerp(
                 recoilTarget,
                 0f,
-                recoilReturnSpeed * Time.deltaTime
+                data.recoilRecoverySpeed * Time.deltaTime
             );
         }
 
@@ -197,5 +196,10 @@ public class Gun : MonoBehaviour
     public void SetCurrentHandType(HandType hand)
     {
         currentHandType = hand;
+    }
+
+    public GunData GetGunData()
+    {
+        return data;
     }
 }
