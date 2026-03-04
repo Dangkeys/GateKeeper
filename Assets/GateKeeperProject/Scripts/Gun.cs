@@ -12,7 +12,7 @@ public class Gun : MonoBehaviour
     [Header("Gun info")]
     [SerializeField] private GunData data;
     [SerializeField] private float recoilReturnSpeed = 8f;
-    [SerializeField] private HandType currentHand = HandType.None;
+    [SerializeField] private HandType currentHandType = HandType.None;
     [Header("UI")]
     [SerializeField] private TMP_Text ammoText;  
     [SerializeField] private AmmoSystem ammoSystem;
@@ -45,11 +45,11 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
-        if (currentHand == HandType.None) return;
+        if (currentHandType == HandType.None) return;
         
-        InputAction currentShoot = currentHand == HandType.Left ? shootInputLeft.action : shootInputRight.action;
+        InputAction currentShootInputAction = currentHandType == HandType.Left ? shootInputLeft.action : shootInputRight.action;
 
-        bool isShooting = data.isAutoGun ? currentShoot.IsPressed() : currentShoot.WasPressedThisFrame();
+        bool isShooting = data.isAutoGun ? currentShootInputAction.IsPressed() : currentShootInputAction.WasPressedThisFrame();
 
         if (isShooting)
         {
@@ -194,8 +194,8 @@ public class Gun : MonoBehaviour
         ammoText.text = currentAmmo.ToString() + " / " + totalAmmo.ToString();
     }
 
-    public void SetHand(HandType hand)
+    public void SetCurrentHandType(HandType hand)
     {
-        currentHand = hand;
+        currentHandType = hand;
     }
 }

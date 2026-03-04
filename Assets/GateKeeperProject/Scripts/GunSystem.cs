@@ -5,89 +5,85 @@ public class GunSystem : MonoBehaviour
     [Header("Gun References")]
     [SerializeField] private Gun[] guns;
     [Header("Hand Transforms")]
-    [SerializeField] private Transform leftHand;
-    [SerializeField] private Transform rightHand;
+    [SerializeField] private Transform leftHandTransform;
+    [SerializeField] private Transform rightHandTransform;
     [SerializeField] private Transform keepWeapon;
-    private int rightWeapon = -1;
-    private int leftWeapon = -1;
+    private WeaponType currentRightWeapon = WeaponType.None;
+    private WeaponType currentLeftWeapon = WeaponType.None;
 
-    public void EquipRight(int index)
+    public void EquipRight(int weaponIndex)
     {
-        GetGunOut(index, true);
+        WeaponType weapon = (WeaponType)weaponIndex;
+        GetGunOut(weapon, HandType.Right);
     }
 
-    public void EquipLeft(int index)
+    public void EquipLeft(int weaponIndex)
     {
-        GetGunOut(index, false);
+        WeaponType weapon = (WeaponType)weaponIndex;
+        GetGunOut(weapon, HandType.Left);
     }
 
     public void UnequipRight()
     {
-        if (rightWeapon == -1) return;
+        if (currentRightWeapon == WeaponType.None) return;
 
-        KeepGun(rightWeapon);
-        rightWeapon = -1;
+        KeepGunAway(currentRightWeapon);
+        currentRightWeapon = WeaponType.None;
     }
 
     public void UnequipLeft()
     {
-        if (leftWeapon == -1) return;
+        if (currentLeftWeapon == WeaponType.None) return;
 
-        KeepGun(leftWeapon);
-        leftWeapon = -1;
+        KeepGunAway(currentLeftWeapon);
+        currentLeftWeapon = WeaponType.None;
     }
 
-    private void GetGunOut(int index, bool isRight)
+    private void GetGunOut(WeaponType weapon, HandType curretnHandType)
     {
-        if (index < 0 || index >= guns.Length)
+        if (currentLeftWeapon == weapon)
         {
-            Debug.LogWarning("Invalid gun index");
-            return;
+            KeepGunAway(currentLeftWeapon);
+            currentLeftWeapon = WeaponType.None;
         }
 
-        if (leftWeapon == index)
+        if (currentRightWeapon == weapon)
         {
-            KeepGun(leftWeapon);
-            leftWeapon = -1;
+            KeepGunAway(currentRightWeapon);
+            currentRightWeapon = WeaponType.None;
         }
 
-        if (rightWeapon == index)
+        if (curretnHandType == HandType.Right)
         {
-            KeepGun(rightWeapon);
-            rightWeapon = -1;
+            if (currentRightWeapon != WeaponType.None)
+                KeepGunAway(currentRightWeapon);
+
+            SetGunToHand(weapon, rightHandTransform, HandType.Right);
+            currentRightWeapon = weapon;
         }
-
-        if (isRight)
+        else if (curretnHandType == HandType.Left)
         {
-            if (rightWeapon != -1)
-                KeepGun(rightWeapon);
+            if (currentLeftWeapon != WeaponType.None)
+                KeepGunAway(currentLeftWeapon);
 
-            SetGunToHand(index, rightHand, HandType.Right);
-            rightWeapon = index;
-        }
-        else
-        {
-            if (leftWeapon != -1)
-                KeepGun(leftWeapon);
-
-            SetGunToHand(index, leftHand, HandType.Left);
-            leftWeapon = index;
+            SetGunToHand(weapon, leftHandTransform, HandType.Left);
+            currentLeftWeapon = weapon;
         }
     }
 
-    private void KeepGun(int index)
+    private void KeepGunAway(WeaponType weapon)
     {
-        guns[index].transform.SetParent(keepWeapon);
-        guns[index].transform.localPosition = Vector3.zero;
-        guns[index].transform.localRotation = Quaternion.identity;
-        guns[index].SetHand(HandType.None);
+        guns[(int)weapon].transform.SetParent(keepWeapon);
+        guns[(int)weapon].transform.localPosition = Vector3.zero;
+        guns[(int)weapon].transform.localRotation = Quaternion.identity;
+        guns[(int)weapon].SetCurrentHandType(HandType.None);
     }
 
-    private void SetGunToHand(int index, Transform hand, HandType handType)
+    private void SetGunToHand(WeaponType weapon, Transform hand, HandType handType)
     {
-        guns[index].transform.SetParent(hand);
-        guns[index].transform.localPosition = Vector3.zero;
-        guns[index].transform.localRotation = Quaternion.identity;
-        guns[index].SetHand(handType);
+        guns[(int)weapon].transform.SetParent(hand);
+        guns[(int)weapon].transform.localPosition = Vector3.zero;
+        guns[(int)weapon].transform.localRotation = Quaternion.identity;
+        guns[(int)weapon].SetCurrentHandType(handType);
     }
 }
