@@ -4,9 +4,9 @@ public class RewardSystem : MonoBehaviour
 {
     [SerializeField] private GunSystem gunSystem;
     [SerializeField] private AmmoSystem ammoSystem;
+    [SerializeField] private Sprint sprint;
     public void GetReward()
     {
-        // Stat, Weapon, Ammo
         RandomStat();
         RandomWeapon();
         RandomAmmo();
@@ -60,8 +60,10 @@ public class RewardSystem : MonoBehaviour
             case 1:
                 break;
             case 2:
+                sprint.IncreaseSpeed();
                 break;
             case 3:
+                sprint.IncreaseStamina();
                 break;
             default:
                 break;
@@ -70,11 +72,6 @@ public class RewardSystem : MonoBehaviour
 
     public void GetWeapon(int weaponIndex, int statIndex)
     {
-        // 0 Flat Damage, 1 headshot multiply, 2 Range, 3 Penetration,
-        // 4 damagePenetrationReduction, 5 Firerate, 6 RecoilReduction,
-        // 7 maximumrecoil, 8 recoilrecoverytime, 9 recoilrecoveryspeed,
-        // 10 magazineSize, 11 reloadTime, 12 freeAmmoPercent, 13 bulletSize, 
-        // 14 pellet count, 15 spread angle  
         GunData gunData = gunSystem.GetGun(weaponIndex).GetGunData();
         WeaponStatType weaponStatType = (WeaponStatType)statIndex;
         gunData.ApplyReward(weaponStatType);
