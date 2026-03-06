@@ -50,24 +50,9 @@ public class Gun : MonoBehaviour
 
         bool isShooting = data.isAutoGun ? currentShootInputAction.IsPressed() : currentShootInputAction.WasPressedThisFrame();
 
-        if (isShooting)
-        {
-            TryShoot();
-        }
-        if(currentAmmo == 0)
-        {
-            if(currentReloadTime > data.reloadTime)
-            {
-                currentReloadTime = 0;
-                ammoSystem.UseAmmo(data.type, data.magazineSize);
-            }
-            else
-            {
-                currentReloadTime += Time.deltaTime;
-            }
-        }
         if(isShooting)
         {
+            TryShoot();
             currentRecoveryTime = 0;
             isRecovery = false;
         }
@@ -78,6 +63,26 @@ public class Gun : MonoBehaviour
         if(currentRecoveryTime >= data.recoilRecoveryTime)
         {
             isRecovery = true;
+        }
+        if(currentAmmo == 0 )
+        {
+            if(currentReloadTime > data.reloadTime)
+            {
+                if(ammoSystem.GetAmmo(data.type) <= 0)
+                {
+                    ammoText.text = "No bullet";
+                }
+                else
+                {
+                    currentReloadTime = 0;
+                    ammoSystem.UseAmmo(data.type, data.magazineSize);
+                }
+            }
+            else
+            {
+                currentReloadTime += Time.deltaTime;
+                ammoText.text = "Reloading";
+            }
         }
         UpdateRecoil();
     }
@@ -90,8 +95,7 @@ public class Gun : MonoBehaviour
 
         nextFireTime = Time.time + 1f / data.fireRate;
 
-        if (data.freeAmmoPercent <= 0f ||
-            Random.Range(0f, 100f) > data.freeAmmoPercent)
+        if (data.freeAmmoPercent <= 0f || Random.Range(0f, 100f) > data.freeAmmoPercent)
         {
             currentAmmo--;
             UpdateAmmoUI();
