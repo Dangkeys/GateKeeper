@@ -169,13 +169,14 @@ GameObject:
   - component: {fileID: 54827203}
   - component: {fileID: 54827204}
   - component: {fileID: 54827205}
+  - component: {fileID: 54827206}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &54827200
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -260,7 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 321e7b5672494117ab38ce820e61c14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GateKeeperProject.Scripts.Player
-  health: {fileID: 0}
+  health: {fileID: 54827206}
 --- !u!136 &54827204
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -311,6 +312,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 2
+--- !u!114 &54827206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54827198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2039c5e773ad4b4c8e01d251db2d8572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GateKeeperProject.Scripts.Health
+  <MaxHealth>k__BackingField: 100
+  <CurrentHealth>k__BackingField: 0
+  <IsAlive>k__BackingField: 0
 --- !u!1 &129188788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,7 +1507,7 @@ GameObject:
   - component: {fileID: 764605374}
   m_Layer: 0
   m_Name: Head VR Target
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2785,6 +2801,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1680501586, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 153982007679157697, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_MoveSpeed
       value: 2.5
@@ -2798,8 +2818,12 @@ PrefabInstance:
       value: XR Origin (XR Rig)
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1717954561962503726, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2941,6 +2965,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1712513976}
+    - targetCorrespondingSourceObject: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1712513984}
     - targetCorrespondingSourceObject: {fileID: 1767192433, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1668830305}
@@ -3054,24 +3081,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253234e484a3f864a8810c9e2929d886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveHandler
-  enemyPool:
-  - stat: {fileID: 11400000, guid: ce220fb2dc1e3db49b0c8834c1cd1496, type: 2}
-    cost: 2
-  - stat: {fileID: 11400000, guid: 9bf897f8b55634844a631135a2a3f997, type: 2}
-    cost: 2
-  - stat: {fileID: 11400000, guid: 1be43b6e5de6d3642bf80f7063025c39, type: 2}
-    cost: 10
-  - stat: {fileID: 11400000, guid: 6a700af5a317bbe4691c4646470554cf, type: 2}
-    cost: 10
-  - stat: {fileID: 11400000, guid: 64af50618d604184aa5fc30b8a3f8698, type: 2}
-    cost: 1
-  - stat: {fileID: 11400000, guid: dd995b5e88403c54897f3e4759fd3341, type: 2}
-    cost: 1
-  - stat: {fileID: 11400000, guid: cd218334d5969b6418acc0336647e7ac, type: 2}
-    cost: 1
   playerTransform: {fileID: 54827202}
   enemyPrefab: {fileID: 7693366073175486830, guid: d73ee81a417e7744db5d0e11bf5819d0, type: 3}
-  randomSpawnOffset: 3
+  randomSpawnOffset: 10
+  enemyPool:
+  - stat: {fileID: 11400000, guid: ce220fb2dc1e3db49b0c8834c1cd1496, type: 2}
+    cost: 1
+    baseWeight: 100
+    weightIncreasePerWave: 1
+  - stat: {fileID: 11400000, guid: 9bf897f8b55634844a631135a2a3f997, type: 2}
+    cost: 1
+    baseWeight: 100
+    weightIncreasePerWave: 1
+  - stat: {fileID: 11400000, guid: 64af50618d604184aa5fc30b8a3f8698, type: 2}
+    cost: 2
+    baseWeight: 75
+    weightIncreasePerWave: 2
+  - stat: {fileID: 11400000, guid: dd995b5e88403c54897f3e4759fd3341, type: 2}
+    cost: 2
+    baseWeight: 75
+    weightIncreasePerWave: 2
+  - stat: {fileID: 11400000, guid: cd218334d5969b6418acc0336647e7ac, type: 2}
+    cost: 2
+    baseWeight: 75
+    weightIncreasePerWave: 2
+  - stat: {fileID: 11400000, guid: 1be43b6e5de6d3642bf80f7063025c39, type: 2}
+    cost: 5
+    baseWeight: 50
+    weightIncreasePerWave: 2
+  - stat: {fileID: 11400000, guid: 6a700af5a317bbe4691c4646470554cf, type: 2}
+    cost: 5
+    baseWeight: 50
+    weightIncreasePerWave: 2
+  baseWaveBudget: 500
+  budgetIncreasePerWave: 20
+  maxWaveBudget: 300
+  spawnDelay: 0.5
+  waveConfig:
+    healthMultiplier: 0.2
+    damageMultiplier: 0.15
+    moveSpeedMultiplier: 0.05
+    maxHealth: 3
+    maxDamage: 2.5
+    maxMoveSpeed: 1.5
 --- !u!4 &1670590433
 Transform:
   m_ObjectHideFlags: 0
@@ -3203,6 +3255,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GateKeeperProject.Scripts.Player
   health: {fileID: 1712513976}
+--- !u!136 &1712513984
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668830299}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1
+  m_Height: 1.36144
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.76072, z: 0}
 --- !u!1 &1712965676
 GameObject:
   m_ObjectHideFlags: 0
