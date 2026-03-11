@@ -52,6 +52,12 @@ public class GunData : ScriptableObject
     [SerializeField] private float spreadAngleReward = 0.5f;
     [SerializeField] private int ammoReward = 120;
 
+    [Header("SFX")]
+    public AudioClip fireSound; 
+    public AudioClip fullAutoSound;
+    public AudioClip reloadSound;
+    public AudioClip reloadSuccessSound;
+
     public bool CanChangeStat(WeaponStatType stat)
     {
         if (type != WeaponType.Shotgun)

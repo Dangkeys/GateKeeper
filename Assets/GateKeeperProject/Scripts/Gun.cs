@@ -23,12 +23,18 @@ public class Gun : MonoBehaviour
     private int totalAmmo;
     private float currentRecoveryTime;
     private bool isRecovery;
+    public AudioSource audioSource;
+    private AudioSource fullAutoAudioSource; // dedicated looping AudioSource
 
     void Start()
     {
         data = Instantiate(data);
         currentAmmo = data.magazineSize;
         UpdateAmmoUI();
+        audioSource = GetComponent<AudioSource>();
+        fullAutoAudioSource = gameObject.AddComponent<AudioSource>();
+        fullAutoAudioSource.loop = true;
+        fullAutoAudioSource.playOnAwake = false;
     }
 
     void OnEnable()
@@ -58,6 +64,7 @@ public class Gun : MonoBehaviour
         }
         else if(currentRecoveryTime < data.recoilRecoveryTime)
         {
+            StopFullAutoSound();
             currentRecoveryTime += Time.deltaTime;
         }
         if(currentRecoveryTime >= data.recoilRecoveryTime)
@@ -66,6 +73,9 @@ public class Gun : MonoBehaviour
         }
         if(currentAmmo == 0 )
         {
+            // If reloading starts, stop full auto loop
+            StopFullAutoSound();
+
             if(currentReloadTime > data.reloadTime)
             {
                 if(ammoSystem.GetAmmo(data.type) <= 0)
@@ -74,22 +84,27 @@ public class Gun : MonoBehaviour
                 }
                 else
                 {
+                    PlayReloadSuccessSound();
                     currentReloadTime = 0;
                     ammoSystem.UseAmmo(data.type, data.magazineSize);
                 }
             }
             else
             {
+                if (currentReloadTime == 0f)
+                {
+                    PlayReloadSound();
+                }
                 currentReloadTime += Time.deltaTime;
                 ammoText.text = "Reloading";
             }
         }
+
         UpdateRecoil();
     }
 
     private void TryShoot()
     {
-
         if (Time.time < nextFireTime) return;
         if (currentAmmo <= 0) return;
 
@@ -137,6 +152,7 @@ public class Gun : MonoBehaviour
         }
 
         ApplyRecoil();
+        PlayFireSound();
     }
 
     private Vector3 GetSpreadDirection()
@@ -205,5 +221,50 @@ public class Gun : MonoBehaviour
     public GunData GetGunData()
     {
         return data;
+    }
+
+    private void PlayFireSound()
+    {
+        if (data.isAutoGun)
+        {
+            // Full Auto: play looping sound (AR, SMG)
+            if (data.fullAutoSound != null && fullAutoAudioSource != null && !fullAutoAudioSource.isPlaying)
+            {
+                fullAutoAudioSource.clip = data.fullAutoSound;
+                fullAutoAudioSource.Play();
+            }
+        }
+        else
+        {
+            // Single Shot: play one-shot sound (Pistol, Shotgun, Sniper)
+            if (data.fireSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(data.fireSound);
+            }
+        }
+    }
+
+    private void StopFullAutoSound()
+    {
+        if (fullAutoAudioSource != null && fullAutoAudioSource.isPlaying)
+        {
+            fullAutoAudioSource.Stop();
+        }
+    }
+
+    private void PlayReloadSound()
+    {
+        if (data.reloadSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(data.reloadSound);
+        }
+    }
+
+    private void PlayReloadSuccessSound()
+    {
+        if (data.reloadSuccessSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(data.reloadSuccessSound);
+        }
     }
 }

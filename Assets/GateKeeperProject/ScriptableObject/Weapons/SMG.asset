@@ -18,14 +18,37 @@ MonoBehaviour:
   headshotMultiplier: 2
   range: 30
   penetration: 1
-  damageReduction: 0.7
+  damagePenetrationReduction: 0.7
   fireRate: 20
   recoil: 1.5
   recoilReduction: 0.5
   maximumRecoil: 10
+  recoilRecoveryTime: 0.5
+  recoilRecoverySpeed: 8
   magazineSize: 60
   reloadTime: 1.5
   freeAmmoPercent: 0
   bulletSize: 0.1
   pelletCount: 1
   spreadAngle: 0.5
+  flatDamageReward: 2
+  headshotMultiplierReward: 0.2
+  rangeReward: 10
+  penetrationReward: 1
+  damagePenetrationReductionReward: 0.01
+  fireRateReward: 1
+  recoilReductionReward: 0.05
+  maximumRecoilReward: 1
+  recoilRecoveryTimeReward: 0.05
+  recoilRecoverySpeedReward: 0.8
+  magazineSizeReward: 3
+  reloadTimeReward: 0.2
+  freeAmmoPercentReward: 1
+  bulletSizeReward: 0.01
+  pelletCountReward: 1
+  spreadAngleReward: 0.5
+  ammoReward: 120
+  fireSound: {fileID: 8300000, guid: cfe42a4be2b6e40a4baa969b10a23415, type: 3}
+  reloadSound: {fileID: 8300000, guid: 44c95562a76bc430e932547d915dc171, type: 3}
+  reloadSuccessSound: {fileID: 0}
+  useLoopingAudio: 0
