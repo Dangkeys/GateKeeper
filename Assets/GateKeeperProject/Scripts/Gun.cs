@@ -24,7 +24,7 @@ public class Gun : MonoBehaviour
     private float currentRecoveryTime;
     private bool isRecovery;
     public AudioSource audioSource;
-    private AudioSource fullAutoAudioSource; // dedicated looping AudioSource
+    private AudioSource fullAutoAudioSource;
 
     void Start()
     {
@@ -73,7 +73,6 @@ public class Gun : MonoBehaviour
         }
         if(currentAmmo == 0 )
         {
-            // If reloading starts, stop full auto loop
             StopFullAutoSound();
 
             if(currentReloadTime > data.reloadTime)
