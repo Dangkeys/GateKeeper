@@ -81,15 +81,13 @@ public class RewardSystem : MonoBehaviour
     {
         // 0 Increase pistol ammo, 1 Increase Assault Rifle ammo, 2 Increase SMG ammo,
         // 3 Increase Shotgun ammo, 4 Increase Sniper ammo, 5 Increase ammo rate drop,
-        switch(ammoIndex)
+        if(ammoIndex >= 0 && ammoIndex <= 4)
         {
-            case 0 - 4:
-                ammoSystem.IncreaseAmmo((WeaponType)ammoIndex, 100);
-                break;
-            case 5:
-                break;
-            default:
-                break;
+            ammoSystem.IncreaseAmmo((WeaponType)ammoIndex, 100);
+        }
+        else
+        {
+            
         }
     }
 }
