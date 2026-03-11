@@ -20,7 +20,7 @@ MonoBehaviour:
   <Name>k__BackingField: KidEnemy
   <MaxHealth>k__BackingField: 100
   <DamageReductionRate>k__BackingField: 1
-  <MoveSpeed>k__BackingField: 5
+  <MoveSpeed>k__BackingField: 2
   <StoppingDistance>k__BackingField: 1.5
   <RotationSpeed>k__BackingField: 120
   <DealDamageAmount>k__BackingField: 10

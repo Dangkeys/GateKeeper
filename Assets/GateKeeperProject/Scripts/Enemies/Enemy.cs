@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GateKeeperProject.Scripts;
+using GateKeeperProject.Scripts.Enemies;
 using JetBrains.Annotations;
 using Unity.Behavior;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class Enemy : MonoBehaviour, IAttackable
     private const string MoveSpeedVariable = "moveSpeed";
     private const string DistanceThresholdVariable = "distanceThreshold";
     private const string AnimatorSpeedVariable = "animatorSpeedParam";
+
+    private EnemyStatModifiers _enemyStatModifiers;
 
     [SerializeField] private Health health;
 
@@ -43,14 +46,14 @@ public class Enemy : MonoBehaviour, IAttackable
         // gameObject.SetActive(false);
     }
 
-    public void Initialize(EnemyStatSO stat)
+    public void Initialize(EnemyStatSO stat, EnemyStatModifiers  statModifiers)
     {
         behaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
         currentStat = stat;
+        _enemyStatModifiers = statModifiers;
         
         enemyVisual = Instantiate(currentStat.GetRandomVisual(), gameObject.transform);
-        
-        health.InitAndSetMaxHealth(currentStat.MaxHealth);
+        health.InitAndSetMaxHealth(currentStat.MaxHealth * _enemyStatModifiers.healthMultiplier);
         
         InitializeColliders();
         InitializeAgent();
@@ -72,6 +75,8 @@ public class Enemy : MonoBehaviour, IAttackable
         agent.agentTypeID = typeID.Value;
         agent.height = currentStat.SizeConfigSo.AgentHeight;
         agent.radius = currentStat.SizeConfigSo.AgentRadius;
+        agent.avoidancePriority = UnityEngine.Random.Range(1, 100);
+        agent.stoppingDistance = currentStat.StoppingDistance;
     }
 
     private void InitializeColliders()
@@ -110,7 +115,7 @@ public class Enemy : MonoBehaviour, IAttackable
     {
         
         behaviorGraphAgent.SetVariableValue(AnimatorVariable, GetComponentInChildren<Animator>());
-        behaviorGraphAgent.SetVariableValue(MoveSpeedVariable, currentStat.MoveSpeed);
+        behaviorGraphAgent.SetVariableValue(MoveSpeedVariable, currentStat.MoveSpeed * _enemyStatModifiers.moveSpeedMultiplier);
         behaviorGraphAgent.SetVariableValue(DistanceThresholdVariable, currentStat.StoppingDistance);
         behaviorGraphAgent.SetVariableValue(AnimatorSpeedVariable, "velocity");
         agent.angularSpeed = currentStat.RotationSpeed;
@@ -145,7 +150,7 @@ public class Enemy : MonoBehaviour, IAttackable
 
     public void Attack(IDamageable damageable)
     {
-        damageable.TakeDamage(currentStat.DealDamageAmount);
+        damageable.TakeDamage(currentStat.DealDamageAmount * _enemyStatModifiers.damageMultiplier);
     }
 
 
