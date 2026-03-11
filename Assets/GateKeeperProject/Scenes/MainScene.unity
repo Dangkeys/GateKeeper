@@ -45396,6 +45396,7 @@ MonoBehaviour:
   shootInputRight: {fileID: 5667446173830999989, guid: 0be0028c24f2a4c14a96b6aa39055933, type: 3}
   firePoint: {fileID: 1588433103}
   data: {fileID: 11400000, guid: 73ac720174bc37a42be5cc5019a9d2a4, type: 2}
+  recoilReturnSpeed: 2
   currentHandType: 0
   ammoText: {fileID: 580666847}
   ammoSystem: {fileID: 1798504951}
@@ -49127,6 +49128,7 @@ MonoBehaviour:
   shootInputRight: {fileID: 5667446173830999989, guid: 0be0028c24f2a4c14a96b6aa39055933, type: 3}
   firePoint: {fileID: 922035615}
   data: {fileID: 11400000, guid: 3d60e13ac6581ce49b16460c83d497da, type: 2}
+  recoilReturnSpeed: 2
   currentHandType: 0
   ammoText: {fileID: 1123646335}
   ammoSystem: {fileID: 1798504951}
@@ -59557,6 +59559,7 @@ MonoBehaviour:
   shootInputRight: {fileID: 5667446173830999989, guid: 0be0028c24f2a4c14a96b6aa39055933, type: 3}
   firePoint: {fileID: 98087825}
   data: {fileID: 11400000, guid: 8072defb6ddefcf4ebca42346bdee512, type: 2}
+  recoilReturnSpeed: 2
   currentHandType: 0
   ammoText: {fileID: 835654447}
   ammoSystem: {fileID: 1798504951}
@@ -70715,6 +70718,7 @@ MonoBehaviour:
   shootInputRight: {fileID: 5667446173830999989, guid: 0be0028c24f2a4c14a96b6aa39055933, type: 3}
   firePoint: {fileID: 1384168709}
   data: {fileID: 11400000, guid: c4e22e1b8e9968b48bcd6b029ba6a2a3, type: 2}
+  recoilReturnSpeed: 2
   currentHandType: 0
   ammoText: {fileID: 1928274375}
   ammoSystem: {fileID: 1798504951}
@@ -76212,7 +76216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -76401,59 +76405,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1896201333}
         m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
         m_MethodName: EquipRight
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1896201333}
-        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
-        m_MethodName: EquipRight
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1896201333}
-        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
-        m_MethodName: EquipRight
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1896201333}
-        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
-        m_MethodName: EquipRight
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1896201333}
-        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
-        m_MethodName: EquipRight
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -78739,6 +78695,7 @@ MonoBehaviour:
   shootInputRight: {fileID: 5667446173830999989, guid: 0be0028c24f2a4c14a96b6aa39055933, type: 3}
   firePoint: {fileID: 541094595}
   data: {fileID: 11400000, guid: d39d9f443077f9c4faba5d3ca3157773, type: 2}
+  recoilReturnSpeed: 2
   currentHandType: 0
   ammoText: {fileID: 17342933}
   ammoSystem: {fileID: 1798504951}
@@ -87680,6 +87637,8 @@ MonoBehaviour:
   - {fileID: 1279762047}
   leftHandTransform: {fileID: 1218398413}
   rightHandTransform: {fileID: 1249272189}
+  leftHandTransform: {fileID: 1218398413}
+  rightHandTransform: {fileID: 1249272189}
   keepWeapon: {fileID: 446457346}
 --- !u!1001 &1897219005
 PrefabInstance:
@@ -93791,59 +93750,11 @@ MonoBehaviour:
       - m_Target: {fileID: 1896201333}
         m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
         m_MethodName: EquipLeft
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1896201333}
-        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
-        m_MethodName: EquipLeft
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1896201333}
-        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
-        m_MethodName: EquipLeft
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1896201333}
-        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
-        m_MethodName: EquipLeft
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1896201333}
-        m_TargetAssemblyTypeName: GunSystem, Assembly-CSharp
-        m_MethodName: EquipLeft
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
