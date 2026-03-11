@@ -11,7 +11,6 @@ public class Gun : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [Header("Gun info")]
     [SerializeField] private GunData data;
-    [SerializeField] private float recoilReturnSpeed = 8f;
     [SerializeField] private HandType currentHandType = HandType.None;
     [Header("UI")]
     [SerializeField] private TMP_Text ammoText;  
@@ -51,34 +50,39 @@ public class Gun : MonoBehaviour
 
         bool isShooting = data.isAutoGun ? currentShootInputAction.IsPressed() : currentShootInputAction.WasPressedThisFrame();
 
-        if (isShooting)
+        if(isShooting)
         {
             TryShoot();
+            currentRecoveryTime = 0;
+            isRecovery = false;
         }
-        if(currentAmmo == 0)
+        else if(currentRecoveryTime < data.recoilRecoveryTime)
+        {
+            currentRecoveryTime += Time.deltaTime;
+        }
+        if(currentRecoveryTime >= data.recoilRecoveryTime)
+        {
+            isRecovery = true;
+        }
+        if(currentAmmo == 0 )
         {
             if(currentReloadTime > data.reloadTime)
             {
-                currentReloadTime = 0;
-                ammoSystem.UseAmmo(data.type, data.magazineSize);
+                if(ammoSystem.GetAmmo(data.type) <= 0)
+                {
+                    ammoText.text = "No bullet";
+                }
+                else
+                {
+                    currentReloadTime = 0;
+                    ammoSystem.UseAmmo(data.type, data.magazineSize);
+                }
             }
             else
             {
                 currentReloadTime += Time.deltaTime;
+                ammoText.text = "Reloading";
             }
-        }
-        if(isShooting)
-        {
-            currentRecoveryTime = 0;
-            isRecovery = false;
-        }
-        else if(currentRecoveryTime < data.RecoilRecoveryTime)
-        {
-            currentRecoveryTime += Time.deltaTime;
-        }
-        if(currentRecoveryTime >= data.RecoilRecoveryTime)
-        {
-            isRecovery = true;
         }
         UpdateRecoil();
     }
@@ -91,8 +95,7 @@ public class Gun : MonoBehaviour
 
         nextFireTime = Time.time + 1f / data.fireRate;
 
-        if (data.freeAmmoPercent <= 0f ||
-            Random.Range(0f, 100f) > data.freeAmmoPercent)
+        if (data.freeAmmoPercent <= 0f || Random.Range(0f, 100f) > data.freeAmmoPercent)
         {
             currentAmmo--;
             UpdateAmmoUI();
@@ -125,7 +128,7 @@ public class Gun : MonoBehaviour
 
                 damageable.TakeDamage(finalDamage);
 
-                currentDamage *= data.damageReduction;
+                currentDamage *= 1 - data.damagePenetrationReduction;
                 penetrationCount++; 
 
                 if (penetrationCount >= data.penetration)
@@ -160,7 +163,7 @@ public class Gun : MonoBehaviour
             recoilTarget = Mathf.Lerp(
                 recoilTarget,
                 0f,
-                recoilReturnSpeed * Time.deltaTime
+                data.recoilRecoverySpeed * Time.deltaTime
             );
         }
 
@@ -197,5 +200,10 @@ public class Gun : MonoBehaviour
     public void SetCurrentHandType(HandType hand)
     {
         currentHandType = hand;
+    }
+
+    public GunData GetGunData()
+    {
+        return data;
     }
 }

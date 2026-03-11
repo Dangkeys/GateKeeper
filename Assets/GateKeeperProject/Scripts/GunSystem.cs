@@ -86,4 +86,9 @@ public class GunSystem : MonoBehaviour
         guns[(int)weapon].transform.localRotation = Quaternion.identity;
         guns[(int)weapon].SetCurrentHandType(handType);
     }
+
+    public Gun GetGun(int index)
+    {
+        return guns[index];
+    }
 }
