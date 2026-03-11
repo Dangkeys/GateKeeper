@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 60d108c1758e69f4b9a274acaffda3f2
+timeCreated: 1501537541
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 0
+  packageName: POLYGON Heist
+  packageVersion: 1.9.2
+  assetPath: Assets/ThirdParty/PolygonHeist/Materials/PolygonHeist_Material_01_A.mat
+  uploadId: 0
