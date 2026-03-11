@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.Build.Utilities;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemySizeConfigSO", menuName = "Scriptable Objects/EnemySizeConfigSO")]

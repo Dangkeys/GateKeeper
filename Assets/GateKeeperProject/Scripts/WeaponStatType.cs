@@ -1,0 +1,19 @@
+public enum WeaponStatType
+{
+    FlatDamage,
+    HeadshotMultiplier,
+    Range,
+    Penetration,
+    DamagePenetrationReduction,
+    FireRate,
+    RecoilReduction,
+    MaximumRecoil,
+    RecoilRecoveryTime,
+    RecoilRecoverySpeed,
+    MagazineSize,
+    ReloadTime,
+    FreeAmmoPercent,
+    BulletSize,
+    PelletCount,
+    SpreadAngle
+}

@@ -630,10 +630,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0247974ae28a1499c594116cca792b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gun
-  shootInput: {fileID: -2439264783773714294, guid: 0be0028c24f2a4c14a96b6aa39055933, type: 3}
+  shootInputLeft: {fileID: 0}
+  shootInputRight: {fileID: 0}
   firePoint: {fileID: 1803756352}
   data: {fileID: 11400000, guid: 3d60e13ac6581ce49b16460c83d497da, type: 2}
   recoilReturnSpeed: 2
+  currentHandType: 0
   ammoText: {fileID: 195941242}
   ammoSystem: {fileID: 1321645536}
 --- !u!1 &276737593
@@ -988,7 +990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

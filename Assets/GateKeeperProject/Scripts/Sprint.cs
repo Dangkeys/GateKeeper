@@ -12,6 +12,8 @@ public class Sprint : MonoBehaviour
     [SerializeField] private float sprintDuration = 10f;
     [SerializeField] private InputActionReference sprintInput;
     [SerializeField] private Scrollbar sprintScrollBar;
+    [SerializeField] private float sprintDurationReward = 2f;
+    [SerializeField] private float speedReward = 2f;
     private float currentSprintDuration;
     private bool isSprint;
 
@@ -81,4 +83,22 @@ public class Sprint : MonoBehaviour
         sprintScrollBar.size = currentSprintDuration / sprintDuration;
     }
 
+    public void IncreaseSpeed()
+    {
+        initSpeed += speedReward;
+        if(isSprint)
+        {
+            dynamicMoveProvider.moveSpeed = initSpeed * multiplySpeed;
+        }
+        else
+        {
+            dynamicMoveProvider.moveSpeed = initSpeed;
+        }
+    }
+
+    public void IncreaseStamina()
+    {
+        sprintDuration += sprintDurationReward;
+        UpdateSprintScrollBar();
+    }
 }
