@@ -7,14 +7,18 @@ public class WaveSettingsSO : ScriptableObject
 {
     [Header("Prefabs")] public Enemy enemyPrefab;
     public float randomSpawnOffset = 10f;
-
+    public float minimumSpawnDistanceOffset = 8f;
+    public float maximumSpawnDistanceOffset = 40f;
+    
+    
     [Header("Enemy Pool & Weights")] public List<EnemySpawnConfig> enemyPool;
 
     [Header("Wave Pacing & Budget")] public int baseWaveBudget = 20;
     public int budgetIncreasePerWave = 15;
     public int maxWaveBudget = 150;
     public float spawnDelay = 0.5f;
-
+    public float ammoRateDrop = .1f;
+    public float maxAmmoRateDrop = .5f;
     [Header("Enemy Stat Scaling")] public EnemyWaveConfig waveConfig;
 }
 
@@ -36,6 +40,8 @@ public class EnemyWaveConfig
     public float maxHealthMultiplier = 3.0f;
     public float maxDamageMultiplier = 2.5f;
     public float maxMoveSpeedMultiplier = 1.5f;
+    public float ammoRateDropMultiplier = .1f;
+    public float maxAmmoRateDropMultiplier = 0.5f;
 }
 
 [System.Serializable]
@@ -44,11 +50,12 @@ public struct EnemyStatModifiers
     public float healthMultiplier;
     public float damageMultiplier;
     public float moveSpeedMultiplier;
-
-    public EnemyStatModifiers(float health, float damage, float speed)
+    public float ammoRateDropMultiplier;
+    public EnemyStatModifiers(float health, float damage, float speed, float ammoRateDropMultiplier)
     {
         healthMultiplier = health;
         damageMultiplier = damage;
         moveSpeedMultiplier = speed;
+        this.ammoRateDropMultiplier = ammoRateDropMultiplier;
     }
 }

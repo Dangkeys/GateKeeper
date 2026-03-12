@@ -12,20 +12,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3445a866a5191ef4d8bde80dc74bf388, type: 3}
   m_Name: AssualtRifle
   m_EditorClassIdentifier: Assembly-CSharp::GunData
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 160
   isAutoGun: 1
   type: 1
-  flatDamage: 30
+  flatDamage: 25
   headshotMultiplier: 2
-  range: 30
+  range: 80
   penetration: 1
-  damageReduction: 0.7
-  fireRate: 5
-  recoil: 2
+  damagePenetrationReduction: 0.7
+  fireRate: 7
+  recoil: 2.5
   recoilReduction: 0.5
-  maximumRecoil: 10
+  maximumRecoil: 12
+  recoilRecoveryTime: 0.5
+  recoilRecoverySpeed: 8
   magazineSize: 30
-  reloadTime: 2
+  reloadTime: 2.5
   freeAmmoPercent: 0
   bulletSize: 0.1
   pelletCount: 1
-  spreadAngle: 0.5
+  spreadAngle: 0
+  flatDamageReward: 2
+  headshotMultiplierReward: 0.2
+  rangeReward: 10
+  penetrationReward: 1
+  damagePenetrationReductionReward: 0.01
+  fireRateReward: 1
+  recoilReductionReward: 0.05
+  maximumRecoilReward: 1
+  recoilRecoveryTimeReward: 0.05
+  recoilRecoverySpeedReward: 0.8
+  magazineSizeReward: 3
+  reloadTimeReward: 0.2
+  freeAmmoPercentReward: 1
+  bulletSizeReward: 0.01
+  pelletCountReward: 1
+  spreadAngleReward: 0.5
+  ammoReward: 120
+  bulletTrailPrefab: {fileID: 428622580606310695, guid: 90fc71b206ef74060b37610f705f305e, type: 3}
+  bulletTrailSpeed: 160
+  hapticAmplitude: 0.35
+  hapticDuration: 0.04

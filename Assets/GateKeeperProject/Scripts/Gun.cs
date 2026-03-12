@@ -1,6 +1,9 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MoreMountains.Feedbacks;
+using UnityEngine.XR;
+using System.Collections.Generic;
 
 public class Gun : MonoBehaviour
 {
@@ -11,12 +14,17 @@ public class Gun : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [Header("Gun info")]
     [SerializeField] private GunData data;
+    [Header("Raycast Settings")]
+ 
     [SerializeField] private HandType currentHandType = HandType.None;
     [Header("UI")]
-    [SerializeField] private TMP_Text ammoText;  
+    [SerializeField] private TMP_Text ammoText;
     [SerializeField] private AmmoSystem ammoSystem;
+    [Header("Feel")]
+    [SerializeField] private MMF_Player fireFeedbacks;
+    [SerializeField] private MMF_Player reloadFeedbacks;
     private float recoilTarget;
-    private float currentRecoil; 
+    private float currentRecoil;
     private float nextFireTime;
     private int currentAmmo;
     private float currentReloadTime;
@@ -45,30 +53,30 @@ public class Gun : MonoBehaviour
     void Update()
     {
         if (currentHandType == HandType.None) return;
-        
+
         InputAction currentShootInputAction = currentHandType == HandType.Left ? shootInputLeft.action : shootInputRight.action;
 
         bool isShooting = data.isAutoGun ? currentShootInputAction.IsPressed() : currentShootInputAction.WasPressedThisFrame();
 
-        if(isShooting)
+        if (isShooting)
         {
             TryShoot();
             currentRecoveryTime = 0;
             isRecovery = false;
         }
-        else if(currentRecoveryTime < data.recoilRecoveryTime)
+        else if (currentRecoveryTime < data.recoilRecoveryTime)
         {
             currentRecoveryTime += Time.deltaTime;
         }
-        if(currentRecoveryTime >= data.recoilRecoveryTime)
+        if (currentRecoveryTime >= data.recoilRecoveryTime)
         {
             isRecovery = true;
         }
-        if(currentAmmo == 0 )
+        if (currentAmmo == 0)
         {
-            if(currentReloadTime > data.reloadTime)
+            if (currentReloadTime > data.reloadTime)
             {
-                if(ammoSystem.GetAmmo(data.type) <= 0)
+                if (ammoSystem.GetAmmo(data.type) <= 0)
                 {
                     ammoText.text = "No bullet";
                 }
@@ -80,6 +88,10 @@ public class Gun : MonoBehaviour
             }
             else
             {
+                if (currentReloadTime == 0 && reloadFeedbacks != null)
+                {
+                    reloadFeedbacks?.PlayFeedbacks();
+                }
                 currentReloadTime += Time.deltaTime;
                 ammoText.text = "Reloading";
             }
@@ -109,14 +121,27 @@ public class Gun : MonoBehaviour
 
             Debug.DrawRay(ray.origin, ray.direction * data.range, Color.red, 1f);
 
-            RaycastHit[] hits = Physics.SphereCastAll(ray, data.bulletSize, data.range, 1 << 7, QueryTriggerInteraction.Collide);
+            RaycastHit[] hits = Physics.SphereCastAll(ray, data.bulletSize, data.range, data.hitLayers, QueryTriggerInteraction.Collide);
             System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+            Vector3 trailEndPoint = hits.Length > 0 ? hits[0].point : firePoint.position + spreadDirection * data.range;
+
+            if (data.bulletTrailPrefab != null)
+            {
+                BulletTrailHandler.Spawn(data.bulletTrailPrefab, firePoint.position, trailEndPoint, data.bulletTrailSpeed, data.bulletSize);
+            }     
 
             int penetrationCount = 0;
             float currentDamage = data.flatDamage;
 
             foreach (var hit in hits)
             {
+                if (hit.collider.CompareTag("RewardCard"))
+                {
+                    ShootableCard card = hit.collider.GetComponent<ShootableCard>();
+                    if (card != null) card.TriggerCard();
+                    break; // Stop bullet penetration if it hits a card
+                }
                 if (!hit.collider.CompareTag("Enemy") && !hit.collider.CompareTag("EnemyHead")) continue;
                 IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
                 if (damageable == null) continue;
@@ -129,7 +154,7 @@ public class Gun : MonoBehaviour
                 damageable.TakeDamage(finalDamage);
 
                 currentDamage *= 1 - data.damagePenetrationReduction;
-                penetrationCount++; 
+                penetrationCount++;
 
                 if (penetrationCount >= data.penetration)
                     break;
@@ -137,6 +162,11 @@ public class Gun : MonoBehaviour
         }
 
         ApplyRecoil();
+        if(fireFeedbacks != null)
+        {
+            fireFeedbacks.PlayFeedbacks();
+        }
+        TriggerHaptic();
     }
 
     private Vector3 GetSpreadDirection()
@@ -176,7 +206,7 @@ public class Gun : MonoBehaviour
 
         recoilTarget += finalRecoil;
 
-        if(recoilTarget > data.maximumRecoil)
+        if (recoilTarget > data.maximumRecoil)
         {
             recoilTarget = data.maximumRecoil;
         }
@@ -184,7 +214,7 @@ public class Gun : MonoBehaviour
 
     private void UpdateAmmo(WeaponType type, int recieve, int total)
     {
-        if(type == data.type)
+        if (type == data.type)
         {
             currentAmmo += recieve;
             totalAmmo = total;
@@ -205,5 +235,19 @@ public class Gun : MonoBehaviour
     public GunData GetGunData()
     {
         return data;
+    }
+
+    private void TriggerHaptic()
+    {
+        List<UnityEngine.XR.InputDevice> devices = new List<UnityEngine.XR.InputDevice>();
+
+        XRNode node = currentHandType == HandType.Left ? XRNode.LeftHand : XRNode.RightHand;
+
+        InputDevices.GetDevicesAtXRNode(node, devices);
+
+        if (devices.Count > 0)
+        {
+            devices[0].SendHapticImpulse(0, data.hapticAmplitude, data.hapticDuration);
+        }
     }
 }

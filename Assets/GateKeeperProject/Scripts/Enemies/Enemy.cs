@@ -6,6 +6,7 @@ using JetBrains.Annotations;
 using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour, IAttackable
 {
@@ -19,20 +20,21 @@ public class Enemy : MonoBehaviour, IAttackable
 
     private EnemyStatModifiers _enemyStatModifiers;
 
-    [SerializeField] private Health health;
+    public Health EnemyHealth { get; private set; }
 
     private GameObject enemyVisual;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        health.OnDamageTaken += DamageTakenEvent;
-        health.OnDeath += DeathEvent;
+        EnemyHealth = GetComponent<Health>();
+        EnemyHealth.OnDamageTaken += DamageTakenEvent;
+        EnemyHealth.OnDeath += DeathEvent;
     }
     private void OnDestroy()
     {
-        health.OnDamageTaken -= DamageTakenEvent;
-        health.OnDeath -= DeathEvent;
+        EnemyHealth.OnDamageTaken -= DamageTakenEvent;
+        EnemyHealth.OnDeath -= DeathEvent;
     }
     private void DamageTakenEvent(float currentHealth)
     {
@@ -53,7 +55,7 @@ public class Enemy : MonoBehaviour, IAttackable
         _enemyStatModifiers = statModifiers;
         
         enemyVisual = Instantiate(currentStat.GetRandomVisual(), gameObject.transform);
-        health.InitAndSetMaxHealth(currentStat.MaxHealth * _enemyStatModifiers.healthMultiplier);
+        EnemyHealth.InitAndSetMaxHealth(currentStat.MaxHealth * _enemyStatModifiers.healthMultiplier);
         
         InitializeColliders();
         InitializeAgent();

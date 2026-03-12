@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: SizeConfigSO
   m_EditorClassIdentifier: Assembly-CSharp::EnemySizeConfigSO
   <ColliderConfigList>k__BackingField:
-  - HandType: 2
-    ParentTransformNameList:
+  - ParentTransformNameList:
     - Hips
     - pelvis
     GameObjectTag: Enemy
@@ -25,8 +24,7 @@ MonoBehaviour:
     Height: 1.5
     IsTrigger: 1
     ShouldDisableOnAwake: 0
-  - HandType: 2
-    ParentTransformNameList:
+  - ParentTransformNameList:
     - Neck
     - neck_01
     GameObjectTag: EnemyHead
@@ -37,8 +35,7 @@ MonoBehaviour:
     Height: 0
     IsTrigger: 1
     ShouldDisableOnAwake: 0
-  - HandType: 2
-    ParentTransformNameList:
+  - ParentTransformNameList:
     - IndexFinger_01
     - middle_01_l
     GameObjectTag: Untagged
@@ -49,8 +46,7 @@ MonoBehaviour:
     Height: 0
     IsTrigger: 1
     ShouldDisableOnAwake: 1
-  - HandType: 2
-    ParentTransformNameList:
+  - ParentTransformNameList:
     - IndexFinger_01 1
     - middle_01_r
     GameObjectTag: Untagged
@@ -61,5 +57,5 @@ MonoBehaviour:
     Height: 0
     IsTrigger: 1
     ShouldDisableOnAwake: 1
-  <AgentRadius>k__BackingField: 0.5
+  <AgentRadius>k__BackingField: 0.41
   <AgentHeight>k__BackingField: 2

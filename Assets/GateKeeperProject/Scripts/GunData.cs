@@ -1,7 +1,8 @@
 using UnityEngine;
-[CreateAssetMenu(fileName = "WeaponData", menuName = "VR/Weapon Data")]
+[CreateAssetMenu(fileName = "WeaponData", menuName = "Scriptable Objects/Weapon Data")]
 public class GunData : ScriptableObject
 {
+    public LayerMask hitLayers;
     [Header("Type")]
     public bool isAutoGun = true;
     public WeaponType type = WeaponType.Pistol;
@@ -13,7 +14,7 @@ public class GunData : ScriptableObject
     public float damagePenetrationReduction = 0.7f;
 
     [Header("Fire Settings")]
-    public float fireRate = 5f; 
+    public float fireRate = 5f;
     public float recoil = 2f;
     public float recoilReduction = 0.5f;
     public float maximumRecoil = 10f;
@@ -23,7 +24,7 @@ public class GunData : ScriptableObject
     [Header("Ammo")]
     public int magazineSize = 30;
     public float reloadTime = 2f;
-    [Range(0,100)]
+    [Range(0, 100)]
     public float freeAmmoPercent = 0f;
 
     [Header("Bullet")]
@@ -39,7 +40,7 @@ public class GunData : ScriptableObject
     [SerializeField] private float rangeReward = 10f;
     [SerializeField] private float penetrationReward = 1f;
     [SerializeField] private float damagePenetrationReductionReward = 0.01f;
-    [SerializeField] private float fireRateReward = 1f; 
+    [SerializeField] private float fireRateReward = 1f;
     [SerializeField] private float recoilReductionReward = 0.05f;
     [SerializeField] private float maximumRecoilReward = 1f;
     [SerializeField] private float recoilRecoveryTimeReward = 0.05f;
@@ -51,6 +52,13 @@ public class GunData : ScriptableObject
     [SerializeField] private float pelletCountReward = 1f;
     [SerializeField] private float spreadAngleReward = 0.5f;
     [SerializeField] private int ammoReward = 120;
+    [Header("Bullet Trail")]
+    public GameObject bulletTrailPrefab;
+    public float bulletTrailSpeed = 80f;
+
+    [Header("Haptics")]
+    public float hapticAmplitude = 0.7f;
+    public float hapticDuration = 0.1f;
 
     public bool CanChangeStat(WeaponStatType stat)
     {

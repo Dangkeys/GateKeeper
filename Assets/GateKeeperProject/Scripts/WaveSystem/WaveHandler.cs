@@ -1,11 +1,18 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 public class WaveHandler : MonoBehaviour
 {
+    
+    
     [SerializeField] private WaveSettingsSO settings;
     [SerializeField] private Transform playerTransform;
+    
+    
+    public event Action OnWaveComplete;
 
     private EnemyStatModifiers enemyStatModifiers = new EnemyStatModifiers();
     private List<(EnemySpawnConfig config, float weight)> currentWavePool = new List<(EnemySpawnConfig, float)>();
@@ -13,28 +20,44 @@ public class WaveHandler : MonoBehaviour
     private int currentBudget;
     private int waveNumber = 1;
 
-    private void Start()
+    private int activeEnemies = 0;
+    private bool isSpawning = false;
+    
+    
+    private bool isWaveComplete = false;
+
+    private void Awake()
     {
         if (settings == null)
         {
             Debug.LogError("WaveHandler: No WaveSettingsSO assigned!");
             return;
         }
-        
+
         if (playerTransform == null) playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        
-        StartNextWave();
+
     }
 
     public void StartNextWave()
     {
+        if (!isWaveComplete && waveNumber > 1) 
+        {
+            Debug.LogWarning("Cannot start next wave: Current wave is still active!");
+            return;
+        }
 
-        currentBudget = Mathf.Min(settings.baseWaveBudget + (waveNumber * settings.budgetIncreasePerWave), settings.maxWaveBudget);
+        isWaveComplete = false;
+        currentBudget = Mathf.Min(settings.baseWaveBudget + (waveNumber * settings.budgetIncreasePerWave),
+            settings.maxWaveBudget);
 
 
-        enemyStatModifiers.healthMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.healthMultiplier), settings.waveConfig.maxHealthMultiplier);
-        enemyStatModifiers.damageMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.damageMultiplier), settings.waveConfig.maxDamageMultiplier);
-        enemyStatModifiers.moveSpeedMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.moveSpeedMultiplier), settings.waveConfig.maxMoveSpeedMultiplier);
+        enemyStatModifiers.healthMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.healthMultiplier),
+            settings.waveConfig.maxHealthMultiplier);
+        enemyStatModifiers.damageMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.damageMultiplier),
+            settings.waveConfig.maxDamageMultiplier);
+        enemyStatModifiers.moveSpeedMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.moveSpeedMultiplier),
+            settings.waveConfig.maxMoveSpeedMultiplier);
+        enemyStatModifiers.ammoRateDropMultiplier = Mathf.Max(waveNumber * settings.ammoRateDrop, settings.maxAmmoRateDrop);
 
 
         currentWavePool.Clear();
@@ -43,6 +66,9 @@ public class WaveHandler : MonoBehaviour
             float calculatedWeight = enemy.baseWeight + (waveNumber * enemy.weightIncreasePerWave);
             currentWavePool.Add((enemy, calculatedWeight));
         }
+
+        activeEnemies = 0;
+        isSpawning = true;
 
         StopAllCoroutines();
         StartCoroutine(FairSpawnRoutine());
@@ -65,6 +91,9 @@ public class WaveHandler : MonoBehaviour
 
             yield return new WaitForSeconds(settings.spawnDelay);
         }
+
+        isSpawning = false;
+        CheckWaveCompletion();
     }
 
     private EnemySpawnConfig GetWeightedRandomEnemy()
@@ -89,6 +118,7 @@ public class WaveHandler : MonoBehaviour
                 if (roll <= cumulative) return currentWavePool[i].config;
             }
         }
+
         return null;
     }
 
@@ -104,7 +134,7 @@ public class WaveHandler : MonoBehaviour
             float dot = Vector3.Dot(playerTransform.forward, dir);
             float dist = Vector3.Distance(points[i].transform.position, playerTransform.position);
 
-            if (dot > -0.5f && dist > 8f) validPoints.Add(points[i]);
+            if (dot > -0.5f && dist > settings.minimumSpawnDistanceOffset && dist < settings.maximumSpawnDistanceOffset) validPoints.Add(points[i]);
         }
 
         var source = validPoints.Count > 0 ? validPoints : points;
@@ -115,8 +145,61 @@ public class WaveHandler : MonoBehaviour
     {
         Vector2 offset = Random.insideUnitCircle * settings.randomSpawnOffset;
         Vector3 pos = spot.position + new Vector3(offset.x, 0, offset.y);
-        
+
         Enemy enemy = Instantiate(settings.enemyPrefab, pos, spot.rotation);
         enemy.Initialize(stat, enemyStatModifiers);
+        activeEnemies++;
+        enemy.EnemyHealth.OnDeath += HandleEnemyDeath;
+    }
+
+    private void HandleEnemyDeath()
+    {
+        Debug.Log("jam");
+        activeEnemies--;
+        CheckWaveCompletion();
+    }
+
+    private void CheckWaveCompletion()
+    {
+        Debug.Log("something");
+        if (!isSpawning && activeEnemies <= 0)
+        {
+            Debug.Log("fish");
+            OnWaveEnded();
+        }
+    }
+
+    private void OnWaveEnded()
+    {
+        isWaveComplete = true;
+        OnWaveComplete?.Invoke();
+    }
+    
+    [ContextMenu("Debug: Clear All Enemies")]
+    public void DebugClearAllEnemies()
+    {
+        // 1. Stop the spawning routine so no new enemies pop up after clearing
+        StopAllCoroutines();
+        isSpawning = false;
+
+        // 2. Find all active enemies currently in the scene
+        Enemy[] allEnemies = FindObjectsOfType<Enemy>();
+
+        foreach (Enemy enemy in allEnemies)
+        {
+            if (enemy != null)
+            {
+                // Unsubscribe from the event first to avoid HandleEnemyDeath 
+                // messing up our manual reset during the Destroy frame
+                enemy.EnemyHealth.OnDeath -= HandleEnemyDeath;
+                Destroy(enemy.gameObject);
+            }
+        }
+
+        // 3. Reset the active count and manually trigger completion
+        activeEnemies = 0;
+        CheckWaveCompletion();
+
+        Debug.Log("Debug command executed: All enemies cleared.");
     }
 }
