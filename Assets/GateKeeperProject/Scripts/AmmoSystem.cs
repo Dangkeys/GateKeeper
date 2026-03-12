@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class AmmoSystem : MonoBehaviour
@@ -6,9 +7,15 @@ public class AmmoSystem : MonoBehaviour
     [SerializeField] private int[] ammos;
     public event Action<WeaponType, int, int> OnAmmoChanged;
 
-    void Awake()
+    void Start()
     {
-        ammos = new int[Enum.GetNames(typeof(WeaponType)).Length];
+        StartCoroutine(InvokeNextFrame());
+    }
+
+    private IEnumerator InvokeNextFrame()
+    {
+        yield return null;
+        OnAmmoChanged?.Invoke(WeaponType.Pistol, 0, ammos[0]);
     }
 
     public int GetAmmo(WeaponType type)
