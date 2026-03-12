@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MoreMountains.Feedbacks;
 
 public class Gun : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Gun : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TMP_Text ammoText;  
     [SerializeField] private AmmoSystem ammoSystem;
+    [Header("Feel")]
+    [SerializeField] private MMF_Player fireFeedbacks;
     private float recoilTarget;
     private float currentRecoil; 
     private float nextFireTime;
@@ -112,6 +115,13 @@ public class Gun : MonoBehaviour
             RaycastHit[] hits = Physics.SphereCastAll(ray, data.bulletSize, data.range, 1 << 7, QueryTriggerInteraction.Collide);
             System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
+            Vector3 trailEndPoint = hits.Length > 0 ? hits[0].point : firePoint.position + spreadDirection * data.range;
+
+            if (data.bulletTrailPrefab != null)
+            {
+                BulletTrailHandler.Spawn(data.bulletTrailPrefab, firePoint.position, trailEndPoint, data.bulletTrailSpeed);
+            }     
+
             int penetrationCount = 0;
             float currentDamage = data.flatDamage;
 
@@ -137,6 +147,7 @@ public class Gun : MonoBehaviour
         }
 
         ApplyRecoil();
+        fireFeedbacks?.PlayFeedbacks();
     }
 
     private Vector3 GetSpreadDirection()
