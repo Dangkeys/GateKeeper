@@ -26,11 +26,14 @@ public class AmmoDropSystem : MonoBehaviour
     public void SpawnAmmo(Vector3 position)
     {
         int index;
+        int counter = 0;
         do
         {
+            
             index = Random.Range(0, maximumIndex);
+            counter++;
         }
-        while(ammoDrops[index].GetActive());
+        while(ammoDrops[index].GetActive() && counter < maximumIndex);
         ammoDrops[index].ChangePosition(position);
     }
 }
