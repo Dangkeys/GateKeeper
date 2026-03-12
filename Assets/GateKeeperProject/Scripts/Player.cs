@@ -5,24 +5,25 @@ namespace GateKeeperProject.Scripts
 {
     public class Player : MonoBehaviour
     {
-        [SerializeField] private Health health;
+        public Health PlayerHealth { get; private set; }
 
         private void OnTriggerEnter(Collider col)
         {
-            health.TryToTakeDamage(col);
+            PlayerHealth.TryToTakeDamage(col);
         }
 
         private void Awake()
         {
-            health.OnDamageTaken += DamageTakenEvent;
-            health.OnDeath += DeathEvent;
-            health.Initialize();
+            PlayerHealth = GetComponent<Health>();
+            PlayerHealth.OnDamageTaken += DamageTakenEvent;
+            PlayerHealth.OnDeath += DeathEvent;
+            PlayerHealth.SetCurrentToMaxHealth();
         }
 
         private void OnDestroy()
         {
-            health.OnDamageTaken -= DamageTakenEvent;
-            health.OnDeath -= DeathEvent;
+            PlayerHealth.OnDamageTaken -= DamageTakenEvent;
+            PlayerHealth.OnDeath -= DeathEvent;
         }
 
         private void DamageTakenEvent(float currentHealth)
@@ -32,7 +33,7 @@ namespace GateKeeperProject.Scripts
 
         private void DeathEvent()
         {
-            // gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

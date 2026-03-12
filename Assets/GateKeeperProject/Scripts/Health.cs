@@ -8,13 +8,14 @@ namespace GateKeeperProject.Scripts
         [field: SerializeField] public float MaxHealth { get; private set; } = 100;
         [field: SerializeField] public float CurrentHealth { get; private set; }
 
-        [field: SerializeField] public bool IsAlive { get; private set; }
+        [field: SerializeField] public bool IsAlive { get; private set; } = true;
 
         public event Action<float> OnDamageTaken;
         public event Action OnDeath;
 
+        
 
-        public void Initialize()
+        public void SetCurrentToMaxHealth()
         {
             CurrentHealth = MaxHealth;
         }
@@ -27,11 +28,12 @@ namespace GateKeeperProject.Scripts
         public void InitAndSetMaxHealth(float value)
         {
             SetMaxHealth(value);
-            Initialize();
+            SetCurrentToMaxHealth();
         }
 
         public void TakeDamage(float damage)
         {
+            if (!IsAlive) return;   
             CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
             OnDamageTaken?.Invoke(CurrentHealth);
             IsAlive = CurrentHealth > 0;
@@ -43,8 +45,14 @@ namespace GateKeeperProject.Scripts
         public void TryToTakeDamage(Collider col)
         {
             IAttackable attackable = col.GetComponentInParent<IAttackable>();
+            
             if (attackable == null) return;
             attackable.Attack(this);
+        }
+
+        public void Dead()
+        {
+            TakeDamage(CurrentHealth);
         }
     }
 }
