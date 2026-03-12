@@ -2,6 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
+using UnityEngine.XR;
+using System.Collections.Generic;
 
 public class Gun : MonoBehaviour
 {
@@ -148,6 +150,7 @@ public class Gun : MonoBehaviour
 
         ApplyRecoil();
         fireFeedbacks?.PlayFeedbacks();
+        TriggerHaptic();
     }
 
     private Vector3 GetSpreadDirection()
@@ -216,5 +219,19 @@ public class Gun : MonoBehaviour
     public GunData GetGunData()
     {
         return data;
+    }
+
+    private void TriggerHaptic()
+    {
+        List<UnityEngine.XR.InputDevice> devices = new List<UnityEngine.XR.InputDevice>();
+
+        XRNode node = currentHandType == HandType.Left ? XRNode.LeftHand : XRNode.RightHand;
+
+        InputDevices.GetDevicesAtXRNode(node, devices);
+
+        if (devices.Count > 0)
+        {
+            devices[0].SendHapticImpulse(0, data.hapticAmplitude, data.hapticDuration);
+        }
     }
 }
