@@ -126,7 +126,7 @@ public class Gun : MonoBehaviour
 
             if (data.bulletTrailPrefab != null)
             {
-                BulletTrailHandler.Spawn(data.bulletTrailPrefab, firePoint.position, trailEndPoint, data.bulletTrailSpeed);
+                BulletTrailHandler.Spawn(data.bulletTrailPrefab, firePoint.position, trailEndPoint, data.bulletTrailSpeed, data.bulletSize);
             }     
 
             int penetrationCount = 0;
