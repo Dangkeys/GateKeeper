@@ -18,22 +18,22 @@ MonoBehaviour:
   isAutoGun: 0
   type: 3
   flatDamage: 15
-  headshotMultiplier: 2
-  range: 15
+  headshotMultiplier: 1.5
+  range: 20
   penetration: 1
   damagePenetrationReduction: 0.7
-  fireRate: 5
-  recoil: 4
+  fireRate: 1.5
+  recoil: 5
   recoilReduction: 0.5
-  maximumRecoil: 20
-  recoilRecoveryTime: 0.5
-  recoilRecoverySpeed: 8
-  magazineSize: 30
-  reloadTime: 2
+  maximumRecoil: 15
+  recoilRecoveryTime: 0.8
+  recoilRecoverySpeed: 5
+  magazineSize: 8
+  reloadTime: 3
   freeAmmoPercent: 0
-  bulletSize: 0.3
-  pelletCount: 5
-  spreadAngle: 1
+  bulletSize: 0.08
+  pelletCount: 8
+  spreadAngle: 15
   flatDamageReward: 2
   headshotMultiplierReward: 0.2
   rangeReward: 10
@@ -52,4 +52,6 @@ MonoBehaviour:
   spreadAngleReward: 0.5
   ammoReward: 120
   bulletTrailPrefab: {fileID: 428622580606310695, guid: 90fc71b206ef74060b37610f705f305e, type: 3}
-  bulletTrailSpeed: 120
+  bulletTrailSpeed: 80
+  hapticAmplitude: 1
+  hapticDuration: 0.2

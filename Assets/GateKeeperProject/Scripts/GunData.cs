@@ -56,6 +56,10 @@ public class GunData : ScriptableObject
     public GameObject bulletTrailPrefab;
     public float bulletTrailSpeed = 80f;
 
+    [Header("Haptics")]
+    public float hapticAmplitude = 0.7f;
+    public float hapticDuration = 0.1f;
+
     public bool CanChangeStat(WeaponStatType stat)
     {
         if (type != WeaponType.Shotgun)

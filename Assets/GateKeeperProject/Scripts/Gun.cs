@@ -2,6 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
+using UnityEngine.XR;
+using System.Collections.Generic;
 
 public class Gun : MonoBehaviour
 {
@@ -20,6 +22,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private AmmoSystem ammoSystem;
     [Header("Feel")]
     [SerializeField] private MMF_Player fireFeedbacks;
+    [SerializeField] private MMF_Player reloadFeedbacks;
     private float recoilTarget;
     private float currentRecoil;
     private float nextFireTime;
@@ -85,6 +88,10 @@ public class Gun : MonoBehaviour
             }
             else
             {
+                if (currentReloadTime == 0)
+                {
+                    reloadFeedbacks?.PlayFeedbacks();
+                }
                 currentReloadTime += Time.deltaTime;
                 ammoText.text = "Reloading";
             }
@@ -121,8 +128,8 @@ public class Gun : MonoBehaviour
 
             if (data.bulletTrailPrefab != null)
             {
-                BulletTrailHandler.Spawn(data.bulletTrailPrefab, firePoint.position, trailEndPoint, data.bulletTrailSpeed);
-            }
+                BulletTrailHandler.Spawn(data.bulletTrailPrefab, firePoint.position, trailEndPoint, data.bulletTrailSpeed, data.bulletSize);
+            }     
 
             int penetrationCount = 0;
             float currentDamage = data.flatDamage;
@@ -156,6 +163,7 @@ public class Gun : MonoBehaviour
 
         ApplyRecoil();
         fireFeedbacks?.PlayFeedbacks();
+        TriggerHaptic();
     }
 
     private Vector3 GetSpreadDirection()
@@ -224,5 +232,19 @@ public class Gun : MonoBehaviour
     public GunData GetGunData()
     {
         return data;
+    }
+
+    private void TriggerHaptic()
+    {
+        List<UnityEngine.XR.InputDevice> devices = new List<UnityEngine.XR.InputDevice>();
+
+        XRNode node = currentHandType == HandType.Left ? XRNode.LeftHand : XRNode.RightHand;
+
+        InputDevices.GetDevicesAtXRNode(node, devices);
+
+        if (devices.Count > 0)
+        {
+            devices[0].SendHapticImpulse(0, data.hapticAmplitude, data.hapticDuration);
+        }
     }
 }
