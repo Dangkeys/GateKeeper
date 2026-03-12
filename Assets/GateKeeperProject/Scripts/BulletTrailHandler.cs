@@ -10,10 +10,6 @@ public class BulletTrailHandler : MonoBehaviour
         trailRenderer = GetComponent<TrailRenderer>();
     }
 
-    /// <summary>
-    /// Spawns and animates a bullet trail from startPoint to endPoint.
-    /// Call this from Gun.cs after every raycast shot.
-    /// </summary>
     public static void Spawn(GameObject trailPrefab, Vector3 startPoint, Vector3 endPoint, float speed)
     {
         GameObject instance = Instantiate(trailPrefab, startPoint, Quaternion.identity);
@@ -47,13 +43,10 @@ public class BulletTrailHandler : MonoBehaviour
             yield return null;
         }
 
-        // Snap to final position
         transform.position = end;
 
-        // Stop emitting — let the trail fade out naturally based on its Time setting
         trailRenderer.emitting = false;
 
-        // Wait for trail to fully fade (matches TrailRenderer Time value)
         yield return new WaitForSeconds(trailRenderer.time);
 
         Destroy(gameObject);
