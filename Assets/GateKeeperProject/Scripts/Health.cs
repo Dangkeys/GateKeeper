@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GateKeeperProject.Scripts
 {
@@ -14,7 +15,7 @@ namespace GateKeeperProject.Scripts
         public event Action<float> OnDamageTaken;
         public event Action OnDeath;
 
-        
+        [SerializeField] private Scrollbar healthScrollbar;
 
         public void SetCurrentToMaxHealth()
         {
@@ -30,6 +31,7 @@ namespace GateKeeperProject.Scripts
         {
             SetMaxHealth(value);
             SetCurrentToMaxHealth();
+            UpdateHealthScrollbar();
         }
 
         public void TakeDamage(float damage)
@@ -38,6 +40,7 @@ namespace GateKeeperProject.Scripts
             CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
             OnDamageTaken?.Invoke(CurrentHealth);
             IsAlive = CurrentHealth > 0;
+            UpdateHealthScrollbar();
             if (IsAlive) return;
             OnDeath?.Invoke();
         }
@@ -54,6 +57,12 @@ namespace GateKeeperProject.Scripts
         public void Dead()
         {
             TakeDamage(CurrentHealth);
+        }
+
+        private void UpdateHealthScrollbar()
+        {
+            if(healthScrollbar == null) return;
+            healthScrollbar.size = CurrentHealth / MaxHealth;
         }
     }
 }
