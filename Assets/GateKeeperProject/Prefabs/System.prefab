@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4107906136739838014}
   - component: {fileID: 4429393893286308127}
   - component: {fileID: 1499074233906578050}
+  - component: {fileID: 2161147431591408365}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9adb45fb13ca854396ebc21aae0ec63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoSystem
-  ammos: a086010000000000000000000000000000000000
+  ammos: 0a00000078000000a00000003c00000019000000
 --- !u!114 &4429393893286308127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,6 +81,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40867ea3591f745408303bfa1c192277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RewardSystem
+  blessingUI: {fileID: 0}
   gunSystem: {fileID: 4429393893286308127}
   ammoSystem: {fileID: 4107906136739838014}
   sprint: {fileID: 0}
+  _player: {fileID: 0}
+  waveHandler: {fileID: 0}
+--- !u!114 &2161147431591408365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7375478038599055188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57caf5afede342849b54d5db04d3ba59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AmmoDropSystem
+  ammoDropPrefabs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  ammoSpawnAmount: 100
+  ammoTransform: {fileID: 0}
