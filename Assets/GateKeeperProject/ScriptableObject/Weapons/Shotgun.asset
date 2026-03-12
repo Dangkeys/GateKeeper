@@ -23,7 +23,7 @@ MonoBehaviour:
   recoil: 4
   recoilReduction: 0.5
   maximumRecoil: 20
-  RecoilRecoveryTime: 0.5
+  recoilRecoveryTime: 0.5
   recoilRecoverySpeed: 8
   magazineSize: 30
   reloadTime: 2
@@ -37,10 +37,9 @@ MonoBehaviour:
   penetrationReward: 1
   damagePenetrationReductionReward: 0.01
   fireRateReward: 1
-  recoilReward: 0.2
   recoilReductionReward: 0.05
   maximumRecoilReward: 1
-  RecoilRecoveryTimeReward: 0.05
+  recoilRecoveryTimeReward: 0.05
   recoilRecoverySpeedReward: 0.8
   magazineSizeReward: 3
   reloadTimeReward: 0.2
@@ -48,3 +47,6 @@ MonoBehaviour:
   bulletSizeReward: 0.01
   pelletCountReward: 1
   spreadAngleReward: 0.5
+  ammoReward: 120
+  bulletTrailPrefab: {fileID: 428622580606310695, guid: 90fc71b206ef74060b37610f705f305e, type: 3}
+  bulletTrailSpeed: 120
