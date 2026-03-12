@@ -4369,7 +4369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8841706926471734270, guid: 2fd3e07afe5b461490fb8e314976b1b0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4782,6 +4782,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AmmoBlessCard (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+      propertyPath: m_TagString
+      value: RewardCard
+      objectReference: {fileID: 0}
     - target: {fileID: 7872702747342484796, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5
@@ -4810,7 +4818,13 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 925241036899479114, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5942465194457341656}
+    - targetCorrespondingSourceObject: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7211248493849864875}
   m_SourcePrefab: {fileID: 100100000, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
 --- !u!224 &582740390447414891 stripped
 RectTransform:
@@ -4822,7 +4836,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 416613889816557987, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
   m_PrefabInstance: {fileID: 660187463817238786}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 3989273901663654872}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -4839,6 +4853,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &3989273901663654872 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+  m_PrefabInstance: {fileID: 660187463817238786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5942465194457341656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3989273901663654872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354c2f8e72b5b8b4d9d03889da8650d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShootableCard
+  OnShot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: RewardSystem, Assembly-CSharp
+        m_MethodName: SelectAmmoReward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!65 &7211248493849864875
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3989273901663654872}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4527794489425044968 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4034240212956134634, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
@@ -6674,6 +6741,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponBlessCard (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+      propertyPath: m_TagString
+      value: RewardCard
+      objectReference: {fileID: 0}
     - target: {fileID: 7872702747342484796, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5
@@ -6702,8 +6777,67 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 925241036899479114, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 323003847278378118}
+    - targetCorrespondingSourceObject: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7949679193829546567}
   m_SourcePrefab: {fileID: 100100000, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+--- !u!1 &133690400300863211 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+  m_PrefabInstance: {fileID: 4588953409067418673}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &323003847278378118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133690400300863211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354c2f8e72b5b8b4d9d03889da8650d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShootableCard
+  OnShot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: RewardSystem, Assembly-CSharp
+        m_MethodName: SelectWeaponReward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!65 &7949679193829546567
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133690400300863211}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &499871362045298633 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4125537592530813944, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
@@ -6720,7 +6854,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 416613889816557987, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
   m_PrefabInstance: {fileID: 4588953409067418673}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 133690400300863211}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -9229,6 +9363,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: StatBlessCard
       objectReference: {fileID: 0}
+    - target: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+      propertyPath: m_TagString
+      value: RewardCard
+      objectReference: {fileID: 0}
     - target: {fileID: 7872702747342484796, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4
@@ -9253,7 +9395,13 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 925241036899479114, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 621264670270162879}
+    - targetCorrespondingSourceObject: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1615204650723719262}
   m_SourcePrefab: {fileID: 100100000, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
 --- !u!114 &4703086863611633148 stripped
 MonoBehaviour:
@@ -9266,6 +9414,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &5076023499490415838 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4500726028458003162, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
+  m_PrefabInstance: {fileID: 8648144938932985348}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &621264670270162879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5076023499490415838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354c2f8e72b5b8b4d9d03889da8650d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShootableCard
+  OnShot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: RewardSystem, Assembly-CSharp
+        m_MethodName: SelectStatReward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!65 &1615204650723719262
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5076023499490415838}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5762604324063142638 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4034240212956134634, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
@@ -9287,7 +9488,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 416613889816557987, guid: 24632c41594f0c04cb74a438e4b3a2de, type: 3}
   m_PrefabInstance: {fileID: 8648144938932985348}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 5076023499490415838}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
