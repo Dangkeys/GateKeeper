@@ -20,6 +20,7 @@ public class Gun : MonoBehaviour
     [SerializeField] private AmmoSystem ammoSystem;
     [Header("Feel")]
     [SerializeField] private MMF_Player fireFeedbacks;
+    [SerializeField] private MMF_Player reloadFeedbacks;
     private float recoilTarget;
     private float currentRecoil; 
     private float nextFireTime;
@@ -85,6 +86,10 @@ public class Gun : MonoBehaviour
             }
             else
             {
+                if (currentReloadTime == 0)
+                {
+                    reloadFeedbacks?.PlayFeedbacks();
+                }
                 currentReloadTime += Time.deltaTime;
                 ammoText.text = "Reloading";
             }
