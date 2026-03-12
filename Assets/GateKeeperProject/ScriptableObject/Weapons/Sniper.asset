@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3445a866a5191ef4d8bde80dc74bf388, type: 3}
   m_Name: Sniper
   m_EditorClassIdentifier: Assembly-CSharp::GunData
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 160
   isAutoGun: 0
   type: 4
   flatDamage: 50
