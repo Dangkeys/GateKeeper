@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5651bbcb352c740914c7e545efc45f, type: 3}
+  m_Name: WaveSettingsSO
+  m_EditorClassIdentifier: Assembly-CSharp::WaveSettingsSO
+  enemyPrefab: {fileID: 7693366073175486830, guid: d73ee81a417e7744db5d0e11bf5819d0, type: 3}
+  randomSpawnOffset: 10
+  enemyPool:
+  - stat: {fileID: 11400000, guid: 1be43b6e5de6d3642bf80f7063025c39, type: 2}
+    cost: 5
+    baseWeight: 10
+    weightIncreasePerWave: 5
+  - stat: {fileID: 11400000, guid: 6a700af5a317bbe4691c4646470554cf, type: 2}
+    cost: 5
+    baseWeight: 10
+    weightIncreasePerWave: 5
+  - stat: {fileID: 11400000, guid: cd218334d5969b6418acc0336647e7ac, type: 2}
+    cost: 2
+    baseWeight: 30
+    weightIncreasePerWave: 3
+  - stat: {fileID: 11400000, guid: 64af50618d604184aa5fc30b8a3f8698, type: 2}
+    cost: 2
+    baseWeight: 30
+    weightIncreasePerWave: 3
+  - stat: {fileID: 11400000, guid: dd995b5e88403c54897f3e4759fd3341, type: 2}
+    cost: 2
+    baseWeight: 30
+    weightIncreasePerWave: 3
+  - stat: {fileID: 11400000, guid: ce220fb2dc1e3db49b0c8834c1cd1496, type: 2}
+    cost: 1
+    baseWeight: 100
+    weightIncreasePerWave: 1
+  - stat: {fileID: 11400000, guid: 9bf897f8b55634844a631135a2a3f997, type: 2}
+    cost: 1
+    baseWeight: 1
+    weightIncreasePerWave: 0
+  baseWaveBudget: 20
+  budgetIncreasePerWave: 15
+  maxWaveBudget: 500
+  spawnDelay: 0.5
+  waveConfig:
+    healthMultiplier: 0.1
+    damageMultiplier: 0.1
+    moveSpeedMultiplier: 0.05
+    maxHealthMultiplier: 3
+    maxDamageMultiplier: 2.5
+    maxMoveSpeedMultiplier: 1.5
