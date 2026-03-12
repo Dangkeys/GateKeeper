@@ -26,9 +26,8 @@ public class BulletTrailHandler : MonoBehaviour
         trailRenderer.emitting = false;
         trailRenderer.Clear();
 
-        // Apply bullet size to trail width
         trailRenderer.startWidth = bulletSize;
-        trailRenderer.endWidth = 0f; // taper to point
+        trailRenderer.endWidth = 0f;
 
         transform.position = start;
         yield return null;
