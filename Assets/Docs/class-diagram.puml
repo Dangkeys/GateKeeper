@@ -1,0 +1,114 @@
+@startuml
+skinparam style strictuml
+skinparam classAttributeIconSize 0
+
+' --- Interfaces ---
+interface IDamageable {
+    + TakeDamage(float amount, Vector3 hitPoint)
+    + IsDead() : bool
+}
+
+interface IAttackable {
+    + OnAttackTarget(Transform target)
+    + GetAttackRange() : float
+}
+
+' --- Persistence & Global Control ---
+class ApplicationController <<Persistent>> {
+    - settings: SettingController
+    - audio: AudioController
+    + SaveGame()
+    + LoadGame()
+}
+
+class SettingController {
+    - masterVolume: float
+    - locomotionType: int
+    - vignetteEnabled: bool
+}
+
+class AudioController {
+    - sfxVolume: float
+    - musicVolume: float
+    + PlaySFX(AudioClip clip, Vector3 pos)
+}
+
+' --- Data Layer (ScriptableObjects) ---
+class GunData <<ScriptableObject>> {
+    + isAutoGun: bool
+    + type: WeaponType
+    + flatDamage: float
+    + headshotMultiplier: float
+    + range: float
+    + fireRate: float
+    + recoil: float
+    + maximumRecoil: float
+    + RecoilRecoveryTime: float
+    + magazineSize: int
+    + freeAmmoPercent: float
+}
+class EnemyDataSO <<ScriptableObject>> {
+    + DealDamaageAmount: float
+    + DamageReductionMutiplier: float
+    + MaxHealth: float
+}
+
+class RewardSO <<ScriptableObject>> {
+    + rewardTitle: string
+    + statToBuff: StatType
+    + buffValue: float
+}
+
+' --- Core Game Loop ---
+class GameManager <<Singleton>> {
+    - currentWave: int
+    + StartWave()
+    + OnWaveClear()
+}
+
+class WaveManager {
+    - spawnPoints: Transform[]
+    + SpawnEnemyBatch()
+}
+
+' --- Player & Combat ---
+class VRPlayerController {
+    - stats: EntityStats
+    - stamina: float
+    + HandleLocomotion()
+}
+
+class InventoryManager {
+    - leftWeapon: Weapon
+    - rightWeapon: Weapon
+    + SwitchWeapon(Hand hand)
+}
+
+class Weapon {
+    - data: GunData
+    - currentAmmo: int
+    - currentRecoil: float
+    + PullTrigger()
+    - HandleRecoilRecovery()
+}
+
+' --- Entities ---
+abstract class Entity implements IDamageable {
+    # health: float
+    + TakeDamage(float amount, Vector3 hitPoint)
+}
+
+class Enemy extends Entity implements IAttackable {
+    + OnAttackTarget(Transform target)
+}
+
+' --- Relationships ---
+ApplicationController *-- SettingController
+ApplicationController *-- AudioController
+GameManager --> WaveManager
+VRPlayerController *-- InventoryManager
+InventoryManager "1" *-- "2" Weapon
+Weapon o-- GunData
+GameManager ..> RewardSO : "RNG Select 1-of-3"
+
+@enduml

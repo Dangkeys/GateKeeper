@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8a11974b142a1e5449a7fd3fe3584857
+timeCreated: 1502255285
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 0
+  packageName: POLYGON Heist
+  packageVersion: 1.9.2
+  assetPath: Assets/ThirdParty/PolygonHeist/Prefab/Weapons/SM_Wep_Shotgun_01.prefab
+  uploadId: 0
