@@ -51,6 +51,9 @@ public class GunData : ScriptableObject
     [SerializeField] private float pelletCountReward = 1f;
     [SerializeField] private float spreadAngleReward = 0.5f;
     [SerializeField] private int ammoReward = 120;
+    [Header("Bullet Trail")]
+    public GameObject bulletTrailPrefab;
+    public float bulletTrailSpeed = 80f;
 
     public bool CanChangeStat(WeaponStatType stat)
     {
