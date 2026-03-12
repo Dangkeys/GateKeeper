@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         waveHandler.OnWaveComplete += EndWaveEvent;
-        
+
         rewardSystem.OnRewardSelected += StartNextWave;
 
         StartNextWave();
@@ -20,15 +20,16 @@ public class GameManager : MonoBehaviour
 
     private void EndWaveEvent()
     {
+        Debug.Log("meow");
         _blessingUI.gameObject.SetActive(true);
-        
-        rewardSystem.GetReward(); 
+
+        rewardSystem.GetReward();
     }
 
     public void StartNextWave()
     {
         _blessingUI.gameObject.SetActive(false);
-        
+
         _player.PlayerHealth.SetCurrentToMaxHealth();
         waveHandler.StartNextWave();
     }
