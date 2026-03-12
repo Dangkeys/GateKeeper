@@ -50,3 +50,5 @@ MonoBehaviour:
   ammoReward: 120
   bulletTrailPrefab: {fileID: 428622580606310695, guid: 90fc71b206ef74060b37610f705f305e, type: 3}
   bulletTrailSpeed: 320
+  hapticAmplitude: 0.85
+  hapticDuration: 0.15

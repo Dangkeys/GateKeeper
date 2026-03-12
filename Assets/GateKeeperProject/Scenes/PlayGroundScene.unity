@@ -636,7 +636,8 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 3d60e13ac6581ce49b16460c83d497da, type: 2}
   currentHandType: 0
   ammoText: {fileID: 195941242}
-  ammoSystem: {fileID: 1321645536}
+  ammoSystem: {fileID: 0}
+  fireFeedbacks: {fileID: 0}
 --- !u!1 &276737593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,7 +1087,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2384,17 +2385,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1321645536 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4107906136739838014, guid: 4367d0ab4821a2c48981ba4575b1b218, type: 3}
-  m_PrefabInstance: {fileID: 1704880682}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9adb45fb13ca854396ebc21aae0ec63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AmmoSystem
 --- !u!1 &1338034718
 GameObject:
   m_ObjectHideFlags: 0
@@ -3273,63 +3263,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1668830301}
   m_LocalEulerAnglesHint: {x: -75.5, y: 90, z: 9.36}
---- !u!1001 &1704880682
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6178717730013231762, guid: 4367d0ab4821a2c48981ba4575b1b218, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.0285
-      objectReference: {fileID: 0}
-    - target: {fileID: 6178717730013231762, guid: 4367d0ab4821a2c48981ba4575b1b218, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.79507
-      objectReference: {fileID: 0}
-    - target: {fileID: 6178717730013231762, guid: 4367d0ab4821a2c48981ba4575b1b218, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 66.38166
-      objectReference: {fileID: 0}
-    - target: {fileID: 6178717730013231762, guid: 4367d0ab4821a2c48981ba4575b1b218, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6178717730013231762, guid: 4367d0ab4821a2c48981ba4575b1b218, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6178717730013231762, guid: 4367d0ab4821a2c48981ba4575b1b218, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6178717730013231762, guid: 4367d0ab4821a2c48981ba4575b1b218, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6178717730013231762, guid: 4367d0ab4821a2c48981ba4575b1b218, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6178717730013231762, guid: 4367d0ab4821a2c48981ba4575b1b218, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6178717730013231762, guid: 4367d0ab4821a2c48981ba4575b1b218, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7375478038599055188, guid: 4367d0ab4821a2c48981ba4575b1b218, type: 3}
-      propertyPath: m_Name
-      value: AmmoSystem
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4367d0ab4821a2c48981ba4575b1b218, type: 3}
 --- !u!1001 &1706365722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4395,7 +4328,6 @@ SceneRoots:
   - {fileID: 129188790}
   - {fileID: 769855427}
   - {fileID: 1820168531}
-  - {fileID: 1704880682}
   - {fileID: 877538056}
   - {fileID: 1668830298}
   - {fileID: 485634279}
