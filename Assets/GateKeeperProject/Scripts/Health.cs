@@ -9,6 +9,7 @@ namespace GateKeeperProject.Scripts
         [field: SerializeField] public float CurrentHealth { get; private set; }
 
         [field: SerializeField] public bool IsAlive { get; private set; } = true;
+        [field: SerializeField] public float DamageTakenMultiplier { get; private set; } = 1;
 
         public event Action<float> OnDamageTaken;
         public event Action OnDeath;

@@ -112,4 +112,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GateKeeperProject.Scripts.Health
   <MaxHealth>k__BackingField: 100
   <CurrentHealth>k__BackingField: 0
-  <IsAlive>k__BackingField: 0
+  <IsAlive>k__BackingField: 1
+  <DamageTakenMultiplier>k__BackingField: 1

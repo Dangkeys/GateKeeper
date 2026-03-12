@@ -57,6 +57,7 @@ public class WaveHandler : MonoBehaviour
             settings.waveConfig.maxDamageMultiplier);
         enemyStatModifiers.moveSpeedMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.moveSpeedMultiplier),
             settings.waveConfig.maxMoveSpeedMultiplier);
+        enemyStatModifiers.ammoRateDropMultiplier = Mathf.Max(waveNumber * settings.ammoRateDrop, settings.maxAmmoRateDrop);
 
 
         currentWavePool.Clear();
@@ -133,7 +134,7 @@ public class WaveHandler : MonoBehaviour
             float dot = Vector3.Dot(playerTransform.forward, dir);
             float dist = Vector3.Distance(points[i].transform.position, playerTransform.position);
 
-            if (dot > -0.5f && dist > 8f) validPoints.Add(points[i]);
+            if (dot > -0.5f && dist > settings.minimumSpawnDistanceOffset && dist < settings.maximumSpawnDistanceOffset) validPoints.Add(points[i]);
         }
 
         var source = validPoints.Count > 0 ? validPoints : points;
@@ -170,7 +171,7 @@ public class WaveHandler : MonoBehaviour
         isWaveComplete = true;
         OnWaveComplete?.Invoke();
     }
-
+    
     [ContextMenu("Debug: Clear All Enemies")]
     public void DebugClearAllEnemies()
     {
