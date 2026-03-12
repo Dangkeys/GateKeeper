@@ -18,13 +18,13 @@ MonoBehaviour:
   - {fileID: 5831015403801387811, guid: 33e341256dd2780449a4a4323f7157e4, type: 3}
   <SizeConfigSo>k__BackingField: {fileID: 11400000, guid: f0c9bcea5d48b724b8e34da7c579fd78, type: 2}
   <Name>k__BackingField: KidEnemy
-  <MaxHealth>k__BackingField: 100
+  <MaxHealth>k__BackingField: 60
   <DamageReductionRate>k__BackingField: 1
-  <MoveSpeed>k__BackingField: 2
-  <StoppingDistance>k__BackingField: 1.5
-  <RotationSpeed>k__BackingField: 120
-  <DealDamageAmount>k__BackingField: 10
-  <AttackRange>k__BackingField: 2
-  <AttackCooldown>k__BackingField: 1.5
+  <MoveSpeed>k__BackingField: 3.2
+  <StoppingDistance>k__BackingField: 1.2
+  <RotationSpeed>k__BackingField: 140
+  <DealDamageAmount>k__BackingField: 8
+  <AttackRange>k__BackingField: 1.5
+  <AttackCooldown>k__BackingField: 2
   <Type>k__BackingField: 1
-  <scoreValue>k__BackingField: 100
+  <scoreValue>k__BackingField: 20

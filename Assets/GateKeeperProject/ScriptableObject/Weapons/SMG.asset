@@ -20,10 +20,10 @@ MonoBehaviour:
   penetration: 1
   damagePenetrationReduction: 0.7
   fireRate: 12
-  recoil: 1.8
-  recoilReduction: 0.4
-  maximumRecoil: 8
-  recoilRecoveryTime: 0.4
+  recoil: 0.15
+  recoilReduction: 0
+  maximumRecoil: 4.5
+  recoilRecoveryTime: 0.8
   recoilRecoverySpeed: 10
   magazineSize: 40
   reloadTime: 2
@@ -32,22 +32,22 @@ MonoBehaviour:
   pelletCount: 1
   spreadAngle: 0
   flatDamageReward: 2
-  headshotMultiplierReward: 0.2
-  rangeReward: 10
+  headshotMultiplierReward: 0.12
+  rangeReward: 4
   penetrationReward: 1
   damagePenetrationReductionReward: 0.01
-  fireRateReward: 1
+  fireRateReward: 2
   recoilReductionReward: 0.05
-  maximumRecoilReward: 1
+  maximumRecoilReward: 0.3
   recoilRecoveryTimeReward: 0.05
-  recoilRecoverySpeedReward: 0.8
-  magazineSizeReward: 3
-  reloadTimeReward: 0.2
+  recoilRecoverySpeedReward: 1.5
+  magazineSizeReward: 8
+  reloadTimeReward: 0.15
   freeAmmoPercentReward: 1
-  bulletSizeReward: 0.01
+  bulletSizeReward: 0.008
   pelletCountReward: 1
-  spreadAngleReward: 0.5
-  ammoReward: 120
+  spreadAngleReward: 0
+  ammoReward: 400
   bulletTrailPrefab: {fileID: 428622580606310695, guid: 90fc71b206ef74060b37610f705f305e, type: 3}
   bulletTrailSpeed: 200
   hapticAmplitude: 0.7

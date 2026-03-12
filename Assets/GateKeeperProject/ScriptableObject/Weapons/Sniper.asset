@@ -14,40 +14,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GunData
   isAutoGun: 0
   type: 4
-  flatDamage: 120
+  flatDamage: 300
   headshotMultiplier: 3
   range: 250
   penetration: 3
   damagePenetrationReduction: 0.3
   fireRate: 0.8
-  recoil: 8
-  recoilReduction: 0.5
+  recoil: 10
+  recoilReduction: 0
   maximumRecoil: 20
   recoilRecoveryTime: 1
   recoilRecoverySpeed: 4
   magazineSize: 5
   reloadTime: 3.5
   freeAmmoPercent: 0
-  bulletSize: 1.2
+  bulletSize: 1.5
   pelletCount: 1
   spreadAngle: 0
-  flatDamageReward: 2
-  headshotMultiplierReward: 0.2
-  rangeReward: 10
-  penetrationReward: 1
-  damagePenetrationReductionReward: 0.01
-  fireRateReward: 1
-  recoilReductionReward: 0.05
-  maximumRecoilReward: 1
-  recoilRecoveryTimeReward: 0.05
+  flatDamageReward: 40
+  headshotMultiplierReward: 0.3
+  rangeReward: 20
+  penetrationReward: 2
+  damagePenetrationReductionReward: 0.02
+  fireRateReward: 0.08
+  recoilReductionReward: 1
+  maximumRecoilReward: 2
+  recoilRecoveryTimeReward: 0.2
   recoilRecoverySpeedReward: 0.8
-  magazineSizeReward: 3
-  reloadTimeReward: 0.2
+  magazineSizeReward: 2
+  reloadTimeReward: 0.35
   freeAmmoPercentReward: 1
-  bulletSizeReward: 0.01
+  bulletSizeReward: 0.2
   pelletCountReward: 1
-  spreadAngleReward: 0.5
-  ammoReward: 120
+  spreadAngleReward: 0
+  ammoReward: 25
   bulletTrailPrefab: {fileID: 428622580606310695, guid: 90fc71b206ef74060b37610f705f305e, type: 3}
   bulletTrailSpeed: 320
   hapticAmplitude: 0.85

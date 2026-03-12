@@ -16,13 +16,13 @@ MonoBehaviour:
   - {fileID: 1314014854321362, guid: 13087e211b7388945b22bab7dd93cb8f, type: 3}
   <SizeConfigSo>k__BackingField: {fileID: 11400000, guid: f0c9bcea5d48b724b8e34da7c579fd78, type: 2}
   <Name>k__BackingField: Demon
-  <MaxHealth>k__BackingField: 100
-  <DamageReductionRate>k__BackingField: 1
-  <MoveSpeed>k__BackingField: 2
-  <StoppingDistance>k__BackingField: 1.5
+  <MaxHealth>k__BackingField: 1200
+  <DamageReductionRate>k__BackingField: 0.5
+  <MoveSpeed>k__BackingField: 1.5
+  <StoppingDistance>k__BackingField: 2.5
   <RotationSpeed>k__BackingField: 120
-  <DealDamageAmount>k__BackingField: 10
-  <AttackRange>k__BackingField: 2
-  <AttackCooldown>k__BackingField: 1.5
+  <DealDamageAmount>k__BackingField: 40
+  <AttackRange>k__BackingField: 3
+  <AttackCooldown>k__BackingField: 2.5
   <Type>k__BackingField: 0
-  <scoreValue>k__BackingField: 100
+  <scoreValue>k__BackingField: 500
