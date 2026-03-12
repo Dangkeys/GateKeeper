@@ -14,23 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GunData
   isAutoGun: 1
   type: 1
-  flatDamage: 30
+  flatDamage: 25
   headshotMultiplier: 2
-  range: 30
+  range: 80
   penetration: 1
   damagePenetrationReduction: 0.7
-  fireRate: 5
-  recoil: 2
+  fireRate: 7
+  recoil: 2.5
   recoilReduction: 0.5
-  maximumRecoil: 10
+  maximumRecoil: 12
   recoilRecoveryTime: 0.5
   recoilRecoverySpeed: 8
   magazineSize: 30
-  reloadTime: 2
+  reloadTime: 2.5
   freeAmmoPercent: 0
   bulletSize: 0.1
   pelletCount: 1
-  spreadAngle: 0.5
+  spreadAngle: 0
   flatDamageReward: 2
   headshotMultiplierReward: 0.2
   rangeReward: 10
