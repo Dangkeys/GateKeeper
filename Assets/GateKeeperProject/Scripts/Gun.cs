@@ -86,7 +86,7 @@ public class Gun : MonoBehaviour
             }
             else
             {
-                if (currentReloadTime == 0)
+                if (currentReloadTime == 0 && reloadFeedbacks != null)
                 {
                     reloadFeedbacks?.PlayFeedbacks();
                 }
@@ -154,7 +154,10 @@ public class Gun : MonoBehaviour
         }
 
         ApplyRecoil();
-        fireFeedbacks?.PlayFeedbacks();
+        if(fireFeedbacks != null)
+        {
+            fireFeedbacks.PlayFeedbacks();
+        }
         TriggerHaptic();
     }
 
