@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GunData
   hitLayers:
     serializedVersion: 2
-    m_Bits: 160
+    m_Bits: 417
   isAutoGun: 0
   type: 0
   flatDamage: 15
@@ -23,35 +23,37 @@ MonoBehaviour:
   penetration: 1
   damagePenetrationReduction: 0.7
   fireRate: 3
-  recoil: 1.5
-  recoilReduction: 0.3
+  recoil: 0.2
+  recoilReduction: 0
   maximumRecoil: 5
   recoilRecoveryTime: 0.3
   recoilRecoverySpeed: 6
   magazineSize: 12
   reloadTime: 1.5
   freeAmmoPercent: 100
-  bulletSize: 0.1
+  bulletSize: 0.05
   pelletCount: 1
   spreadAngle: 0
-  flatDamageReward: 2
-  headshotMultiplierReward: 0.2
-  rangeReward: 10
+  flatDamageReward: 3
+  headshotMultiplierReward: 0.15
+  rangeReward: 5
   penetrationReward: 1
-  damagePenetrationReductionReward: 0.01
-  fireRateReward: 1
+  damagePenetrationReductionReward: 0.02
+  fireRateReward: 0.3
   recoilReductionReward: 0.05
-  maximumRecoilReward: 1
+  maximumRecoilReward: 0.5
   recoilRecoveryTimeReward: 0.05
-  recoilRecoverySpeedReward: 0.8
-  magazineSizeReward: 3
+  recoilRecoverySpeedReward: 0.5
+  magazineSizeReward: 2
   reloadTimeReward: 0.2
-  freeAmmoPercentReward: 1
-  bulletSizeReward: 0.01
+  freeAmmoPercentReward: 12
+  bulletSizeReward: 0.015
   pelletCountReward: 1
-  spreadAngleReward: 0.5
+  spreadAngleReward: 0
   ammoReward: 120
   bulletTrailPrefab: {fileID: 428622580606310695, guid: 90fc71b206ef74060b37610f705f305e, type: 3}
-  bulletTrailSpeed: 80
+  bulletTrailSpeed: 240
   hapticAmplitude: 0.6
   hapticDuration: 0.08
+  enemyHitEffectPrefab: {fileID: 2978202617918792182, guid: 9fa3205ef225e478da0fbdf6a33cf3c9, type: 3}
+  wallHitEffectPrefab: {fileID: 6946534475826379899, guid: f7b41e7522a884f04b90ebfa22c2cc8e, type: 3}

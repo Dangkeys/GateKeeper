@@ -19,15 +19,15 @@ MonoBehaviour:
   - {fileID: 1880296544152820, guid: 7cba755559c5ca34da07bd8d24eeba60, type: 3}
   - {fileID: 1895674993587318, guid: 55db12455fc8ee44c8568137898687d7, type: 3}
   - {fileID: 1009295489438026, guid: 66e77aa60f5941c4fac8214300600242, type: 3}
-  <SizeConfigSo>k__BackingField: {fileID: 11400000, guid: f0c9bcea5d48b724b8e34da7c579fd78, type: 2}
+  <SizeConfigSo>k__BackingField: {fileID: 11400000, guid: ef18bdf8fae723d4d81d75959ec74f33, type: 2}
   <Name>k__BackingField: MiniOrc
-  <MaxHealth>k__BackingField: 100
-  <DamageReductionRate>k__BackingField: 1
-  <MoveSpeed>k__BackingField: 2
-  <StoppingDistance>k__BackingField: 1.5
-  <RotationSpeed>k__BackingField: 120
-  <DealDamageAmount>k__BackingField: 10
-  <AttackRange>k__BackingField: 2
-  <AttackCooldown>k__BackingField: 1.5
+  <MaxHealth>k__BackingField: 250
+  <DamageReductionRate>k__BackingField: 0
+  <MoveSpeed>k__BackingField: 2.8
+  <StoppingDistance>k__BackingField: 0
+  <RotationSpeed>k__BackingField: 130
+  <DealDamageAmount>k__BackingField: 4
+  <AttackRange>k__BackingField: 0
+  <AttackCooldown>k__BackingField: 0
   <Type>k__BackingField: 1
   <scoreValue>k__BackingField: 100

@@ -1,13 +1,15 @@
 using System;
+using System.Diagnostics;
 using GateKeeperProject.Scripts;
 using UnityEngine;
+using VContainer;
 
 public class RewardSystem : MonoBehaviour
 {
     public event Action OnRewardSelected;
 
     [Header("Core Systems")]
-    [SerializeField] private BlessingUI blessingUI; // Link your UI script here
+    [SerializeField] private BlessingUI blessingUI;
     [SerializeField] private GunSystem gunSystem;
     [SerializeField] private AmmoSystem ammoSystem;
     [SerializeField] private Sprint sprint;
@@ -19,26 +21,24 @@ public class RewardSystem : MonoBehaviour
     private WeaponStatType _currentWeaponStatType;
     private int _currentAmmoIndex;
 
+
     public void GetReward()
     {
-        // 1. Generate the stats and get their string formats
         var (sTitle, sDesc) = RandomStat();
         var (wTitle, wDesc) = RandomWeapon();
         var (aTitle, aDesc) = RandomAmmo();
-        // 2. Send the formatted strings to the UI to display
-        blessingUI.gameObject.SetActive(true);
         blessingUI.UpdateCardUI(sTitle, sDesc, wTitle, wDesc, aTitle, aDesc);
     }
 
     private (string title, string description) RandomStat()
     {
         _currentStatIndex = UnityEngine.Random.Range(1, 4);
-        
+
         switch (_currentStatIndex)
         {
-            case 1: return ("Vitality", "Increase Max Health");
-            case 2: return ("Agility", "Increase Move Speed");
-            case 3: return ("Endurance", "Increase Stamina");
+            case 1: return ("Vitality", "Increase Max Health 10%");
+            case 2: return ("Agility", $"Increase Move Speed {sprint.GetPercentSpeedReward()}%");
+            case 3: return ("Endurance", $"Increase Stamina {sprint.GetPercentStaminaReward()}%");
             default: return ("Stat", "Unknown Upgrade");
         }
     }
@@ -47,7 +47,7 @@ public class RewardSystem : MonoBehaviour
     {
         _currentWeaponIndex = UnityEngine.Random.Range(0, 5);
         GunData gunData = gunSystem.GetGun(_currentWeaponIndex).GetGunData();
-        
+
         do
         {
             int statIndex = UnityEngine.Random.Range(0, 16);
@@ -57,18 +57,17 @@ public class RewardSystem : MonoBehaviour
         float reward = gunData.GetRewardValue(_currentWeaponStatType);
         string descText = GetStatUpgradeText(gunData, _currentWeaponStatType, reward);
         string titleText = $"{gunData.type} Upgrade";
-        
+
         return (titleText, descText);
     }
 
     private (string title, string description) RandomAmmo()
     {
-        // Restricted to 0-4 to remove the drop rate logic as requested
-        _currentAmmoIndex = UnityEngine.Random.Range(0, 5); 
+        _currentAmmoIndex = UnityEngine.Random.Range(0, 5);
 
         GunData gunData = gunSystem.GetGun(_currentAmmoIndex).GetGunData();
         int ammo = gunData.GetAmmoReward();
-        
+
         string titleText = $"{gunData.type} Munitions";
         string descText = $"Gain {ammo} Ammo";
 
@@ -99,27 +98,23 @@ public class RewardSystem : MonoBehaviour
         }
     }
 
-    // --- Button Click Events Called by UI ---
-
     public void SelectStatReward()
     {
         GetStat(_currentStatIndex);
-        OnRewardSelected?.Invoke(); 
+        OnRewardSelected?.Invoke();
     }
 
     public void SelectWeaponReward()
     {
         GetWeapon(_currentWeaponIndex, (int)_currentWeaponStatType);
-        OnRewardSelected?.Invoke(); 
+        OnRewardSelected?.Invoke();
     }
 
     public void SelectAmmoReward()
     {
         GetAmmo(_currentAmmoIndex);
-        OnRewardSelected?.Invoke(); 
+        OnRewardSelected?.Invoke();
     }
-
-    // --- Application Logic ---
 
     private void GetStat(int statIndex)
     {
@@ -140,6 +135,8 @@ public class RewardSystem : MonoBehaviour
 
     private void GetAmmo(int ammoIndex)
     {
-        ammoSystem.IncreaseAmmo((WeaponType)ammoIndex, 100);
+        GunData gunData = gunSystem.GetGun(ammoIndex).GetGunData();
+        int ammo = gunData.GetAmmoReward();
+        ammoSystem.IncreaseAmmo((WeaponType)ammoIndex, ammo);
     }
 }

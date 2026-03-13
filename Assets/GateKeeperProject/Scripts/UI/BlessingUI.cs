@@ -1,10 +1,13 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using VContainer;
 
 public class BlessingUI : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI waveText;
     [Header("Core Systems")]
+    private WaveHandler waveHandler;
     [SerializeField] private RewardSystem rewardSystem;
 
     [Header("Stat Card")]
@@ -22,13 +25,18 @@ public class BlessingUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ammoTitleText;
     [SerializeField] private TextMeshProUGUI ammoDescriptionText;
 
+
+    [Inject]
+    private void Construct(WaveHandler waveHandler)
+    {
+        this.waveHandler = waveHandler;
+    }
     private void Start()
     {
         // Tell the buttons to trigger the rewards in the RewardSystem when clicked
         statButton.onClick.AddListener(() => rewardSystem.SelectStatReward());
         weaponButton.onClick.AddListener(() => rewardSystem.SelectWeaponReward());
         ammoButton.onClick.AddListener(() => rewardSystem.SelectAmmoReward());
-        gameObject.SetActive(false);
     }
 
     // RewardSystem will call this to populate the cards
@@ -46,5 +54,8 @@ public class BlessingUI : MonoBehaviour
 
         ammoTitleText.text = aTitle;
         ammoDescriptionText.text = aDesc;
+
+        waveText.text = "Wave : " + waveHandler.WaveNumber + " Completed ";
+
     }
 }

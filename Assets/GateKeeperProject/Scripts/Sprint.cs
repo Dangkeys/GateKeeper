@@ -10,6 +10,7 @@ public class Sprint : MonoBehaviour
     [SerializeField] private float initSpeed = 2.5f;
     [SerializeField] private float multiplySpeed = 2f;
     [SerializeField] private float sprintDuration = 10f;
+    [SerializeField] private float speedRecovery = 1f;
     [SerializeField] private InputActionReference sprintInput;
     [SerializeField] private Scrollbar sprintScrollBar;
     [SerializeField] private float sprintDurationReward = 2f;
@@ -57,7 +58,7 @@ public class Sprint : MonoBehaviour
         {
             if(currentSprintDuration < sprintDuration)
             {
-                currentSprintDuration += Time.deltaTime;
+                currentSprintDuration += Time.deltaTime * speedRecovery;
                 UpdateSprintScrollBar();
             }
         }
@@ -81,6 +82,16 @@ public class Sprint : MonoBehaviour
     private void UpdateSprintScrollBar()
     {
         sprintScrollBar.size = currentSprintDuration / sprintDuration;
+    }
+
+    public int GetPercentSpeedReward()
+    {
+        return (int)(speedReward * 100 / initSpeed);
+    }
+
+    public int GetPercentStaminaReward()
+    {
+        return (int)(sprintDurationReward * 100 / sprintDuration);
     }
 
     public void IncreaseSpeed()

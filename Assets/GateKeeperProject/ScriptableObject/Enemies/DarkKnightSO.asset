@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDataSO
   <EnemyPrefabVisualList>k__BackingField:
   - {fileID: 1246891314395918, guid: cb4ff29f6f657bc4d94ed49c50a70be2, type: 3}
-  <SizeConfigSo>k__BackingField: {fileID: 11400000, guid: f0c9bcea5d48b724b8e34da7c579fd78, type: 2}
+  <SizeConfigSo>k__BackingField: {fileID: 11400000, guid: 06f2ad915d1fba04d93208abb4d118f6, type: 2}
   <Name>k__BackingField: DarkKnight
-  <MaxHealth>k__BackingField: 100
-  <DamageReductionRate>k__BackingField: 1
-  <MoveSpeed>k__BackingField: 2
-  <StoppingDistance>k__BackingField: 1.5
-  <RotationSpeed>k__BackingField: 120
-  <DealDamageAmount>k__BackingField: 10
-  <AttackRange>k__BackingField: 2
-  <AttackCooldown>k__BackingField: 1.5
+  <MaxHealth>k__BackingField: 1200
+  <DamageReductionRate>k__BackingField: 0
+  <MoveSpeed>k__BackingField: 2.4
+  <StoppingDistance>k__BackingField: 0
+  <RotationSpeed>k__BackingField: 100
+  <DealDamageAmount>k__BackingField: 20
+  <AttackRange>k__BackingField: 0
+  <AttackCooldown>k__BackingField: 0
   <Type>k__BackingField: 0
   <scoreValue>k__BackingField: 100

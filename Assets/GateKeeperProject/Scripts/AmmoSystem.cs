@@ -7,17 +7,6 @@ public class AmmoSystem : MonoBehaviour
     [SerializeField] private int[] ammos;
     public event Action<WeaponType, int, int> OnAmmoChanged;
 
-    void Start()
-    {
-        StartCoroutine(InvokeNextFrame());
-    }
-
-    private IEnumerator InvokeNextFrame()
-    {
-        yield return null;
-        OnAmmoChanged?.Invoke(WeaponType.Pistol, 0, ammos[0]);
-    }
-
     public int GetAmmo(WeaponType type)
     {
         return ammos[(int)type];

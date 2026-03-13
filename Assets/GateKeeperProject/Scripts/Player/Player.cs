@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GateKeeperProject.Scripts
 {
@@ -29,12 +30,12 @@ namespace GateKeeperProject.Scripts
 
         private void DamageTakenEvent(float currentHealth)
         {
-            Debug.Log("CurrentHealth:" + currentHealth);
         }
 
         private void DeathEvent()
         {
-            gameObject.SetActive(false);
+            //Play Fade  MMFeedback
+            SceneManager.LoadScene("Main Menu");
         }
 
 

@@ -231,7 +231,7 @@ MonoBehaviour:
         BlackboardGroupReferences: []
         Root:
           rid: 637501499245068531
-        m_VersionTimestamp: 639088493325710674
+        m_VersionTimestamp: 639089958972781262
     - rid: 993807337077080351
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -346,7 +346,7 @@ MonoBehaviour:
   - rid: 993807350802153901
   - rid: 637501288771223603
   - rid: 637501288771223659
-  m_VersionTimestamp: 639088493325710674
+  m_VersionTimestamp: 639089958972781262
   m_SerializedVersion: 2
   m_DebugInfo: {fileID: 6964806971050876149}
   m_RuntimeGraph: {fileID: -8762832082019754502}
@@ -684,16 +684,6 @@ MonoBehaviour:
         IsExposed: 0
         m_IsShared: 0
         m_Value: 0
-    - rid: 637501493896020079
-      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
-      data:
-        ID:
-          m_Value0: 14218896286076811953
-          m_Value1: 8223449544895674953
-        Name: distanceThreshold
-        IsExposed: 0
-        m_IsShared: 0
-        m_Value: 0
     - rid: 637501493896020093
       type: {class: 'TypedVariableModel`1[[System.String, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -704,6 +694,16 @@ MonoBehaviour:
         IsExposed: 0
         m_IsShared: 0
         m_Value: 
+    - rid: 637501537743798377
+      type: {class: 'TypedVariableModel`1[[System.Single, mscorlib]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 14218896286076811953
+          m_Value1: 8223449544895674953
+        Name: distanceThreshold
+        IsExposed: 0
+        m_IsShared: 0
+        m_Value: 0
     - rid: 993807337077080356
       type: {class: StartNodeModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -820,7 +820,7 @@ MonoBehaviour:
         LocalValue:
           rid: 993807337077080380
         LinkedVariable:
-          rid: 637501493896020079
+          rid: 637501537743798377
     - rid: 993807337077080374
       type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
       data:
@@ -1091,7 +1091,7 @@ MonoBehaviour:
   - rid: 993807375853420630
   - rid: 993807375853420662
   - rid: 993807375853420688
-  m_VersionTimestamp: 639088492268139397
+  m_VersionTimestamp: 639089958962966413
   m_CommandBuffer:
     m_Commands: []
   m_RuntimeBlackboardAsset: {fileID: -7265452136988990783}

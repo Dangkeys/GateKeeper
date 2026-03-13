@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9adb45fb13ca854396ebc21aae0ec63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoSystem
-  ammos: 0a00000078000000a00000003c00000019000000
+  ammos: 0a00000078000000a00000001000000005000000
 --- !u!114 &4429393893286308127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,5 +105,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  ammoSpawnAmount: 100
+  ammoSpawnAmount: 120
   ammoTransform: {fileID: 0}

@@ -4,12 +4,15 @@ using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
 using UnityEngine.XR;
 using System.Collections.Generic;
+using VContainer;
 
 public class Gun : MonoBehaviour
 {
     [Header("Input")]
     [SerializeField] private InputActionReference shootInputLeft;
     [SerializeField] private InputActionReference shootInputRight;
+    [SerializeField] private InputActionReference reloadInputLeft;
+    [SerializeField] private InputActionReference reloadInputRight;
     [Header("Transform")]
     [SerializeField] private Transform firePoint;
     [Header("Gun info")]
@@ -31,23 +34,34 @@ public class Gun : MonoBehaviour
     private int totalAmmo;
     private float currentRecoveryTime;
     private bool isRecovery;
-
+    private bool isReload;
+    
     void Start()
     {
         data = Instantiate(data);
         currentAmmo = data.magazineSize;
+        totalAmmo = ammoSystem.GetAmmo(data.type);
         UpdateAmmoUI();
     }
 
     void OnEnable()
     {
         ammoSystem.OnAmmoChanged += UpdateAmmo;
+        totalAmmo = ammoSystem.GetAmmo(data.type);
         UpdateAmmoUI();
+        reloadInputLeft.action.Enable();
+        reloadInputLeft.action.started += ReloadInLeft;
+        reloadInputRight.action.Enable();
+        reloadInputRight.action.started += ReloadInRight;
     }
 
     void OnDisable()
     {
         ammoSystem.OnAmmoChanged -= UpdateAmmo;
+        reloadInputLeft.action.Disable();
+        reloadInputLeft.action.started -= ReloadInLeft;
+        reloadInputRight.action.Disable();
+        reloadInputRight.action.started -= ReloadInRight;
     }
 
     void Update()
@@ -58,7 +72,7 @@ public class Gun : MonoBehaviour
 
         bool isShooting = data.isAutoGun ? currentShootInputAction.IsPressed() : currentShootInputAction.WasPressedThisFrame();
 
-        if (isShooting)
+        if (isShooting && !isReload)
         {
             TryShoot();
             currentRecoveryTime = 0;
@@ -72,31 +86,8 @@ public class Gun : MonoBehaviour
         {
             isRecovery = true;
         }
-        if (currentAmmo == 0)
-        {
-            if (currentReloadTime > data.reloadTime)
-            {
-                if (ammoSystem.GetAmmo(data.type) <= 0)
-                {
-                    ammoText.text = "No bullet";
-                }
-                else
-                {
-                    currentReloadTime = 0;
-                    ammoSystem.UseAmmo(data.type, data.magazineSize);
-                }
-            }
-            else
-            {
-                if (currentReloadTime == 0 && reloadFeedbacks != null)
-                {
-                    reloadFeedbacks?.PlayFeedbacks();
-                }
-                currentReloadTime += Time.deltaTime;
-                ammoText.text = "Reloading";
-            }
-        }
         UpdateRecoil();
+        Reload();
     }
 
     private void TryShoot()
@@ -124,23 +115,52 @@ public class Gun : MonoBehaviour
             RaycastHit[] hits = Physics.SphereCastAll(ray, data.bulletSize, data.range, data.hitLayers, QueryTriggerInteraction.Collide);
             System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
-            Vector3 trailEndPoint = hits.Length > 0 ? hits[0].point : firePoint.position + spreadDirection * data.range;
+            Vector3 trailEndPoint = firePoint.position + spreadDirection * data.range;
+            foreach (var hit in hits)
+            {
+                if (hit.distance <= 0f) continue; 
+
+                Vector3 hitPoint = hit.point == Vector3.zero
+                    ? firePoint.position + spreadDirection * hit.distance
+                    : hit.point;
+
+                trailEndPoint = hitPoint;
+                break;
+            }
 
             if (data.bulletTrailPrefab != null)
             {
                 BulletTrailHandler.Spawn(data.bulletTrailPrefab, firePoint.position, trailEndPoint, data.bulletTrailSpeed, data.bulletSize);
-            }     
+            }   
 
             int penetrationCount = 0;
             float currentDamage = data.flatDamage;
 
             foreach (var hit in hits)
             {
+                if (hit.distance <= 0f) continue;
+
                 if (hit.collider.CompareTag("RewardCard"))
                 {
                     ShootableCard card = hit.collider.GetComponent<ShootableCard>();
                     if (card != null) card.TriggerCard();
-                    break; // Stop bullet penetration if it hits a card
+                    break; 
+                }
+
+                bool isEnemy = hit.collider.CompareTag("Enemy") || 
+                                hit.collider.CompareTag("EnemyHead");
+
+                if (isEnemy)
+                {
+                    if (data.enemyHitEffectPrefab != null)
+                        HitEffectHandler.Spawn(data.enemyHitEffectPrefab, 
+                                            hit.point, hit.normal);
+                }
+                else
+                {
+                    if (data.wallHitEffectPrefab != null)
+                        HitEffectHandler.Spawn(data.wallHitEffectPrefab, 
+                                            hit.point, hit.normal);
                 }
                 if (!hit.collider.CompareTag("Enemy") && !hit.collider.CompareTag("EnemyHead")) continue;
                 IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
@@ -148,10 +168,13 @@ public class Gun : MonoBehaviour
 
                 float finalDamage = currentDamage;
 
-                if (hit.collider.CompareTag("EnemyHead"))
-                    finalDamage *= data.headshotMultiplier;
+                bool isHeadshot = hit.collider.CompareTag("EnemyHead");
+                if (isHeadshot) finalDamage *= data.headshotMultiplier;
 
                 damageable.TakeDamage(finalDamage);
+
+                Enemy enemy = hit.collider.GetComponentInParent<Enemy>();
+                enemy?.GetHitFlash()?.Flash(isHeadshot);
 
                 currentDamage *= 1 - data.damagePenetrationReduction;
                 penetrationCount++;
@@ -248,6 +271,62 @@ public class Gun : MonoBehaviour
         if (devices.Count > 0)
         {
             devices[0].SendHapticImpulse(0, data.hapticAmplitude, data.hapticDuration);
+        }
+    }
+
+    private void ReloadInLeft(InputAction.CallbackContext context)
+    {
+        if(currentHandType == HandType.Left)
+        {
+            StartReload();
+        }
+    }
+
+    private void ReloadInRight(InputAction.CallbackContext context)
+    {
+        if(currentHandType == HandType.Right)
+        {
+            StartReload();
+        }
+    }
+
+    private void StartReload()
+    {
+        if(isReload) return;
+
+        if(currentAmmo >= data.magazineSize) return;
+
+        if(ammoSystem.GetAmmo(data.type) <= 0)
+        {
+            ammoText.text = "No bullet";
+            return;
+        }
+
+        isReload = true;
+        currentReloadTime = 0;
+
+        reloadFeedbacks?.PlayFeedbacks();
+    }
+
+    private void Reload()
+    {
+        if(!isReload) return;
+
+        currentReloadTime += Time.deltaTime;
+
+        ammoText.text = "Reloading";
+
+        if(currentReloadTime >= data.reloadTime)
+        {
+            int ammoNeeded = data.magazineSize - currentAmmo;
+
+            int ammoToLoad = Mathf.Min(ammoNeeded, ammoSystem.GetAmmo(data.type));
+
+            ammoSystem.UseAmmo(data.type, ammoToLoad);
+
+            isReload = false;
+
+            UpdateAmmoUI();
         }
     }
 }
