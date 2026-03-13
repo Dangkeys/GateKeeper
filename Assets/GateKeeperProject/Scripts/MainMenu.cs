@@ -20,8 +20,13 @@ public class MainMenuScript : MonoBehaviour
         SceneManager.LoadScene("Map");
     }
 
-        public void StartPlayGround()
+    public void StartPlayGround()
     {
         SceneManager.LoadScene("PlayGroundScene");
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 }
