@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
 using UnityEngine.XR;
 using System.Collections.Generic;
+using VContainer;
 
 public class Gun : MonoBehaviour
 {
@@ -31,7 +32,9 @@ public class Gun : MonoBehaviour
     private int totalAmmo;
     private float currentRecoveryTime;
     private bool isRecovery;
-
+    
+    
+    
     void Start()
     {
         data = Instantiate(data);
@@ -141,6 +144,22 @@ public class Gun : MonoBehaviour
                     ShootableCard card = hit.collider.GetComponent<ShootableCard>();
                     if (card != null) card.TriggerCard();
                     break; // Stop bullet penetration if it hits a card
+                }
+
+                bool isEnemy = hit.collider.CompareTag("Enemy") || 
+                                hit.collider.CompareTag("EnemyHead");
+
+                if (isEnemy)
+                {
+                    if (data.enemyHitEffectPrefab != null)
+                        HitEffectHandler.Spawn(data.enemyHitEffectPrefab, 
+                                            hit.point, hit.normal);
+                }
+                else
+                {
+                    if (data.wallHitEffectPrefab != null)
+                        HitEffectHandler.Spawn(data.wallHitEffectPrefab, 
+                                            hit.point, hit.normal);
                 }
                 if (!hit.collider.CompareTag("Enemy") && !hit.collider.CompareTag("EnemyHead")) continue;
                 IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();

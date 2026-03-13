@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GateKeeperProject.Scripts
 {
@@ -34,7 +35,8 @@ namespace GateKeeperProject.Scripts
 
         private void DeathEvent()
         {
-            gameObject.SetActive(false);
+            //Play Fade  MMFeedback
+            SceneManager.LoadScene("Main Menu");
         }
 
 

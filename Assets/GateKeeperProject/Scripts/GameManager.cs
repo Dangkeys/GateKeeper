@@ -1,13 +1,15 @@
 using System.Collections;
 using GateKeeperProject.Scripts;
 using UnityEngine;
+using VContainer;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private WaveHandler waveHandler;
+    [SerializeField] private  WaveHandler waveHandler;
     [SerializeField] private RewardSystem rewardSystem;
     [SerializeField] private BlessingUI blessingUI;
     [SerializeField] private Player _player;
+    
 
     void Start()
     {

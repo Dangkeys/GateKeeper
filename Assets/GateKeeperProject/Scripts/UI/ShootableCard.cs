@@ -8,6 +8,7 @@ public class ShootableCard : MonoBehaviour
 
     public void TriggerCard()
     {
+        Debug.Log("Trigger Card");
         OnShot?.Invoke();
     }
 }
