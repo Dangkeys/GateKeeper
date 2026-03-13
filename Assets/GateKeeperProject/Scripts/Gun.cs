@@ -130,7 +130,13 @@ public class Gun : MonoBehaviour
             Vector3 trailEndPoint = firePoint.position + spreadDirection * data.range;
             foreach (var hit in hits)
             {
-                trailEndPoint = hit.point;
+                if (hit.distance <= 0f) continue; 
+
+                Vector3 hitPoint = hit.point == Vector3.zero
+                    ? firePoint.position + spreadDirection * hit.distance
+                    : hit.point;
+
+                trailEndPoint = hitPoint;
                 break;
             }
 
@@ -144,6 +150,8 @@ public class Gun : MonoBehaviour
 
             foreach (var hit in hits)
             {
+                if (hit.distance <= 0f) continue;
+
                 if (hit.collider.CompareTag("RewardCard"))
                 {
                     ShootableCard card = hit.collider.GetComponent<ShootableCard>();
