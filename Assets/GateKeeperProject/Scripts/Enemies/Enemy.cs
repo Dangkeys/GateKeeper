@@ -98,17 +98,18 @@ public class Enemy : MonoBehaviour, IAttackable
             }
 
             colliderGO.transform.SetParent(parentTransform!, worldPositionStays: false);
-            
             CapsuleCollider collider = colliderGO.AddComponent<CapsuleCollider>();
             
-            const int xAxisDirection = 0;
+
             
             colliderGO.transform.localPosition = enemySizeConfig.Position;
+            colliderGO.transform.localRotation = Quaternion.Euler(enemySizeConfig.Rotation);
+            
             collider.isTrigger = enemySizeConfig.IsTrigger;
             collider.radius = enemySizeConfig.Radius;
             collider.height = enemySizeConfig.Height;
             collider.center = enemySizeConfig.Center;
-            collider.direction = xAxisDirection;
+            collider.direction = (int)enemySizeConfig.EnemyColliderDirection;
             colliderGO.SetActive(!enemySizeConfig.ShouldDisableOnAwake);
         }
     }

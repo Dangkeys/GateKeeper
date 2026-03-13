@@ -65,13 +65,13 @@ MonoBehaviour:
   - {fileID: 1965423065467750, guid: 46e3fad9d63edad4e95366d675950f78, type: 3}
   <SizeConfigSo>k__BackingField: {fileID: 11400000, guid: f0c9bcea5d48b724b8e34da7c579fd78, type: 2}
   <Name>k__BackingField: Zombie
-  <MaxHealth>k__BackingField: 100
-  <DamageReductionRate>k__BackingField: 1
+  <MaxHealth>k__BackingField: 500
+  <DamageReductionRate>k__BackingField: 0
   <MoveSpeed>k__BackingField: 2
-  <StoppingDistance>k__BackingField: 1.5
-  <RotationSpeed>k__BackingField: 120
-  <DealDamageAmount>k__BackingField: 10
-  <AttackRange>k__BackingField: 2
-  <AttackCooldown>k__BackingField: 1.5
+  <StoppingDistance>k__BackingField: 0
+  <RotationSpeed>k__BackingField: 110
+  <DealDamageAmount>k__BackingField: 8
+  <AttackRange>k__BackingField: 0
+  <AttackCooldown>k__BackingField: 0
   <Type>k__BackingField: 2
   <scoreValue>k__BackingField: 100
