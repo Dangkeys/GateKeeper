@@ -45,17 +45,10 @@ public class EnemyWaveConfig
 }
 
 [System.Serializable]
-public struct EnemyStatModifiers
+public class EnemyStatModifiers
 {
     public float healthMultiplier;
     public float damageMultiplier;
     public float moveSpeedMultiplier;
     public float ammoRateDropMultiplier;
-    public EnemyStatModifiers(float health, float damage, float speed, float ammoRateDropMultiplier)
-    {
-        healthMultiplier = health;
-        damageMultiplier = damage;
-        moveSpeedMultiplier = speed;
-        this.ammoRateDropMultiplier = ammoRateDropMultiplier;
-    }
 }

@@ -1,9 +1,14 @@
 using UnityEngine;
+using VContainer;
+
 public class AmmoDrop : MonoBehaviour
 {
     [SerializeField] private int recieveAmmo = 10;
-    [SerializeField] private AmmoSystem ammoSystem;
+    [SerializeField] AmmoSystem ammoSystem;
     [SerializeField] private WeaponType weaponType;
+
+    
+    
     public void ChangePosition(Vector3 position)
     {
         transform.position = position;

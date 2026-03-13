@@ -1,6 +1,7 @@
 using System;
 using GateKeeperProject.Scripts;
 using UnityEngine;
+using VContainer;
 
 public class RewardSystem : MonoBehaviour
 {
@@ -18,7 +19,8 @@ public class RewardSystem : MonoBehaviour
     private int _currentWeaponIndex;
     private WeaponStatType _currentWeaponStatType;
     private int _currentAmmoIndex;
-
+    
+    
     public void GetReward()
     {
         var (sTitle, sDesc) = RandomStat();

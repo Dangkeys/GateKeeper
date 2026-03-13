@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WaveSettingsSO
   m_EditorClassIdentifier: Assembly-CSharp::WaveSettingsSO
   enemyPrefab: {fileID: 7693366073175486830, guid: d73ee81a417e7744db5d0e11bf5819d0, type: 3}
-  randomSpawnOffset: 10
+  randomSpawnOffset: 0
   minimumSpawnDistanceOffset: 10
   maximumSpawnDistanceOffset: 40
   enemyPool:
