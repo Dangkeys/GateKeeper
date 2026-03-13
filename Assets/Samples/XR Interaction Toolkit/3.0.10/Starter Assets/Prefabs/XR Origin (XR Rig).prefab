@@ -1916,6 +1916,7 @@ GameObject:
   - component: {fileID: 5984854755147242817}
   - component: {fileID: 4014050047918754998}
   - component: {fileID: 4427298781944890467}
+  - component: {fileID: 209607048210061671}
   m_Layer: 2
   m_Name: XR Origin (XR Rig)
   m_TagString: Player
@@ -2103,6 +2104,29 @@ MonoBehaviour:
   sprintScrollBar: {fileID: 3772846822052908927}
   sprintDurationReward: 2
   speedReward: 0.2
+--- !u!136 &209607048210061671
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717954561962503725}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1787516059220952802
 GameObject:
   m_ObjectHideFlags: 0
@@ -9954,7 +9978,7 @@ MonoBehaviour:
           ButtonText: Automatic Shaker Setup
         Owner: {fileID: 7272980759753624958}
         DebugActive: 0
-        Sfx: {fileID: 8300000, guid: 6e158e2d37d77a048838813185c20707, type: 3}
+        Sfx: {fileID: 8300000, guid: 347f8cb424b7a4dc2b04b2dffee31166, type: 3}
         RandomSfx: []
         TestPlayButton:
           ButtonText: Debug Play Sound
