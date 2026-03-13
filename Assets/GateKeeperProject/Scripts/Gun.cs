@@ -11,6 +11,8 @@ public class Gun : MonoBehaviour
     [Header("Input")]
     [SerializeField] private InputActionReference shootInputLeft;
     [SerializeField] private InputActionReference shootInputRight;
+    [SerializeField] private InputActionReference reloadInputLeft;
+    [SerializeField] private InputActionReference reloadInputRight;
     [Header("Transform")]
     [SerializeField] private Transform firePoint;
     [Header("Gun info")]
@@ -32,8 +34,7 @@ public class Gun : MonoBehaviour
     private int totalAmmo;
     private float currentRecoveryTime;
     private bool isRecovery;
-    
-    
+    private bool isReload;
     
     void Start()
     {
@@ -48,11 +49,19 @@ public class Gun : MonoBehaviour
         ammoSystem.OnAmmoChanged += UpdateAmmo;
         totalAmmo = ammoSystem.GetAmmo(data.type);
         UpdateAmmoUI();
+        reloadInputLeft.action.Enable();
+        reloadInputLeft.action.started += ReloadInLeft;
+        reloadInputRight.action.Enable();
+        reloadInputRight.action.started += ReloadInRight;
     }
 
     void OnDisable()
     {
         ammoSystem.OnAmmoChanged -= UpdateAmmo;
+        reloadInputLeft.action.Disable();
+        reloadInputLeft.action.started -= ReloadInLeft;
+        reloadInputRight.action.Disable();
+        reloadInputRight.action.started -= ReloadInRight;
     }
 
     void Update()
@@ -63,7 +72,7 @@ public class Gun : MonoBehaviour
 
         bool isShooting = data.isAutoGun ? currentShootInputAction.IsPressed() : currentShootInputAction.WasPressedThisFrame();
 
-        if (isShooting)
+        if (isShooting && !isReload)
         {
             TryShoot();
             currentRecoveryTime = 0;
@@ -77,31 +86,8 @@ public class Gun : MonoBehaviour
         {
             isRecovery = true;
         }
-        if (currentAmmo == 0)
-        {
-            if (currentReloadTime > data.reloadTime)
-            {
-                if (ammoSystem.GetAmmo(data.type) <= 0)
-                {
-                    ammoText.text = "No bullet";
-                }
-                else
-                {
-                    currentReloadTime = 0;
-                    ammoSystem.UseAmmo(data.type, data.magazineSize);
-                }
-            }
-            else
-            {
-                if (currentReloadTime == 0 && reloadFeedbacks != null)
-                {
-                    reloadFeedbacks?.PlayFeedbacks();
-                }
-                currentReloadTime += Time.deltaTime;
-                ammoText.text = "Reloading";
-            }
-        }
         UpdateRecoil();
+        Reload();
     }
 
     private void TryShoot()
@@ -145,7 +131,7 @@ public class Gun : MonoBehaviour
                 {
                     ShootableCard card = hit.collider.GetComponent<ShootableCard>();
                     if (card != null) card.TriggerCard();
-                    break; // Stop bullet penetration if it hits a card
+                    break; 
                 }
 
                 bool isEnemy = hit.collider.CompareTag("Enemy") || 
@@ -272,6 +258,64 @@ public class Gun : MonoBehaviour
         if (devices.Count > 0)
         {
             devices[0].SendHapticImpulse(0, data.hapticAmplitude, data.hapticDuration);
+        }
+    }
+
+    private void ReloadInLeft(InputAction.CallbackContext context)
+    {
+        if(currentHandType == HandType.Left)
+        {
+            StartReload();
+        }
+    }
+
+    private void ReloadInRight(InputAction.CallbackContext context)
+    {
+        if(currentHandType == HandType.Right)
+        {
+            StartReload();
+        }
+    }
+
+    private void StartReload()
+    {
+        if(isReload) return;
+
+        if(currentAmmo >= data.magazineSize) return;
+
+        if(ammoSystem.GetAmmo(data.type) <= 0)
+        {
+            ammoText.text = "No bullet";
+            return;
+        }
+
+        isReload = true;
+        currentReloadTime = 0;
+
+        reloadFeedbacks?.PlayFeedbacks();
+    }
+
+    private void Reload()
+    {
+        if(!isReload) return;
+
+        currentReloadTime += Time.deltaTime;
+
+        ammoText.text = "Reloading";
+
+        if(currentReloadTime >= data.reloadTime)
+        {
+            int ammoNeeded = data.magazineSize - currentAmmo;
+
+            int ammoToLoad = Mathf.Min(ammoNeeded, ammoSystem.GetAmmo(data.type));
+
+            currentAmmo += ammoToLoad;
+
+            ammoSystem.UseAmmo(data.type, ammoToLoad);
+
+            isReload = false;
+
+            UpdateAmmoUI();
         }
     }
 }
