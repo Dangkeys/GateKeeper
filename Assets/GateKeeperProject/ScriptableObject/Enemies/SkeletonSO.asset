@@ -18,13 +18,13 @@ MonoBehaviour:
   - {fileID: 1623817811568398, guid: 3e4cf0221a0e8db41bcb50be99ebe457, type: 3}
   <SizeConfigSo>k__BackingField: {fileID: 11400000, guid: f0c9bcea5d48b724b8e34da7c579fd78, type: 2}
   <Name>k__BackingField: Skeleton
-  <MaxHealth>k__BackingField: 100
-  <DamageReductionRate>k__BackingField: 1
-  <MoveSpeed>k__BackingField: 2
-  <StoppingDistance>k__BackingField: 1.5
+  <MaxHealth>k__BackingField: 400
+  <DamageReductionRate>k__BackingField: 0
+  <MoveSpeed>k__BackingField: 2.3
+  <StoppingDistance>k__BackingField: 0
   <RotationSpeed>k__BackingField: 120
-  <DealDamageAmount>k__BackingField: 10
-  <AttackRange>k__BackingField: 2
-  <AttackCooldown>k__BackingField: 1.5
+  <DealDamageAmount>k__BackingField: 6
+  <AttackRange>k__BackingField: 0
+  <AttackCooldown>k__BackingField: 0
   <Type>k__BackingField: 2
   <scoreValue>k__BackingField: 100
