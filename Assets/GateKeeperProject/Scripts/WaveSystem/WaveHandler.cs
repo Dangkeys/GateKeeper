@@ -18,13 +18,14 @@ public class WaveHandler : MonoBehaviour
     private List<(EnemySpawnConfig config, float weight)> currentWavePool = new List<(EnemySpawnConfig, float)>();
 
     private int currentBudget;
-    private int waveNumber = 1;
+    public int WaveNumber { get; private set; } = 0;
 
     private int activeEnemies = 0;
     private bool isSpawning = false;
 
     private IObjectResolver _resolver;
     private bool isWaveComplete = false;
+
     [Inject]
     public void Construct(IObjectResolver resolver)
     {
@@ -44,31 +45,31 @@ public class WaveHandler : MonoBehaviour
 
     public void StartNextWave()
     {
-        if (!isWaveComplete && waveNumber > 1)
+        if (!isWaveComplete && WaveNumber > 1)
         {
             Debug.LogWarning("Cannot start next wave: Current wave is still active!");
             return;
         }
-
+        Debug.Log("Starting next wave");
         isWaveComplete = false;
-        currentBudget = Mathf.Min(settings.baseWaveBudget + (waveNumber * settings.budgetIncreasePerWave),
+        currentBudget = Mathf.Min(settings.baseWaveBudget + (WaveNumber * settings.budgetIncreasePerWave),
             settings.maxWaveBudget);
 
 
-        StatModifiers.healthMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.healthMultiplier),
+        StatModifiers.healthMultiplier = Mathf.Min(1f + (WaveNumber * settings.waveConfig.healthMultiplier),
             settings.waveConfig.maxHealthMultiplier);
-        StatModifiers.damageMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.damageMultiplier),
+        StatModifiers.damageMultiplier = Mathf.Min(1f + (WaveNumber * settings.waveConfig.damageMultiplier),
             settings.waveConfig.maxDamageMultiplier);
-        StatModifiers.moveSpeedMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.moveSpeedMultiplier),
+        StatModifiers.moveSpeedMultiplier = Mathf.Min(1f + (WaveNumber * settings.waveConfig.moveSpeedMultiplier),
             settings.waveConfig.maxMoveSpeedMultiplier);
         StatModifiers.ammoRateDropMultiplier =
-            Mathf.Max(waveNumber * settings.ammoRateDrop, settings.maxAmmoRateDrop);
+            Mathf.Max(WaveNumber * settings.ammoRateDrop, settings.maxAmmoRateDrop);
 
 
         currentWavePool.Clear();
         foreach (var enemy in settings.enemyPool)
         {
-            float calculatedWeight = enemy.baseWeight + (waveNumber * enemy.weightIncreasePerWave);
+            float calculatedWeight = enemy.baseWeight + (WaveNumber * enemy.weightIncreasePerWave);
             currentWavePool.Add((enemy, calculatedWeight));
         }
 
@@ -77,7 +78,7 @@ public class WaveHandler : MonoBehaviour
 
         StopAllCoroutines();
         StartCoroutine(FairSpawnRoutine());
-        waveNumber++;
+        WaveNumber++;
     }
 
     private IEnumerator FairSpawnRoutine()
