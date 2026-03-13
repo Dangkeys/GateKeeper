@@ -28,7 +28,6 @@ public class BlessingUI : MonoBehaviour
         statButton.onClick.AddListener(() => rewardSystem.SelectStatReward());
         weaponButton.onClick.AddListener(() => rewardSystem.SelectWeaponReward());
         ammoButton.onClick.AddListener(() => rewardSystem.SelectAmmoReward());
-        gameObject.SetActive(false);
     }
 
     // RewardSystem will call this to populate the cards
