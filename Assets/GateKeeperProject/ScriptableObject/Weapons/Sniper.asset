@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GunData
   hitLayers:
     serializedVersion: 2
-    m_Bits: 416
+    m_Bits: 417
   isAutoGun: 0
   type: 4
   flatDamage: 300
