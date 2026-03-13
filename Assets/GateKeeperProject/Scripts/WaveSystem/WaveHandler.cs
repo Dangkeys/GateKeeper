@@ -2,29 +2,35 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using VContainer;
+using VContainer.Unity;
 using Random = UnityEngine.Random;
 
 public class WaveHandler : MonoBehaviour
 {
-    
-    
     [SerializeField] private WaveSettingsSO settings;
     [SerializeField] private Transform playerTransform;
-    
-    
+
+
     public event Action OnWaveComplete;
 
-    private EnemyStatModifiers enemyStatModifiers = new EnemyStatModifiers();
+    public EnemyStatModifiers StatModifiers { get; private set; } = new EnemyStatModifiers();
     private List<(EnemySpawnConfig config, float weight)> currentWavePool = new List<(EnemySpawnConfig, float)>();
 
     private int currentBudget;
-    private int waveNumber = 1;
+    public int WaveNumber { get; private set; } = 0;
 
     private int activeEnemies = 0;
     private bool isSpawning = false;
-    
-    
+
+    private IObjectResolver _resolver;
     private bool isWaveComplete = false;
+
+    [Inject]
+    public void Construct(IObjectResolver resolver)
+    {
+        _resolver = resolver;
+    }
 
     private void Awake()
     {
@@ -35,35 +41,35 @@ public class WaveHandler : MonoBehaviour
         }
 
         if (playerTransform == null) playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-
     }
 
     public void StartNextWave()
     {
-        if (!isWaveComplete && waveNumber > 1) 
+        if (!isWaveComplete && WaveNumber > 1)
         {
             Debug.LogWarning("Cannot start next wave: Current wave is still active!");
             return;
         }
-
+        Debug.Log("Starting next wave");
         isWaveComplete = false;
-        currentBudget = Mathf.Min(settings.baseWaveBudget + (waveNumber * settings.budgetIncreasePerWave),
+        currentBudget = Mathf.Min(settings.baseWaveBudget + (WaveNumber * settings.budgetIncreasePerWave),
             settings.maxWaveBudget);
 
 
-        enemyStatModifiers.healthMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.healthMultiplier),
+        StatModifiers.healthMultiplier = Mathf.Min(1f + (WaveNumber * settings.waveConfig.healthMultiplier),
             settings.waveConfig.maxHealthMultiplier);
-        enemyStatModifiers.damageMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.damageMultiplier),
+        StatModifiers.damageMultiplier = Mathf.Min(1f + (WaveNumber * settings.waveConfig.damageMultiplier),
             settings.waveConfig.maxDamageMultiplier);
-        enemyStatModifiers.moveSpeedMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.moveSpeedMultiplier),
+        StatModifiers.moveSpeedMultiplier = Mathf.Min(1f + (WaveNumber * settings.waveConfig.moveSpeedMultiplier),
             settings.waveConfig.maxMoveSpeedMultiplier);
-        enemyStatModifiers.ammoRateDropMultiplier = Mathf.Max(waveNumber * settings.ammoRateDrop, settings.maxAmmoRateDrop);
+        StatModifiers.ammoRateDropMultiplier =
+            Mathf.Max(WaveNumber * settings.ammoRateDrop, settings.maxAmmoRateDrop);
 
 
         currentWavePool.Clear();
         foreach (var enemy in settings.enemyPool)
         {
-            float calculatedWeight = enemy.baseWeight + (waveNumber * enemy.weightIncreasePerWave);
+            float calculatedWeight = enemy.baseWeight + (WaveNumber * enemy.weightIncreasePerWave);
             currentWavePool.Add((enemy, calculatedWeight));
         }
 
@@ -72,7 +78,7 @@ public class WaveHandler : MonoBehaviour
 
         StopAllCoroutines();
         StartCoroutine(FairSpawnRoutine());
-        waveNumber++;
+        WaveNumber++;
     }
 
     private IEnumerator FairSpawnRoutine()
@@ -134,7 +140,8 @@ public class WaveHandler : MonoBehaviour
             float dot = Vector3.Dot(playerTransform.forward, dir);
             float dist = Vector3.Distance(points[i].transform.position, playerTransform.position);
 
-            if (dot > -0.5f && dist > settings.minimumSpawnDistanceOffset && dist < settings.maximumSpawnDistanceOffset) validPoints.Add(points[i]);
+            if (dot > -0.5f && dist > settings.minimumSpawnDistanceOffset && dist < settings.maximumSpawnDistanceOffset)
+                validPoints.Add(points[i]);
         }
 
         var source = validPoints.Count > 0 ? validPoints : points;
@@ -146,25 +153,22 @@ public class WaveHandler : MonoBehaviour
         Vector2 offset = Random.insideUnitCircle * settings.randomSpawnOffset;
         Vector3 pos = spot.position + new Vector3(offset.x, 0, offset.y);
 
-        Enemy enemy = Instantiate(settings.enemyPrefab, pos, spot.rotation);
-        enemy.Initialize(stat, enemyStatModifiers);
+        Enemy enemy = _resolver.Instantiate(settings.enemyPrefab, pos, spot.rotation);
+        enemy.Initialize(stat, StatModifiers);
         activeEnemies++;
         enemy.EnemyHealth.OnDeath += HandleEnemyDeath;
     }
 
     private void HandleEnemyDeath()
     {
-        Debug.Log("jam");
         activeEnemies--;
         CheckWaveCompletion();
     }
 
     private void CheckWaveCompletion()
     {
-        Debug.Log("something");
         if (!isSpawning && activeEnemies <= 0)
         {
-            Debug.Log("fish");
             OnWaveEnded();
         }
     }
@@ -174,7 +178,7 @@ public class WaveHandler : MonoBehaviour
         isWaveComplete = true;
         OnWaveComplete?.Invoke();
     }
-    
+
     [ContextMenu("Debug: Clear All Enemies")]
     public void DebugClearAllEnemies()
     {

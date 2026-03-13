@@ -17,7 +17,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("Map");
     }
 
         public void StartPlayGround()

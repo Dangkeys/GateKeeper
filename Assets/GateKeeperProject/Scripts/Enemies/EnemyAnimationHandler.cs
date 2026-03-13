@@ -37,7 +37,6 @@ namespace GateKeeperProject.Scripts.Enemies
 
                 if (collider != null)
                 {
-                    Debug.Log("Found Collider: " + collider.name + " | Setting active: " + active);
                     collider.gameObject.SetActive(active);
                 }
                 else
