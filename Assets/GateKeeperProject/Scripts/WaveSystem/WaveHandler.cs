@@ -160,17 +160,14 @@ public class WaveHandler : MonoBehaviour
 
     private void HandleEnemyDeath()
     {
-        Debug.Log("jam");
         activeEnemies--;
         CheckWaveCompletion();
     }
 
     private void CheckWaveCompletion()
     {
-        Debug.Log("something");
         if (!isSpawning && activeEnemies <= 0)
         {
-            Debug.Log("fish");
             OnWaveEnded();
         }
     }
