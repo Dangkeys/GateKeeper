@@ -167,10 +167,13 @@ public class Gun : MonoBehaviour
 
                 float finalDamage = currentDamage;
 
-                if (hit.collider.CompareTag("EnemyHead"))
-                    finalDamage *= data.headshotMultiplier;
+                bool isHeadshot = hit.collider.CompareTag("EnemyHead");
+                if (isHeadshot) finalDamage *= data.headshotMultiplier;
 
                 damageable.TakeDamage(finalDamage);
+
+                Enemy enemy = hit.collider.GetComponentInParent<Enemy>();
+                enemy?.GetHitFlash()?.Flash(isHeadshot);
 
                 currentDamage *= 1 - data.damagePenetrationReduction;
                 penetrationCount++;
