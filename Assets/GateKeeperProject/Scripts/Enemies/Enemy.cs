@@ -7,6 +7,7 @@ using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
+using VContainer;
 
 public class Enemy : MonoBehaviour, IAttackable
 {
@@ -22,7 +23,19 @@ public class Enemy : MonoBehaviour, IAttackable
 
     public Health EnemyHealth { get; private set; }
 
+
+    private WaveHandler _waveHandler;
+    private AmmoDropSystem _ammoDropSystem;
+
     private GameObject enemyVisual;
+
+    [Inject]
+    private void Construct(WaveHandler waveHandler, AmmoDropSystem ammoDropSystem)
+    {
+        _waveHandler = waveHandler;
+        _ammoDropSystem = ammoDropSystem;
+    }
+
 
     private void Awake()
     {
@@ -31,11 +44,13 @@ public class Enemy : MonoBehaviour, IAttackable
         EnemyHealth.OnDamageTaken += DamageTakenEvent;
         EnemyHealth.OnDeath += DeathEvent;
     }
+
     private void OnDestroy()
     {
         EnemyHealth.OnDamageTaken -= DamageTakenEvent;
         EnemyHealth.OnDeath -= DeathEvent;
     }
+
     private void DamageTakenEvent(float currentHealth)
     {
         // Debug.Log(gameObject.name +  " damaged!" + ", CurrentHealth:"  + currentHealth);
@@ -44,26 +59,40 @@ public class Enemy : MonoBehaviour, IAttackable
     private void DeathEvent()
     {
         agent.enabled = false;
+        TrySpawnAmmo();
+
+
         Destroy(gameObject);
         // gameObject.SetActive(false);
     }
 
-    public void Initialize(EnemyStatSO stat, EnemyStatModifiers  statModifiers)
+    private void TrySpawnAmmo()
+    {
+        // Assuming this is a value between 0.0 (0%) and 1.0 (100%)
+        float randomChance = _waveHandler.StatModifiers.ammoRateDropMultiplier;
+
+        // Check if a randomly generated number is less than or equal to your chance
+        if (UnityEngine.Random.value <= randomChance)
+        {
+            _ammoDropSystem.SpawnAmmo(transform.position);
+        }
+    }
+
+    public void Initialize(EnemyStatSO stat, EnemyStatModifiers statModifiers)
     {
         behaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
         currentStat = stat;
         _enemyStatModifiers = statModifiers;
-        
+
         enemyVisual = Instantiate(currentStat.GetRandomVisual(), gameObject.transform);
         EnemyHealth.InitAndSetMaxHealth(currentStat.MaxHealth * _enemyStatModifiers.healthMultiplier);
-        
+
         InitializeColliders();
         InitializeAgent();
         InitializeBehaviorGraphAgent();
-
     }
-    
-    
+
+
     private void InitializeAgent()
     {
         // 2. Map NavMesh Agent Settings
@@ -99,12 +128,11 @@ public class Enemy : MonoBehaviour, IAttackable
 
             colliderGO.transform.SetParent(parentTransform!, worldPositionStays: false);
             CapsuleCollider collider = colliderGO.AddComponent<CapsuleCollider>();
-            
 
-            
+
             colliderGO.transform.localPosition = enemySizeConfig.Position;
             colliderGO.transform.localRotation = Quaternion.Euler(enemySizeConfig.Rotation);
-            
+
             collider.isTrigger = enemySizeConfig.IsTrigger;
             collider.radius = enemySizeConfig.Radius;
             collider.height = enemySizeConfig.Height;
@@ -116,9 +144,9 @@ public class Enemy : MonoBehaviour, IAttackable
 
     private void InitializeBehaviorGraphAgent()
     {
-        
         behaviorGraphAgent.SetVariableValue(AnimatorVariable, GetComponentInChildren<Animator>());
-        behaviorGraphAgent.SetVariableValue(MoveSpeedVariable, currentStat.MoveSpeed * _enemyStatModifiers.moveSpeedMultiplier);
+        behaviorGraphAgent.SetVariableValue(MoveSpeedVariable,
+            currentStat.MoveSpeed * _enemyStatModifiers.moveSpeedMultiplier);
         behaviorGraphAgent.SetVariableValue(DistanceThresholdVariable, currentStat.StoppingDistance);
         behaviorGraphAgent.SetVariableValue(AnimatorSpeedVariable, "velocity");
         agent.angularSpeed = currentStat.RotationSpeed;
@@ -149,12 +177,10 @@ public class Enemy : MonoBehaviour, IAttackable
 
         return null;
     }
-    
+
 
     public void Attack(IDamageable damageable)
     {
         damageable.TakeDamage(currentStat.DealDamageAmount * _enemyStatModifiers.damageMultiplier);
     }
-
-
 }

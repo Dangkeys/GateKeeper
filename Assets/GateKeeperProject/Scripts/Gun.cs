@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
 using UnityEngine.XR;
 using System.Collections.Generic;
+using VContainer;
 
 public class Gun : MonoBehaviour
 {
@@ -31,7 +32,9 @@ public class Gun : MonoBehaviour
     private int totalAmmo;
     private float currentRecoveryTime;
     private bool isRecovery;
-
+    
+    
+    
     void Start()
     {
         data = Instantiate(data);

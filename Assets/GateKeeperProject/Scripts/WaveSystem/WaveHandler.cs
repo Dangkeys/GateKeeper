@@ -2,19 +2,19 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using VContainer;
+using VContainer.Unity;
 using Random = UnityEngine.Random;
 
 public class WaveHandler : MonoBehaviour
 {
-    
-    
     [SerializeField] private WaveSettingsSO settings;
     [SerializeField] private Transform playerTransform;
-    
-    
+
+
     public event Action OnWaveComplete;
 
-    private EnemyStatModifiers enemyStatModifiers = new EnemyStatModifiers();
+    public EnemyStatModifiers StatModifiers { get; private set; } = new EnemyStatModifiers();
     private List<(EnemySpawnConfig config, float weight)> currentWavePool = new List<(EnemySpawnConfig, float)>();
 
     private int currentBudget;
@@ -22,9 +22,14 @@ public class WaveHandler : MonoBehaviour
 
     private int activeEnemies = 0;
     private bool isSpawning = false;
-    
-    
+
+    private IObjectResolver _resolver;
     private bool isWaveComplete = false;
+    [Inject]
+    public void Construct(IObjectResolver resolver)
+    {
+        _resolver = resolver;
+    }
 
     private void Awake()
     {
@@ -35,12 +40,11 @@ public class WaveHandler : MonoBehaviour
         }
 
         if (playerTransform == null) playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-
     }
 
     public void StartNextWave()
     {
-        if (!isWaveComplete && waveNumber > 1) 
+        if (!isWaveComplete && waveNumber > 1)
         {
             Debug.LogWarning("Cannot start next wave: Current wave is still active!");
             return;
@@ -51,13 +55,14 @@ public class WaveHandler : MonoBehaviour
             settings.maxWaveBudget);
 
 
-        enemyStatModifiers.healthMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.healthMultiplier),
+        StatModifiers.healthMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.healthMultiplier),
             settings.waveConfig.maxHealthMultiplier);
-        enemyStatModifiers.damageMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.damageMultiplier),
+        StatModifiers.damageMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.damageMultiplier),
             settings.waveConfig.maxDamageMultiplier);
-        enemyStatModifiers.moveSpeedMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.moveSpeedMultiplier),
+        StatModifiers.moveSpeedMultiplier = Mathf.Min(1f + (waveNumber * settings.waveConfig.moveSpeedMultiplier),
             settings.waveConfig.maxMoveSpeedMultiplier);
-        enemyStatModifiers.ammoRateDropMultiplier = Mathf.Max(waveNumber * settings.ammoRateDrop, settings.maxAmmoRateDrop);
+        StatModifiers.ammoRateDropMultiplier =
+            Mathf.Max(waveNumber * settings.ammoRateDrop, settings.maxAmmoRateDrop);
 
 
         currentWavePool.Clear();
@@ -134,7 +139,8 @@ public class WaveHandler : MonoBehaviour
             float dot = Vector3.Dot(playerTransform.forward, dir);
             float dist = Vector3.Distance(points[i].transform.position, playerTransform.position);
 
-            if (dot > -0.5f && dist > settings.minimumSpawnDistanceOffset && dist < settings.maximumSpawnDistanceOffset) validPoints.Add(points[i]);
+            if (dot > -0.5f && dist > settings.minimumSpawnDistanceOffset && dist < settings.maximumSpawnDistanceOffset)
+                validPoints.Add(points[i]);
         }
 
         var source = validPoints.Count > 0 ? validPoints : points;
@@ -146,8 +152,8 @@ public class WaveHandler : MonoBehaviour
         Vector2 offset = Random.insideUnitCircle * settings.randomSpawnOffset;
         Vector3 pos = spot.position + new Vector3(offset.x, 0, offset.y);
 
-        Enemy enemy = Instantiate(settings.enemyPrefab, pos, spot.rotation);
-        enemy.Initialize(stat, enemyStatModifiers);
+        Enemy enemy = _resolver.Instantiate(settings.enemyPrefab, pos, spot.rotation);
+        enemy.Initialize(stat, StatModifiers);
         activeEnemies++;
         enemy.EnemyHealth.OnDeath += HandleEnemyDeath;
     }
@@ -174,7 +180,7 @@ public class WaveHandler : MonoBehaviour
         isWaveComplete = true;
         OnWaveComplete?.Invoke();
     }
-    
+
     [ContextMenu("Debug: Clear All Enemies")]
     public void DebugClearAllEnemies()
     {
