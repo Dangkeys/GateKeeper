@@ -7,7 +7,7 @@ public class RewardSystem : MonoBehaviour
     public event Action OnRewardSelected;
 
     [Header("Core Systems")]
-    [SerializeField] private BlessingUI blessingUI; // Link your UI script here
+    [SerializeField] private BlessingUI blessingUI; 
     [SerializeField] private GunSystem gunSystem;
     [SerializeField] private AmmoSystem ammoSystem;
     [SerializeField] private Sprint sprint;
@@ -21,7 +21,6 @@ public class RewardSystem : MonoBehaviour
 
     public void GetReward()
     {
-        // 1. Generate the stats and get their string formats
         var (sTitle, sDesc) = RandomStat();
         var (wTitle, wDesc) = RandomWeapon();
         var (aTitle, aDesc) = RandomAmmo();
@@ -34,9 +33,9 @@ public class RewardSystem : MonoBehaviour
         
         switch (_currentStatIndex)
         {
-            case 1: return ("Vitality", "Increase Max Health");
-            case 2: return ("Agility", "Increase Move Speed");
-            case 3: return ("Endurance", "Increase Stamina");
+            case 1: return ("Vitality", "Increase Max Health 10%");
+            case 2: return ("Agility", $"Increase Move Speed {sprint.GetPercentSpeedReward()}%");
+            case 3: return ("Endurance", $"Increase Stamina {sprint.GetPercentStaminaReward()}%");
             default: return ("Stat", "Unknown Upgrade");
         }
     }
@@ -61,7 +60,6 @@ public class RewardSystem : MonoBehaviour
 
     private (string title, string description) RandomAmmo()
     {
-        // Restricted to 0-4 to remove the drop rate logic as requested
         _currentAmmoIndex = UnityEngine.Random.Range(0, 5); 
 
         GunData gunData = gunSystem.GetGun(_currentAmmoIndex).GetGunData();
@@ -97,8 +95,6 @@ public class RewardSystem : MonoBehaviour
         }
     }
 
-    // --- Button Click Events Called by UI ---
-
     public void SelectStatReward()
     {
         GetStat(_currentStatIndex);
@@ -116,8 +112,6 @@ public class RewardSystem : MonoBehaviour
         GetAmmo(_currentAmmoIndex);
         OnRewardSelected?.Invoke(); 
     }
-
-    // --- Application Logic ---
 
     private void GetStat(int statIndex)
     {
