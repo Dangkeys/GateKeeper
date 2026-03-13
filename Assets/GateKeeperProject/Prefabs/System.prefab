@@ -105,5 +105,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  ammoSpawnAmount: 100
+  ammoSpawnAmount: 120
   ammoTransform: {fileID: 0}

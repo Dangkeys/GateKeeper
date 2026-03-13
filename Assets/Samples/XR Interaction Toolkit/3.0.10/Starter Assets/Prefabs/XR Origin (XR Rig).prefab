@@ -1975,7 +1975,6 @@ GameObject:
   - component: {fileID: 6520291404937146767}
   - component: {fileID: 5826056641483426609}
   - component: {fileID: 5033801203051696737}
-  - component: {fileID: 566339270656252554}
   - component: {fileID: 5984854755147242817}
   - component: {fileID: 4014050047918754998}
   - component: {fileID: 4427298781944890467}
@@ -2116,26 +2115,6 @@ MonoBehaviour:
   m_AimAssistRequiredSpeed: 0.25
   m_AimAssistPercent: 0.8
   m_AimAssistMaxSpeedPercent: 10
---- !u!114 &566339270656252554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717954561962503725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f59b2d095e7ded64d997ebd64f483028, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Sprint
-  dynamicMoveProvider: {fileID: 153982007679157697}
-  initSpeed: 2.5
-  multiplySpeed: 10
-  sprintDuration: 10
-  sprintInput: {fileID: -2439264783773714294, guid: 0be0028c24f2a4c14a96b6aa39055933, type: 3}
-  sprintScrollBar: {fileID: 3772846822052908927}
-  sprintDurationReward: 2
-  speedReward: 2
 --- !u!114 &5984854755147242817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2179,12 +2158,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Sprint
   dynamicMoveProvider: {fileID: 153982007679157697}
   initSpeed: 2.5
-  multiplySpeed: 10
-  sprintDuration: 10
-  sprintInput: {fileID: -2439264783773714294, guid: 0be0028c24f2a4c14a96b6aa39055933, type: 3}
+  multiplySpeed: 4
+  sprintDuration: 6
+  sprintInput: {fileID: -5294386686942278007, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   sprintScrollBar: {fileID: 3772846822052908927}
   sprintDurationReward: 2
-  speedReward: 2
+  speedReward: 0.2
 --- !u!1 &1787516059220952802
 GameObject:
   m_ObjectHideFlags: 0

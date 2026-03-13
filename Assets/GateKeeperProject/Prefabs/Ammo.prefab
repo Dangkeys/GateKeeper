@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74935188329406647ab81d18c1747f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoDrop
-  recieveAmmo: 10
+  recieveAmmo: 1
   ammoSystem: {fileID: 0}
   weaponType: 4
 --- !u!1001 &3317005789827240515
@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74935188329406647ab81d18c1747f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoDrop
-  recieveAmmo: 10
+  recieveAmmo: 2
   ammoSystem: {fileID: 0}
   weaponType: 0
 --- !u!4 &3317005789827658799 stripped
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74935188329406647ab81d18c1747f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoDrop
-  recieveAmmo: 10
+  recieveAmmo: 8
   ammoSystem: {fileID: 0}
   weaponType: 1
 --- !u!1001 &6901463129312846800
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74935188329406647ab81d18c1747f66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AmmoDrop
-  recieveAmmo: 10
+  recieveAmmo: 2
   ammoSystem: {fileID: 0}
   weaponType: 3
 --- !u!1001 &8902337519874948115
