@@ -16,7 +16,12 @@ public enum EnemyHandType
     Right,
     None
 }
-
+public enum ColliderDirection
+{
+    X,
+    Y,
+    Z
+}
 [System.Serializable]
 public class EnemyColliderConfig
 {
@@ -24,7 +29,9 @@ public class EnemyColliderConfig
     public string GameObjectTag = "Enemy";
     public string GameObjectLayer = "Enemy";
     public Vector3 Position;
+    public Vector3 Rotation;
     public Vector3 Center;
+    public ColliderDirection EnemyColliderDirection = ColliderDirection.Y;
     public float Radius;
     public float Height;
     public bool IsTrigger = true;

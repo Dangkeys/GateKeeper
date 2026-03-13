@@ -25,8 +25,6 @@ public class RewardSystem : MonoBehaviour
         var (sTitle, sDesc) = RandomStat();
         var (wTitle, wDesc) = RandomWeapon();
         var (aTitle, aDesc) = RandomAmmo();
-        // 2. Send the formatted strings to the UI to display
-        blessingUI.gameObject.SetActive(true);
         blessingUI.UpdateCardUI(sTitle, sDesc, wTitle, wDesc, aTitle, aDesc);
     }
 
