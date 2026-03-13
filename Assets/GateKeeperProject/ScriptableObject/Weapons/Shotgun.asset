@@ -25,13 +25,13 @@ MonoBehaviour:
   fireRate: 1.2
   recoil: 5
   recoilReduction: 0
-  maximumRecoil: 15
+  maximumRecoil: 10
   recoilRecoveryTime: 1.2
   recoilRecoverySpeed: 8
   magazineSize: 8
   reloadTime: 4.5
   freeAmmoPercent: 0
-  bulletSize: 0.1
+  bulletSize: 0.05
   pelletCount: 8
   spreadAngle: 5
   flatDamageReward: 3
@@ -52,6 +52,6 @@ MonoBehaviour:
   spreadAngleReward: 0.5
   ammoReward: 40
   bulletTrailPrefab: {fileID: 428622580606310695, guid: 90fc71b206ef74060b37610f705f305e, type: 3}
-  bulletTrailSpeed: 80
+  bulletTrailSpeed: 240
   hapticAmplitude: 1
   hapticDuration: 0.2
