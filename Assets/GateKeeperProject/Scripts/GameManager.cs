@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private WaveHandler waveHandler;
     [SerializeField] private RewardSystem rewardSystem;
-    [SerializeField] private BlessingUI _blessingUI;
+    [SerializeField] private BlessingUI blessingUI;
     [SerializeField] private Player _player;
 
     void Start()
@@ -20,15 +20,14 @@ public class GameManager : MonoBehaviour
 
     private void EndWaveEvent()
     {
-        Debug.Log("meow");
-        _blessingUI.gameObject.SetActive(true);
+        blessingUI.gameObject.SetActive(true);
 
         rewardSystem.GetReward();
     }
 
     public void StartNextWave()
     {
-        _blessingUI.gameObject.SetActive(false);
+        blessingUI.gameObject.SetActive(false);
 
         _player.PlayerHealth.SetCurrentToMaxHealth();
         waveHandler.StartNextWave();
