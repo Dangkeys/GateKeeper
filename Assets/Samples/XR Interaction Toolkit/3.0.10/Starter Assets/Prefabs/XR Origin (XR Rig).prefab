@@ -1549,7 +1549,6 @@ GameObject:
   - component: {fileID: 4014050047918754998}
   - component: {fileID: 4427298781944890467}
   - component: {fileID: 209607048210061671}
-  - component: {fileID: 4290744006205919833}
   m_Layer: 2
   m_Name: XR Origin (XR Rig)
   m_TagString: Player
@@ -1731,36 +1730,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Sprint
   dynamicMoveProvider: {fileID: 153982007679157697}
   initSpeed: 2.5
-  multiplySpeed: 4
-  sprintDuration: 6
+  multiplySpeed: 3.3
+  sprintDuration: 2
+  speedRecovery: 0.75
   sprintInput: {fileID: -5294386686942278007, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   sprintScrollBar: {fileID: 0}
-  sprintDurationReward: 2
-  speedReward: 0.2
+  sprintDurationReward: 1
+  speedReward: 0.15
 --- !u!136 &209607048210061671
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1717954561962503725}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &4290744006205919833
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5974,6 +5951,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gun
   shootInputLeft: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   shootInputRight: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  reloadInputLeft: {fileID: 2104703574278359796, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  reloadInputRight: {fileID: -7104762911020123007, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   firePoint: {fileID: 7775353056401697196}
   data: {fileID: 11400000, guid: d39d9f443077f9c4faba5d3ca3157773, type: 2}
   currentHandType: 0
@@ -6999,6 +6978,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gun
   shootInputLeft: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   shootInputRight: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  reloadInputLeft: {fileID: 2104703574278359796, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  reloadInputRight: {fileID: -7104762911020123007, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   firePoint: {fileID: 6334396304595338187}
   data: {fileID: 11400000, guid: c4e22e1b8e9968b48bcd6b029ba6a2a3, type: 2}
   currentHandType: 0
@@ -7935,6 +7916,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gun
   shootInputLeft: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   shootInputRight: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  reloadInputLeft: {fileID: 2104703574278359796, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  reloadInputRight: {fileID: -7104762911020123007, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   firePoint: {fileID: 2277446298285130814}
   data: {fileID: 11400000, guid: 8072defb6ddefcf4ebca42346bdee512, type: 2}
   currentHandType: 0
@@ -9102,6 +9085,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gun
   shootInputLeft: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   shootInputRight: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  reloadInputLeft: {fileID: 2104703574278359796, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  reloadInputRight: {fileID: -7104762911020123007, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   firePoint: {fileID: 8517979963459621340}
   data: {fileID: 11400000, guid: 3d60e13ac6581ce49b16460c83d497da, type: 2}
   currentHandType: 0
@@ -9733,6 +9718,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gun
   shootInputLeft: {fileID: -5982496924579745919, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   shootInputRight: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  reloadInputLeft: {fileID: 2104703574278359796, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  reloadInputRight: {fileID: -7104762911020123007, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   firePoint: {fileID: 2247973227980129253}
   data: {fileID: 11400000, guid: 73ac720174bc37a42be5cc5019a9d2a4, type: 2}
   currentHandType: 0

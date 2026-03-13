@@ -2874,25 +2874,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 712033299}
     - target: {fileID: 4427298781944890467, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-      propertyPath: speedReward
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4427298781944890467, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-      propertyPath: multiplySpeed
-      value: 3.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4427298781944890467, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-      propertyPath: speedRecovery
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4427298781944890467, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-      propertyPath: sprintDuration
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4427298781944890467, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
-      propertyPath: sprintDurationReward
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: sprintScrollBar
+      value: 
+      objectReference: {fileID: 342412321}
     - target: {fileID: 4495064450804425622, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: onPartSelected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -4387,7 +4371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
