@@ -322,8 +322,6 @@ public class Gun : MonoBehaviour
 
             int ammoToLoad = Mathf.Min(ammoNeeded, ammoSystem.GetAmmo(data.type));
 
-            currentAmmo += ammoToLoad;
-
             ammoSystem.UseAmmo(data.type, ammoToLoad);
 
             isReload = false;
