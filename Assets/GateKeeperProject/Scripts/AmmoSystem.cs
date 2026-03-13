@@ -15,7 +15,10 @@ public class AmmoSystem : MonoBehaviour
     private IEnumerator InvokeNextFrame()
     {
         yield return null;
-        OnAmmoChanged?.Invoke(WeaponType.Pistol, 0, ammos[0]);
+        for (int i = 0; i <= 5; i++)
+        {
+            OnAmmoChanged?.Invoke((WeaponType)i, 0, ammos[i]);    
+        }
     }
 
     public int GetAmmo(WeaponType type)

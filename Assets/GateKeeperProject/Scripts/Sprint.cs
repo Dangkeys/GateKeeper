@@ -83,6 +83,16 @@ public class Sprint : MonoBehaviour
         sprintScrollBar.size = currentSprintDuration / sprintDuration;
     }
 
+    public int GetPercentSpeedReward()
+    {
+        return (int)(speedReward * 100 / initSpeed);
+    }
+
+    public int GetPercentStaminaReward()
+    {
+        return (int)(sprintDurationReward * 100 / sprintDuration);
+    }
+
     public void IncreaseSpeed()
     {
         initSpeed += speedReward;
