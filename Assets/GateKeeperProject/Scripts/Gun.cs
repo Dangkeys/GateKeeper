@@ -142,6 +142,22 @@ public class Gun : MonoBehaviour
                     if (card != null) card.TriggerCard();
                     break; // Stop bullet penetration if it hits a card
                 }
+
+                bool isEnemy = hit.collider.CompareTag("Enemy") || 
+                                hit.collider.CompareTag("EnemyHead");
+
+                if (isEnemy)
+                {
+                    if (data.enemyHitEffectPrefab != null)
+                        HitEffectHandler.Spawn(data.enemyHitEffectPrefab, 
+                                            hit.point, hit.normal);
+                }
+                else
+                {
+                    if (data.wallHitEffectPrefab != null)
+                        HitEffectHandler.Spawn(data.wallHitEffectPrefab, 
+                                            hit.point, hit.normal);
+                }
                 if (!hit.collider.CompareTag("Enemy") && !hit.collider.CompareTag("EnemyHead")) continue;
                 IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
                 if (damageable == null) continue;

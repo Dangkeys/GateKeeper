@@ -60,6 +60,10 @@ public class GunData : ScriptableObject
     public float hapticAmplitude = 0.7f;
     public float hapticDuration = 0.1f;
 
+    [Header("Hit Effects")]
+    public GameObject enemyHitEffectPrefab;
+    public GameObject wallHitEffectPrefab;
+
     public bool CanChangeStat(WeaponStatType stat)
     {
         if (type != WeaponType.Shotgun)
