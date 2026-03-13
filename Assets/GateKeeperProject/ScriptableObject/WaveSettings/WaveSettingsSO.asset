@@ -18,33 +18,33 @@ MonoBehaviour:
   maximumSpawnDistanceOffset: 40
   enemyPool:
   - stat: {fileID: 11400000, guid: 1be43b6e5de6d3642bf80f7063025c39, type: 2}
-    cost: 15
+    cost: 8
     baseWeight: 2
     weightIncreasePerWave: 6
   - stat: {fileID: 11400000, guid: 6a700af5a317bbe4691c4646470554cf, type: 2}
-    cost: 8
+    cost: 15
     baseWeight: 1
     weightIncreasePerWave: 4
   - stat: {fileID: 11400000, guid: cd218334d5969b6418acc0336647e7ac, type: 2}
     cost: 1
     baseWeight: 60
-    weightIncreasePerWave: 0
+    weightIncreasePerWave: 2
   - stat: {fileID: 11400000, guid: 64af50618d604184aa5fc30b8a3f8698, type: 2}
     cost: 2
     baseWeight: 30
-    weightIncreasePerWave: 2
+    weightIncreasePerWave: 3
   - stat: {fileID: 11400000, guid: dd995b5e88403c54897f3e4759fd3341, type: 2}
     cost: 1
     baseWeight: 50
-    weightIncreasePerWave: 1
+    weightIncreasePerWave: 2
   - stat: {fileID: 11400000, guid: ce220fb2dc1e3db49b0c8834c1cd1496, type: 2}
-    cost: 3
-    baseWeight: 20
-    weightIncreasePerWave: 3
-  - stat: {fileID: 11400000, guid: 9bf897f8b55634844a631135a2a3f997, type: 2}
-    cost: 4
-    baseWeight: 10
+    cost: 2
+    baseWeight: 40
     weightIncreasePerWave: 4
+  - stat: {fileID: 11400000, guid: 9bf897f8b55634844a631135a2a3f997, type: 2}
+    cost: 3
+    baseWeight: 30
+    weightIncreasePerWave: 5
   baseWaveBudget: 30
   budgetIncreasePerWave: 20
   maxWaveBudget: 600
