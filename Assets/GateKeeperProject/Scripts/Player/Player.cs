@@ -30,7 +30,6 @@ namespace GateKeeperProject.Scripts
 
         private void DamageTakenEvent(float currentHealth)
         {
-            Debug.Log("CurrentHealth:" + currentHealth);
         }
 
         private void DeathEvent()

@@ -31,7 +31,7 @@ MonoBehaviour:
     - neck_01
     GameObjectTag: EnemyHead
     GameObjectLayer: Enemy
-    Position: {x: 0, y: 0, z: 0.3}
+    Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0}
     Center: {x: -0.1, y: 0, z: 0}
     EnemyColliderDirection: 1
