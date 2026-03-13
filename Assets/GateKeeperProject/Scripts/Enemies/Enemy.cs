@@ -118,8 +118,7 @@ public class Enemy : MonoBehaviour, IAttackable
             GameObject colliderGO = new GameObject(colliderGOName);
             colliderGO.tag = enemySizeConfig.GameObjectTag;
             colliderGO.layer = LayerMask.NameToLayer(enemySizeConfig.GameObjectLayer);
-            Transform? parentTransform =
-                RecursiveFindChild(enemyVisual.transform, enemySizeConfig.ParentTransformNameList).transform;
+            Transform? parentTransform = RecursiveFindChild(enemyVisual.transform, enemySizeConfig.ParentTransformNameList).transform;
             if (parentTransform == null)
             {
                 Debug.LogError("Parent Transform not found!");
