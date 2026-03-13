@@ -39,21 +39,21 @@ public class GunSystem : MonoBehaviour
         currentLeftWeapon = WeaponType.None;
     }
 
-    private void GetGunOut(WeaponType weapon, HandType curretnHandType)
+    private void GetGunOut(WeaponType weapon, HandType currentHandType)
     {
-        if (currentLeftWeapon == weapon)
+        if (currentHandType == HandType.Right && currentLeftWeapon == weapon)
         {
-            KeepGunAway(currentLeftWeapon);
-            currentLeftWeapon = WeaponType.None;
+            SwapWeapons();
+            return;
         }
 
-        if (currentRightWeapon == weapon)
+        if (currentHandType == HandType.Left && currentRightWeapon == weapon)
         {
-            KeepGunAway(currentRightWeapon);
-            currentRightWeapon = WeaponType.None;
+            SwapWeapons();
+            return;
         }
 
-        if (curretnHandType == HandType.Right)
+        if (currentHandType == HandType.Right)
         {
             if (currentRightWeapon != WeaponType.None)
                 KeepGunAway(currentRightWeapon);
@@ -61,7 +61,7 @@ public class GunSystem : MonoBehaviour
             SetGunToHand(weapon, rightHandTransform, HandType.Right);
             currentRightWeapon = weapon;
         }
-        else if (curretnHandType == HandType.Left)
+        else if (currentHandType == HandType.Left)
         {
             if (currentLeftWeapon != WeaponType.None)
                 KeepGunAway(currentLeftWeapon);
@@ -85,6 +85,17 @@ public class GunSystem : MonoBehaviour
         guns[(int)weapon].transform.localPosition = Vector3.zero;
         guns[(int)weapon].transform.localRotation = Quaternion.identity;
         guns[(int)weapon].SetCurrentHandType(handType);
+    }
+
+    private void SwapWeapons()
+    {
+        WeaponType temp = currentLeftWeapon;
+
+        SetGunToHand(currentRightWeapon, leftHandTransform, HandType.Left);
+        SetGunToHand(temp, rightHandTransform, HandType.Right);
+
+        currentLeftWeapon = currentRightWeapon;
+        currentRightWeapon = temp;
     }
 
     public Gun GetGun(int index)
