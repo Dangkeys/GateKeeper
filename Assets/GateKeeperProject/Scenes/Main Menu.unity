@@ -135,8 +135,11 @@ MonoBehaviour:
   initSpeed: 2.5
   multiplySpeed: 10
   sprintDuration: 10
+  speedRecovery: 1
   sprintInput: {fileID: -2439264783773714294, guid: 0be0028c24f2a4c14a96b6aa39055933, type: 3}
   sprintScrollBar: {fileID: 708728871}
+  sprintDurationReward: 2
+  speedReward: 2
 --- !u!4 &204172687 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6598815579406187027, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
@@ -894,12 +897,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gun
   shootInputLeft: {fileID: 0}
   shootInputRight: {fileID: 0}
+  reloadInputLeft: {fileID: 0}
+  reloadInputRight: {fileID: 0}
   firePoint: {fileID: 275194377}
   data: {fileID: 11400000, guid: 73ac720174bc37a42be5cc5019a9d2a4, type: 2}
-  recoilReturnSpeed: 2
   currentHandType: 0
   ammoText: {fileID: 283361169}
   ammoSystem: {fileID: 0}
+  fireFeedbacks: {fileID: 0}
+  reloadFeedbacks: {fileID: 0}
 --- !u!1001 &658879588
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1629,7 +1635,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play
+  m_text: Tutorial
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2600,7 +2606,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1891761550}
         m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
-        m_MethodName: StartPlayGround
+        m_MethodName: Tutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2886,7 +2892,15 @@ PrefabInstance:
       propertyPath: m_MoveSpeed
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 334494386751041156, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 393207239731357619, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 617128413859587828, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

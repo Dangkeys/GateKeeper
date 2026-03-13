@@ -17,4 +17,5 @@ MonoBehaviour:
     Pick up ammo and utilities dropped by enemies.  \\n3. Upgrade \u2013 Choose 1
     of 3 random upgrades after clearing a wave.  \\n4. Repeat \u2013 Each wave becomes
     harder with stronger enemies."
-  dialogSO: {fileID: 11400000, guid: 8b7efaa67ed05414a9a197952f0a4dea, type: 2}
+  dialogSO: {fileID: 11400000, guid: d1c47bf8b4b65204b816565785622c8a, type: 2}
+  image: {fileID: 0}

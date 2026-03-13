@@ -29,4 +29,9 @@ public class MainMenuScript : MonoBehaviour
     {
         SceneManager.LoadScene("Main Menu");
     }
+
+    public void Tutorial()
+    {
+        SceneManager.LoadScene("Tutorial");
+    }
 }

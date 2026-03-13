@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 191e060318acf6246949650f06d27ab8, type: 3}
-  m_Name: Button
+  m_Name: Reward
   m_EditorClassIdentifier: Assembly-CSharp::DialogSO
-  header: Button
-  description: 
-  dialogSO: {fileID: 11400000, guid: 80d05faeda6c1f244854334f6841250a, type: 2}
-  image: {fileID: 21300000, guid: e94db140371f80f4daced522ead5ffda, type: 3}
+  header: How to get reward
+  description: Wave Cleared! All enemies have been defeated. Go to the center area
+    and shoot the reward icon to choose your upgrade.
+  dialogSO: {fileID: 11400000, guid: 8b7efaa67ed05414a9a197952f0a4dea, type: 2}
+  image: {fileID: 0}
