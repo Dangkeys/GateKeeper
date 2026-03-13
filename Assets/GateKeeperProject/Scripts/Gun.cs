@@ -129,18 +129,31 @@ public class Gun : MonoBehaviour
             RaycastHit[] hits = Physics.SphereCastAll(ray, data.bulletSize, data.range, data.hitLayers, QueryTriggerInteraction.Collide);
             System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
-            Vector3 trailEndPoint = hits.Length > 0 ? hits[0].point : firePoint.position + spreadDirection * data.range;
+            Vector3 trailEndPoint = firePoint.position + spreadDirection * data.range;
+            foreach (var hit in hits)
+            {
+                if (hit.distance <= 0f) continue; 
+
+                Vector3 hitPoint = hit.point == Vector3.zero
+                    ? firePoint.position + spreadDirection * hit.distance
+                    : hit.point;
+
+                trailEndPoint = hitPoint;
+                break;
+            }
 
             if (data.bulletTrailPrefab != null)
             {
                 BulletTrailHandler.Spawn(data.bulletTrailPrefab, firePoint.position, trailEndPoint, data.bulletTrailSpeed, data.bulletSize);
-            }     
+            }   
 
             int penetrationCount = 0;
             float currentDamage = data.flatDamage;
 
             foreach (var hit in hits)
             {
+                if (hit.distance <= 0f) continue;
+
                 if (hit.collider.CompareTag("RewardCard"))
                 {
                     ShootableCard card = hit.collider.GetComponent<ShootableCard>();
