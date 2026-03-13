@@ -39,12 +39,14 @@ public class Gun : MonoBehaviour
     {
         data = Instantiate(data);
         currentAmmo = data.magazineSize;
+        totalAmmo = ammoSystem.GetAmmo(data.type);
         UpdateAmmoUI();
     }
 
     void OnEnable()
     {
         ammoSystem.OnAmmoChanged += UpdateAmmo;
+        totalAmmo = ammoSystem.GetAmmo(data.type);
         UpdateAmmoUI();
     }
 
@@ -167,10 +169,13 @@ public class Gun : MonoBehaviour
 
                 float finalDamage = currentDamage;
 
-                if (hit.collider.CompareTag("EnemyHead"))
-                    finalDamage *= data.headshotMultiplier;
+                bool isHeadshot = hit.collider.CompareTag("EnemyHead");
+                if (isHeadshot) finalDamage *= data.headshotMultiplier;
 
                 damageable.TakeDamage(finalDamage);
+
+                Enemy enemy = hit.collider.GetComponentInParent<Enemy>();
+                enemy?.GetHitFlash()?.Flash(isHeadshot);
 
                 currentDamage *= 1 - data.damagePenetrationReduction;
                 penetrationCount++;

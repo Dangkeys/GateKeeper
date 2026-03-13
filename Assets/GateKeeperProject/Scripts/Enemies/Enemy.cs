@@ -29,7 +29,8 @@ public class Enemy : MonoBehaviour, IAttackable
     private AmmoDropSystem _ammoDropSystem;
 
     private GameObject enemyVisual;
-
+    private EnemyHitFlash hitFlash;
+    public EnemyHitFlash GetHitFlash() => hitFlash;
     [Inject]
     private void Construct(WaveHandler waveHandler, AmmoDropSystem ammoDropSystem)
     {
@@ -93,6 +94,8 @@ public class Enemy : MonoBehaviour, IAttackable
         _enemyStatModifiers = statModifiers;
 
         enemyVisual = Instantiate(currentStat.GetRandomVisual(), gameObject.transform);
+        hitFlash = gameObject.AddComponent<EnemyHitFlash>();
+        hitFlash.Initialize(enemyVisual);
         EnemyHealth.InitAndSetMaxHealth(currentStat.MaxHealth * _enemyStatModifiers.healthMultiplier);
 
         InitializeColliders();

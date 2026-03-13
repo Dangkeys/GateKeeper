@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 191e060318acf6246949650f06d27ab8, type: 3}
+  m_Name: Weapons
+  m_EditorClassIdentifier: Assembly-CSharp::DialogSO
+  header: Weapons
+  description: "1. Pistol \u2013 Starter weapon  \\n2. Assault Rifle \u2013 Balanced
+    weapon  \\n3. SMG \u2013 Very fast shooting  \\n4. Shotgun \u2013 High damage
+    at close range  \\n5. Sniper \u2013 High precision damage"
+  dialogSO: {fileID: 11400000, guid: 198e84b415d48ef4691ac43c9c40f82c, type: 2}
+  image: {fileID: 0}
