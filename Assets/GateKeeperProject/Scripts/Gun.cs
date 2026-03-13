@@ -39,12 +39,14 @@ public class Gun : MonoBehaviour
     {
         data = Instantiate(data);
         currentAmmo = data.magazineSize;
+        totalAmmo = ammoSystem.GetAmmo(data.type);
         UpdateAmmoUI();
     }
 
     void OnEnable()
     {
         ammoSystem.OnAmmoChanged += UpdateAmmo;
+        totalAmmo = ammoSystem.GetAmmo(data.type);
         UpdateAmmoUI();
     }
 
