@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using GateKeeperProject.Scripts;
 using UnityEngine;
 using VContainer;
@@ -8,7 +9,7 @@ public class RewardSystem : MonoBehaviour
     public event Action OnRewardSelected;
 
     [Header("Core Systems")]
-    [SerializeField] private BlessingUI blessingUI; 
+    [SerializeField] private BlessingUI blessingUI;
     [SerializeField] private GunSystem gunSystem;
     [SerializeField] private AmmoSystem ammoSystem;
     [SerializeField] private Sprint sprint;
@@ -19,8 +20,8 @@ public class RewardSystem : MonoBehaviour
     private int _currentWeaponIndex;
     private WeaponStatType _currentWeaponStatType;
     private int _currentAmmoIndex;
-    
-    
+
+
     public void GetReward()
     {
         var (sTitle, sDesc) = RandomStat();
@@ -32,7 +33,7 @@ public class RewardSystem : MonoBehaviour
     private (string title, string description) RandomStat()
     {
         _currentStatIndex = UnityEngine.Random.Range(1, 4);
-        
+
         switch (_currentStatIndex)
         {
             case 1: return ("Vitality", "Increase Max Health 10%");
@@ -46,7 +47,7 @@ public class RewardSystem : MonoBehaviour
     {
         _currentWeaponIndex = UnityEngine.Random.Range(0, 5);
         GunData gunData = gunSystem.GetGun(_currentWeaponIndex).GetGunData();
-        
+
         do
         {
             int statIndex = UnityEngine.Random.Range(0, 16);
@@ -56,17 +57,17 @@ public class RewardSystem : MonoBehaviour
         float reward = gunData.GetRewardValue(_currentWeaponStatType);
         string descText = GetStatUpgradeText(gunData, _currentWeaponStatType, reward);
         string titleText = $"{gunData.type} Upgrade";
-        
+
         return (titleText, descText);
     }
 
     private (string title, string description) RandomAmmo()
     {
-        _currentAmmoIndex = UnityEngine.Random.Range(0, 5); 
+        _currentAmmoIndex = UnityEngine.Random.Range(0, 5);
 
         GunData gunData = gunSystem.GetGun(_currentAmmoIndex).GetGunData();
         int ammo = gunData.GetAmmoReward();
-        
+
         string titleText = $"{gunData.type} Munitions";
         string descText = $"Gain {ammo} Ammo";
 
@@ -100,19 +101,19 @@ public class RewardSystem : MonoBehaviour
     public void SelectStatReward()
     {
         GetStat(_currentStatIndex);
-        OnRewardSelected?.Invoke(); 
+        OnRewardSelected?.Invoke();
     }
 
     public void SelectWeaponReward()
     {
         GetWeapon(_currentWeaponIndex, (int)_currentWeaponStatType);
-        OnRewardSelected?.Invoke(); 
+        OnRewardSelected?.Invoke();
     }
 
     public void SelectAmmoReward()
     {
         GetAmmo(_currentAmmoIndex);
-        OnRewardSelected?.Invoke(); 
+        OnRewardSelected?.Invoke();
     }
 
     private void GetStat(int statIndex)
@@ -134,6 +135,8 @@ public class RewardSystem : MonoBehaviour
 
     private void GetAmmo(int ammoIndex)
     {
-        ammoSystem.IncreaseAmmo((WeaponType)ammoIndex, 100);
+        GunData gunData = gunSystem.GetGun(ammoIndex).GetGunData();
+        int ammo = gunData.GetAmmoReward();
+        ammoSystem.IncreaseAmmo((WeaponType)ammoIndex, ammo);
     }
 }
