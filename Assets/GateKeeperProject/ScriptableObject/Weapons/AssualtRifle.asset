@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GunData
   hitLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 416
   isAutoGun: 1
   type: 1
   flatDamage: 25
@@ -55,3 +55,5 @@ MonoBehaviour:
   bulletTrailSpeed: 240
   hapticAmplitude: 0.7
   hapticDuration: 0.1
+  enemyHitEffectPrefab: {fileID: 2978202617918792182, guid: 9fa3205ef225e478da0fbdf6a33cf3c9, type: 3}
+  wallHitEffectPrefab: {fileID: 6946534475826379899, guid: f7b41e7522a884f04b90ebfa22c2cc8e, type: 3}
