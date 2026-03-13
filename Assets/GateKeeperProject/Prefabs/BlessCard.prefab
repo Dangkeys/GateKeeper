@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 120428591022923039}
   - component: {fileID: 2642875889086758093}
   - component: {fileID: 416613889816557987}
+  - component: {fileID: 3525573832638534598}
   m_Layer: 6
   m_Name: BlessCard
   m_TagString: Untagged
@@ -296,6 +297,27 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &3525573832638534598
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4500726028458003162}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6620680826424616263
 GameObject:
   m_ObjectHideFlags: 0

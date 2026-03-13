@@ -7629,6 +7629,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1763277165867629938, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1932244999281745301, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -7669,6 +7673,10 @@ PrefabInstance:
       propertyPath: ammoSystem
       value: 
       objectReference: {fileID: 712033299}
+    - target: {fileID: 5456733348963664102, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: m_RaycastMask.m_Bits
+      value: 33
+      objectReference: {fileID: 0}
     - target: {fileID: 6684681141426480707, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: ammoSystem
       value: 
