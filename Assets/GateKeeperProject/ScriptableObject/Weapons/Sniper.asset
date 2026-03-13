@@ -17,12 +17,12 @@ MonoBehaviour:
     m_Bits: 417
   isAutoGun: 0
   type: 4
-  flatDamage: 300
+  flatDamage: 250
   headshotMultiplier: 3
   range: 250
   penetration: 3
   damagePenetrationReduction: 0.3
-  fireRate: 0.8
+  fireRate: 0.5
   recoil: 8
   recoilReduction: 0.5
   maximumRecoil: 16
