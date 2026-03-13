@@ -12,6 +12,7 @@ public class AmmoDrop : MonoBehaviour
     public void ChangePosition(Vector3 position)
     {
         transform.position = position;
+        transform.rotation = Random.rotation;
         gameObject.SetActive(true);
     }
     public bool GetActive()

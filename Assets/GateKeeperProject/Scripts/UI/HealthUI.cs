@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
@@ -8,29 +9,26 @@ namespace GateKeeperProject.Scripts.UI
     {
         [SerializeField] private Image healthImage;
         [SerializeField] private float maxRedAlphaColor = 1f;
-        private Player _player;
+        [SerializeField] private Health PlayerHealth;
 
-        [Inject]
-        private void Construct(Player player)
+
+        private void Start()
         {
-            _player = player;
-            _player.PlayerHealth.OnDamageTaken += UpdateHealthUI;
-
+            PlayerHealth.OnDamageTaken += UpdateHealthUI;
         }
 
         private void OnDestroy()
         {
-            if (_player != null && _player.PlayerHealth != null)
-            {
-                _player.PlayerHealth.OnDamageTaken -= UpdateHealthUI;
-            }
+            PlayerHealth.OnDamageTaken -= UpdateHealthUI;
         }
 
-        private void UpdateHealthUI(float damageAmount)
+        private void UpdateHealthUI(float damageAmount) // damageAmount is unused here, which is fine
         {
-            float maxHealth = _player.PlayerHealth.MaxHealth;
-            float healthPercentage = _player.PlayerHealth.CurrentHealth / maxHealth;
-            float damagePercentage = 1f - healthPercentage;
+
+            float current = PlayerHealth.CurrentHealth;
+            float max = PlayerHealth.MaxHealth;
+        
+            float damagePercentage = Mathf.Clamp01(1f - (current / max));
 
             Color tempColor = healthImage.color;
             tempColor.a = maxRedAlphaColor * damagePercentage;

@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
 using VContainer;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour, IAttackable
 {
@@ -75,8 +76,15 @@ public class Enemy : MonoBehaviour, IAttackable
         // Check if a randomly generated number is less than or equal to your chance
         if (UnityEngine.Random.value <= randomChance)
         {
-            _ammoDropSystem.SpawnAmmo(transform.position);
+            Vector3 randomOffset = new Vector3(
+                    Random.Range(-.25f, .25f),
+                    Random.Range(1f, 2f),
+                    Random.Range(-.25f, .25f)
+                );
+            Vector3 spawnPos = transform.position + randomOffset;
+            _ammoDropSystem.SpawnAmmo(spawnPos);
         }
+
     }
 
     public void Initialize(EnemyStatSO stat, EnemyStatModifiers statModifiers)
