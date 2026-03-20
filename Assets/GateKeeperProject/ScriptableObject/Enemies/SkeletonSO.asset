@@ -27,4 +27,5 @@ MonoBehaviour:
   <AttackRange>k__BackingField: 0
   <AttackCooldown>k__BackingField: 0
   <Type>k__BackingField: 2
+  <AttackFeedbackPrefab>k__BackingField: {fileID: 2498633473321405873, guid: 31786d268706e405f958d991f3234e94, type: 3}
   <scoreValue>k__BackingField: 100
