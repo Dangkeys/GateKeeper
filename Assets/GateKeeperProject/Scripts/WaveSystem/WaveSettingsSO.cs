@@ -42,6 +42,7 @@ public class EnemyWaveConfig
     public float maxMoveSpeedMultiplier = 1.5f;
     public float ammoRateDropMultiplier = .1f;
     public float maxAmmoRateDropMultiplier = 0.5f;
+    public float scoreMultiplier =  .1f;
 }
 
 [System.Serializable]
@@ -51,4 +52,5 @@ public class EnemyStatModifiers
     public float damageMultiplier;
     public float moveSpeedMultiplier;
     public float ammoRateDropMultiplier;
+    public float scoreMultiplier;
 }

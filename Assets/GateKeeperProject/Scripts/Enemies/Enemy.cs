@@ -27,15 +27,17 @@ public class Enemy : MonoBehaviour, IAttackable
 
     private WaveHandler _waveHandler;
     private AmmoDropSystem _ammoDropSystem;
-
+    private ScoreManager _scoreManager;
     private GameObject enemyVisual;
     private EnemyHitFlash hitFlash;
     public EnemyHitFlash GetHitFlash() => hitFlash;
+
     [Inject]
-    private void Construct(WaveHandler waveHandler, AmmoDropSystem ammoDropSystem)
+    private void Construct(WaveHandler waveHandler, AmmoDropSystem ammoDropSystem, ScoreManager scoreManager )
     {
         _waveHandler = waveHandler;
         _ammoDropSystem = ammoDropSystem;
+        _scoreManager = scoreManager;
     }
 
 
@@ -62,7 +64,8 @@ public class Enemy : MonoBehaviour, IAttackable
     {
         agent.enabled = false;
         TrySpawnAmmo();
-
+        
+        _scoreManager.AddScore(Mathf.RoundToInt(_waveHandler.StatModifiers.scoreMultiplier * currentStat.Score));
 
         Destroy(gameObject);
         // gameObject.SetActive(false);
@@ -77,14 +80,13 @@ public class Enemy : MonoBehaviour, IAttackable
         if (UnityEngine.Random.value <= randomChance)
         {
             Vector3 randomOffset = new Vector3(
-                    Random.Range(-.25f, .25f),
-                    Random.Range(1f, 2f),
-                    Random.Range(-.25f, .25f)
-                );
+                Random.Range(-.25f, .25f),
+                Random.Range(1f, 2f),
+                Random.Range(-.25f, .25f)
+            );
             Vector3 spawnPos = transform.position + randomOffset;
             _ammoDropSystem.SpawnAmmo(spawnPos);
         }
-
     }
 
     public void Initialize(EnemyStatSO stat, EnemyStatModifiers statModifiers)
@@ -92,6 +94,12 @@ public class Enemy : MonoBehaviour, IAttackable
         behaviorGraphAgent = GetComponent<BehaviorGraphAgent>();
         currentStat = stat;
         _enemyStatModifiers = statModifiers;
+
+        var statGraph = stat.EnemyBehaviorGraph;
+        if (statGraph != null)
+        {
+            behaviorGraphAgent.Graph = stat.EnemyBehaviorGraph;
+        }
 
         enemyVisual = Instantiate(currentStat.GetRandomVisual(), gameObject.transform);
         hitFlash = gameObject.AddComponent<EnemyHitFlash>();
@@ -129,7 +137,8 @@ public class Enemy : MonoBehaviour, IAttackable
             GameObject colliderGO = new GameObject(colliderGOName);
             colliderGO.tag = enemySizeConfig.GameObjectTag;
             colliderGO.layer = LayerMask.NameToLayer(enemySizeConfig.GameObjectLayer);
-            Transform? parentTransform = RecursiveFindChild(enemyVisual.transform, enemySizeConfig.ParentTransformNameList).transform;
+            Transform? parentTransform =
+                RecursiveFindChild(enemyVisual.transform, enemySizeConfig.ParentTransformNameList).transform;
             if (parentTransform == null)
             {
                 Debug.LogError("Parent Transform not found!");

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
@@ -42,6 +43,9 @@ public class EnemyStatSO : ScriptableObject
     [field: SerializeField] public int scoreValue { get; private set; } = 100;
     [Range(0, 1)] public float dropChance { get; private set; } = 0.2f;
 
+
+    [field: SerializeField] public BehaviorGraph EnemyBehaviorGraph {get; private set;}
+    [field: SerializeField] public int Score { get; private set; }
     /// <summary>
     /// Returns a random prefab from the visual list.
     /// </summary>
