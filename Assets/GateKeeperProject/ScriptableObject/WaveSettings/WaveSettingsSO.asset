@@ -48,7 +48,7 @@ MonoBehaviour:
   baseWaveBudget: 30
   budgetIncreasePerWave: 20
   maxWaveBudget: 600
-  spawnDelay: 0.4
+  spawnDelay: 1.5
   ammoRateDrop: 0.1
   maxAmmoRateDrop: 0.5
   waveConfig:
