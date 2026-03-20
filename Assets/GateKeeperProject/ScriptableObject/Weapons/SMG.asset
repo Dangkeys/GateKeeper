@@ -20,7 +20,7 @@ MonoBehaviour:
   flatDamage: 18
   headshotMultiplier: 1.8
   range: 40
-  penetration: 1
+  penetration: 2
   damagePenetrationReduction: 0.7
   fireRate: 12
   recoil: 0.15
