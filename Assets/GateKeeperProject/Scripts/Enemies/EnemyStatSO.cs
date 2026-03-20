@@ -48,7 +48,7 @@ public class EnemyStatSO : ScriptableObject
     [field: SerializeField] public int Score { get; private set; }
     /// <summary>
     /// Returns a random prefab from the visual list.
-    /// </summary>
+    /// </summary>  
     public GameObject GetRandomVisual()
     {
         if (EnemyPrefabVisualList == null || EnemyPrefabVisualList.Count == 0)
