@@ -62,8 +62,10 @@ public class WaveHandler : MonoBehaviour
             settings.waveConfig.maxDamageMultiplier);
         StatModifiers.moveSpeedMultiplier = Mathf.Min(1f + (WaveNumber * settings.waveConfig.moveSpeedMultiplier),
             settings.waveConfig.maxMoveSpeedMultiplier);
+        StatModifiers.scoreMultiplier = 1f + WaveNumber * settings.waveConfig.scoreMultiplier;
         StatModifiers.ammoRateDropMultiplier =
             Mathf.Max(WaveNumber * settings.ammoRateDrop, settings.maxAmmoRateDrop);
+        
 
 
         currentWavePool.Clear();
