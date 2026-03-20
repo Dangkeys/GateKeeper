@@ -17,21 +17,21 @@ public class MainMenuScript : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Map");
+        SceneManager.LoadSceneAsync("Map");
     }
 
     public void StartPlayGround()
     {
-        SceneManager.LoadScene("PlayGroundScene");
+        SceneManager.LoadSceneAsync("PlayGroundScene");
     }
 
     public void Menu()
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadSceneAsync("Main Menu");
     }
 
     public void Tutorial()
     {
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadSceneAsync("Tutorial");
     }
 }
