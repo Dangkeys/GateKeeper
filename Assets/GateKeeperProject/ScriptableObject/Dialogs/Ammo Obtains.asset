@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 191e060318acf6246949650f06d27ab8, type: 3}
-  m_Name: Weapons
+  m_Name: Ammo Obtains
   m_EditorClassIdentifier: Assembly-CSharp::DialogSO
-  header: Weapons
-  description: "1. Pistol \u2013 Starter weapon  \\n2. Assault Rifle \u2013 Balanced
-    weapon  \\n3. SMG \u2013 Very fast shooting  \\n4. Shotgun \u2013 High damage
-    at close range  \\n5. Sniper \u2013 High precision damage"
-  dialogSO: {fileID: 11400000, guid: 2783212abb02f9b42860382545cd6835, type: 2}
+  header: Ammo Obtains
+  description: Sometimes, when you kill an enemy, it will drop ammo that you can
+    pick up by walking over it.
+  dialogSO: {fileID: 11400000, guid: 198e84b415d48ef4691ac43c9c40f82c, type: 2}
   image: {fileID: 0}
