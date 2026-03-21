@@ -54,10 +54,6 @@ public class WaveHandler : MonoBehaviour
             return;
         }
         Debug.Log("Starting next wave");
-        if (waveClearFeedbacks != null && WaveNumber > 0)
-        {
-            waveClearFeedbacks?.PlayFeedbacks();
-        }
         isWaveComplete = false;
         currentBudget = Mathf.Min(settings.baseWaveBudget + (WaveNumber * settings.budgetIncreasePerWave),
             settings.maxWaveBudget);
@@ -185,6 +181,10 @@ public class WaveHandler : MonoBehaviour
     private void OnWaveEnded()
     {
         isWaveComplete = true;
+        if (waveClearFeedbacks != null && WaveNumber > 0)
+        {
+            waveClearFeedbacks?.PlayFeedbacks();
+        }
         OnWaveComplete?.Invoke();
     }
 

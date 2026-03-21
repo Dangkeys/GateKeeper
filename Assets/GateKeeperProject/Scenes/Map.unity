@@ -3609,7 +3609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4427298781944890467, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: speedRecovery
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4427298781944890467, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: sprintDuration
