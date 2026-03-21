@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using MoreMountains.Feedbacks;
 using VContainer;
 
 namespace GateKeeperProject.Scripts
@@ -10,6 +11,9 @@ namespace GateKeeperProject.Scripts
     {
         public Health PlayerHealth { get; private set; }
         private SaveManager _saveManager;
+
+        [Header("Feedbacks")]
+        [SerializeField] private MMF_Player hurtFeedbacks;
 
         [Inject]
         public void Construct(SaveManager saveManager)
@@ -37,10 +41,12 @@ namespace GateKeeperProject.Scripts
 
         private void DamageTakenEvent(float currentHealth)
         {
+            hurtFeedbacks?.PlayFeedbacks();
         }
 
         private async void DeathEvent()
         {
+            SceneManager.LoadScene("Main Menu");
             // 1. Play Fade MMFeedback
             // playFeedback();
 
@@ -51,7 +57,6 @@ namespace GateKeeperProject.Scripts
 
             SceneManager.LoadSceneAsync("ScoreScene");
         }
-
 
         public void IncreaseMaxHealth()
         {
