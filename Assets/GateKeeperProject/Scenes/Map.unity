@@ -3239,6 +3239,7 @@ MonoBehaviour:
   autoInjectGameObjects:
   - {fileID: 1651217063}
   - {fileID: 1407155494}
+  - {fileID: 719454839}
 --- !u!4 &1727369443
 Transform:
   m_ObjectHideFlags: 0
@@ -3848,7 +3849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
