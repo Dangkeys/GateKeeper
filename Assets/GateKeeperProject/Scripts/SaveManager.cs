@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.IO;
 using System;
+using System.Threading.Tasks;
 using VContainer;
 using GateKeeperProject.Scripts;
 
 [Serializable]
-public class GameData 
+public class GameData
 {
     public int highScore;
     public int latestScore;
@@ -13,28 +14,28 @@ public class GameData
     public int latestWaveCleared;
 }
 
-public class SaveManager : MonoBehaviour 
+public class SaveManager : MonoBehaviour
 {
     private string savePath;
-    private GameData currentData = new GameData(); 
+    private GameData currentData = new GameData();
 
     private ScoreManager _scoreManager;
     private WaveHandler _waveHandler;
 
     [Inject]
-    public void Construct(ScoreManager scoreManager, WaveHandler waveHandler) 
+    public void Construct(ScoreManager scoreManager, WaveHandler waveHandler)
     {
         _scoreManager = scoreManager;
         _waveHandler = waveHandler;
     }
 
-    void Start() 
+    void Start()
     {
         savePath = GetSavePath();
         LoadGame();
     }
 
-    public void SaveGame() 
+    public async Task SaveGameAsync()
     {
         int currentScore = _scoreManager != null ? _scoreManager.CurrentScore : 0;
         int currentWave = _waveHandler != null ? _waveHandler.WaveNumber : 0;
@@ -42,32 +43,27 @@ public class SaveManager : MonoBehaviour
         currentData.latestScore = currentScore;
         currentData.latestWaveCleared = currentWave;
 
-        if (currentScore > currentData.highScore) 
-        {
-            currentData.highScore = currentScore;
-        }
-
-        if (currentWave > currentData.highestWave) 
-        {
-            currentData.highestWave = currentWave;
-        }
+        if (currentScore > currentData.highScore) currentData.highScore = currentScore;
+        if (currentWave > currentData.highestWave) currentData.highestWave = currentWave;
 
         string jsonData = JsonUtility.ToJson(currentData, true);
-        File.WriteAllText(savePath, jsonData);
 
-        Debug.Log($"Game saved! Latest Score: {currentData.latestScore} | High Score: {currentData.highScore}");
+        // Await the file write so it happens in the background
+        await File.WriteAllTextAsync(savePath, jsonData);
+
+        Debug.Log($"Game saved async! Latest Score: {currentData.latestScore}");
     }
 
-    public void LoadGame() 
+    public void LoadGame()
     {
-        if (File.Exists(savePath)) 
+        if (File.Exists(savePath))
         {
             string jsonData = File.ReadAllText(savePath);
             currentData = JsonUtility.FromJson<GameData>(jsonData);
         }
     }
 
-    public GameData GetSaveData() 
+    public GameData GetSaveData()
     {
         return currentData;
     }
@@ -81,16 +77,16 @@ public class SaveManager : MonoBehaviour
         return Path.Combine(Application.persistentDataPath, "savegame.json");
     }
 
-    public static GameData LoadDataStatically() 
+    public static GameData LoadDataStatically()
     {
         string path = GetSavePath();
-        
-        if (File.Exists(path)) 
+
+        if (File.Exists(path))
         {
             string jsonData = File.ReadAllText(path);
             return JsonUtility.FromJson<GameData>(jsonData);
         }
 
-        return new GameData(); 
+        return new GameData();
     }
 }
