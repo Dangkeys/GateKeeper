@@ -2207,6 +2207,10 @@ PrefabInstance:
       propertyPath: ammoSystem
       value: 
       objectReference: {fileID: 712033299}
+    - target: {fileID: 4014050047918754998, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: hurtFeedbacks
+      value: 
+      objectReference: {fileID: 5163027452955222354, guid: d898aa691310a4d6a926f1d123c175ee, type: 3}
     - target: {fileID: 4047825330684490910, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: ammoSystem
       value: 
