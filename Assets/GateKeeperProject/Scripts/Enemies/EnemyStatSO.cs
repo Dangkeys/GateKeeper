@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
+using MoreMountains.Feedbacks;
 
 [CreateAssetMenu(fileName = "EnemyStatSO", menuName = "Scriptable Objects/EnemyStatSO")]
 public class EnemyStatSO : ScriptableObject
@@ -38,13 +40,19 @@ public class EnemyStatSO : ScriptableObject
     [field: SerializeField] public float AttackCooldown { get; private set; } = 1.5f;
      [field: SerializeField] public AgentType Type { get; private set; } = AgentType.Humanoid;
 
+    [Header("Feedbacks")]
+    [field: SerializeField] public MMF_Player AttackFeedbackPrefab { get; private set; }
+
     [Header("Roguelike / Rewards")]
     [field: SerializeField] public int scoreValue { get; private set; } = 100;
     [Range(0, 1)] public float dropChance { get; private set; } = 0.2f;
 
+
+    [field: SerializeField] public BehaviorGraph EnemyBehaviorGraph {get; private set;}
+    [field: SerializeField] public int Score { get; private set; }
     /// <summary>
     /// Returns a random prefab from the visual list.
-    /// </summary>
+    /// </summary>  
     public GameObject GetRandomVisual()
     {
         if (EnemyPrefabVisualList == null || EnemyPrefabVisualList.Count == 0)
