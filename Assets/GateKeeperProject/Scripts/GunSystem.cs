@@ -90,12 +90,10 @@ public class GunSystem : MonoBehaviour
     private void SwapWeapons()
     {
         WeaponType temp = currentLeftWeapon;
-
-        SetGunToHand(currentRightWeapon, leftHandTransform, HandType.Left);
-        SetGunToHand(temp, rightHandTransform, HandType.Right);
-
         currentLeftWeapon = currentRightWeapon;
         currentRightWeapon = temp;
+        SetGunToHand(currentLeftWeapon, leftHandTransform, HandType.Left);
+        SetGunToHand(currentRightWeapon, rightHandTransform, HandType.Right);
     }
 
     public Gun GetGun(int index)
