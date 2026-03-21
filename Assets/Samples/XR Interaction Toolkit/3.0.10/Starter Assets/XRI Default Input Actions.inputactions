@@ -963,7 +963,7 @@
                     "name": "Scale Toggle",
                     "type": "Button",
                     "id": "80ed7d74-56de-473c-bf76-da3bdd16b562",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -1276,7 +1276,7 @@
                 },
                 {
                     "name": "",
-                    "id": "f9ba23d5-2215-420c-8c4f-1ed86c9e9f27",
+                    "id": "4c76fd8b-8924-474b-b65d-ffd4004b1b20",
                     "path": "<XRController>{LeftHand}/secondaryButton",
                     "interactions": "",
                     "processors": "",
@@ -2377,7 +2377,7 @@
                 {
                     "name": "",
                     "id": "d6c0e865-85e2-4e1e-a703-1513103edc2b",
-                    "path": "<XRController>/secondaryButton",
+                    "path": "<XRController>{RightHand}/secondaryButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
