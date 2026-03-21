@@ -1,12 +1,14 @@
 using UnityEngine;
 using VContainer;
+using MoreMountains.Feedbacks;
 
 public class AmmoDrop : MonoBehaviour
 {
     [SerializeField] private int recieveAmmo = 10;
     [SerializeField] AmmoSystem ammoSystem;
     [SerializeField] private WeaponType weaponType;
-
+    [Header("Feedbacks")]
+    [SerializeField] private MMF_Player AmmoCollectFeedbacks;
     
     
     public void ChangePosition(Vector3 position)
@@ -24,6 +26,7 @@ public class AmmoDrop : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            AmmoCollectFeedbacks?.PlayFeedbacks();
             ammoSystem.IncreaseAmmo(weaponType, recieveAmmo);
             gameObject.SetActive(false);
         }
