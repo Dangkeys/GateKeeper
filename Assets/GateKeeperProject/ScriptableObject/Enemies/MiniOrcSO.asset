@@ -24,10 +24,14 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 250
   <DamageReductionRate>k__BackingField: 0
   <MoveSpeed>k__BackingField: 2.8
-  <StoppingDistance>k__BackingField: 0
+  <RandomMoveSpeedOffset>k__BackingField: 0.25
+  <StoppingDistance>k__BackingField: 0.25
   <RotationSpeed>k__BackingField: 130
   <DealDamageAmount>k__BackingField: 4
   <AttackRange>k__BackingField: 0
   <AttackCooldown>k__BackingField: 0
   <Type>k__BackingField: 1
+  <AttackFeedbackPrefab>k__BackingField: {fileID: 6550545587374452516, guid: 803842caaa8d14cb1b2bdd65898d9175, type: 3}
   <scoreValue>k__BackingField: 100
+  <EnemyBehaviorGraph>k__BackingField: {fileID: -8762832082019754502, guid: de84a907c27ea4e48a99ee303913c8a9, type: 2}
+  <Score>k__BackingField: 50

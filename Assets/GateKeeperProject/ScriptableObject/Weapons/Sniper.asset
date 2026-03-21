@@ -20,7 +20,7 @@ MonoBehaviour:
   flatDamage: 250
   headshotMultiplier: 3
   range: 250
-  penetration: 3
+  penetration: 5
   damagePenetrationReduction: 0.3
   fireRate: 0.5
   recoil: 8
@@ -57,3 +57,4 @@ MonoBehaviour:
   hapticDuration: 0.15
   enemyHitEffectPrefab: {fileID: 2978202617918792182, guid: 9fa3205ef225e478da0fbdf6a33cf3c9, type: 3}
   wallHitEffectPrefab: {fileID: 6946534475826379899, guid: f7b41e7522a884f04b90ebfa22c2cc8e, type: 3}
+  <EmptyFiringPrefab>k__BackingField: {fileID: 1079518944062936621, guid: fbab19fa79b6742ef819cfac0d8fbc4d, type: 3}

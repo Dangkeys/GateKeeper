@@ -17,7 +17,7 @@ MonoBehaviour:
     m_Bits: 417
   isAutoGun: 0
   type: 0
-  flatDamage: 15
+  flatDamage: 45
   headshotMultiplier: 2
   range: 50
   penetration: 1
@@ -57,3 +57,4 @@ MonoBehaviour:
   hapticDuration: 0.08
   enemyHitEffectPrefab: {fileID: 2978202617918792182, guid: 9fa3205ef225e478da0fbdf6a33cf3c9, type: 3}
   wallHitEffectPrefab: {fileID: 6946534475826379899, guid: f7b41e7522a884f04b90ebfa22c2cc8e, type: 3}
+  <EmptyFiringPrefab>k__BackingField: {fileID: 1079518944062936621, guid: fbab19fa79b6742ef819cfac0d8fbc4d, type: 3}

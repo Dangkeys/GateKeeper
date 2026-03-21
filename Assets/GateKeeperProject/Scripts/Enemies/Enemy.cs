@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GateKeeperProject.Scripts;
 using GateKeeperProject.Scripts.Enemies;
 using JetBrains.Annotations;
+using MoreMountains.Feedbacks;
 using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
@@ -19,6 +20,8 @@ public class Enemy : MonoBehaviour, IAttackable
     private const string MoveSpeedVariable = "moveSpeed";
     private const string DistanceThresholdVariable = "distanceThreshold";
     private const string AnimatorSpeedVariable = "animatorSpeedParam";
+    private const string EnemyVariable = "enemy";
+    private MMF_Player _attackFeedback;
 
     private EnemyStatModifiers _enemyStatModifiers;
 
@@ -27,15 +30,17 @@ public class Enemy : MonoBehaviour, IAttackable
 
     private WaveHandler _waveHandler;
     private AmmoDropSystem _ammoDropSystem;
-
+    private ScoreManager _scoreManager;
     private GameObject enemyVisual;
     private EnemyHitFlash hitFlash;
     public EnemyHitFlash GetHitFlash() => hitFlash;
+
     [Inject]
-    private void Construct(WaveHandler waveHandler, AmmoDropSystem ammoDropSystem)
+    private void Construct(WaveHandler waveHandler, AmmoDropSystem ammoDropSystem, ScoreManager scoreManager)
     {
         _waveHandler = waveHandler;
         _ammoDropSystem = ammoDropSystem;
+        _scoreManager = scoreManager;
     }
 
 
@@ -63,6 +68,7 @@ public class Enemy : MonoBehaviour, IAttackable
         agent.enabled = false;
         TrySpawnAmmo();
 
+        _scoreManager.AddScore(Mathf.RoundToInt(_waveHandler.StatModifiers.scoreMultiplier * currentStat.Score));
 
         Destroy(gameObject);
         // gameObject.SetActive(false);
@@ -77,14 +83,13 @@ public class Enemy : MonoBehaviour, IAttackable
         if (UnityEngine.Random.value <= randomChance)
         {
             Vector3 randomOffset = new Vector3(
-                    Random.Range(-.25f, .25f),
-                    Random.Range(1f, 2f),
-                    Random.Range(-.25f, .25f)
-                );
+                Random.Range(-.25f, .25f),
+                Random.Range(1f, 2f),
+                Random.Range(-.25f, .25f)
+            );
             Vector3 spawnPos = transform.position + randomOffset;
             _ammoDropSystem.SpawnAmmo(spawnPos);
         }
-
     }
 
     public void Initialize(EnemyStatSO stat, EnemyStatModifiers statModifiers)
@@ -93,16 +98,38 @@ public class Enemy : MonoBehaviour, IAttackable
         currentStat = stat;
         _enemyStatModifiers = statModifiers;
 
+        var statGraph = stat.EnemyBehaviorGraph;
+        if (statGraph != null)
+        {
+            behaviorGraphAgent.Graph = stat.EnemyBehaviorGraph;
+        }
+
         enemyVisual = Instantiate(currentStat.GetRandomVisual(), gameObject.transform);
         hitFlash = gameObject.AddComponent<EnemyHitFlash>();
         hitFlash.Initialize(enemyVisual);
         EnemyHealth.InitAndSetMaxHealth(currentStat.MaxHealth * _enemyStatModifiers.healthMultiplier);
-
         InitializeColliders();
         InitializeAgent();
+        InitializeAttackFeedback();
         InitializeBehaviorGraphAgent();
     }
 
+    private void InitializeAttackFeedback()
+    {
+        if (currentStat.AttackFeedbackPrefab == null) return;
+        _attackFeedback = Instantiate(currentStat.AttackFeedbackPrefab, transform);
+        _attackFeedback.Initialization();
+    }
+
+    public void OnAttack()
+    {
+        if (_attackFeedback != null && _attackFeedback.IsPlaying)
+        {
+            return;
+        }
+
+        _attackFeedback?.PlayFeedbacks();
+    }
 
     private void InitializeAgent()
     {
@@ -129,7 +156,8 @@ public class Enemy : MonoBehaviour, IAttackable
             GameObject colliderGO = new GameObject(colliderGOName);
             colliderGO.tag = enemySizeConfig.GameObjectTag;
             colliderGO.layer = LayerMask.NameToLayer(enemySizeConfig.GameObjectLayer);
-            Transform? parentTransform = RecursiveFindChild(enemyVisual.transform, enemySizeConfig.ParentTransformNameList).transform;
+            Transform? parentTransform =
+                RecursiveFindChild(enemyVisual.transform, enemySizeConfig.ParentTransformNameList).transform;
             if (parentTransform == null)
             {
                 Debug.LogError("Parent Transform not found!");
@@ -154,11 +182,14 @@ public class Enemy : MonoBehaviour, IAttackable
 
     private void InitializeBehaviorGraphAgent()
     {
+        var randomSpeed = currentStat.RandomMoveSpeedOffset;
         behaviorGraphAgent.SetVariableValue(AnimatorVariable, GetComponentInChildren<Animator>());
         behaviorGraphAgent.SetVariableValue(MoveSpeedVariable,
-            currentStat.MoveSpeed * _enemyStatModifiers.moveSpeedMultiplier);
+            (currentStat.MoveSpeed + Random.Range(-randomSpeed, randomSpeed)) *
+            _enemyStatModifiers.moveSpeedMultiplier);
         behaviorGraphAgent.SetVariableValue(DistanceThresholdVariable, currentStat.StoppingDistance);
         behaviorGraphAgent.SetVariableValue(AnimatorSpeedVariable, "velocity");
+        behaviorGraphAgent.SetVariableValue(EnemyVariable, this);
         agent.angularSpeed = currentStat.RotationSpeed;
     }
 

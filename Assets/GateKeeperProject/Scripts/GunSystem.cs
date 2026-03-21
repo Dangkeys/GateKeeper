@@ -23,49 +23,31 @@ public class GunSystem : MonoBehaviour
         GetGunOut(weapon, HandType.Left);
     }
 
-    public void UnequipRight()
-    {
-        if (currentRightWeapon == WeaponType.None) return;
-
-        KeepGunAway(currentRightWeapon);
-        currentRightWeapon = WeaponType.None;
-    }
-
-    public void UnequipLeft()
-    {
-        if (currentLeftWeapon == WeaponType.None) return;
-
-        KeepGunAway(currentLeftWeapon);
-        currentLeftWeapon = WeaponType.None;
-    }
-
     private void GetGunOut(WeaponType weapon, HandType currentHandType)
     {
         if (currentHandType == HandType.Right && currentLeftWeapon == weapon)
         {
             SwapWeapons();
-            return;
         }
-
-        if (currentHandType == HandType.Left && currentRightWeapon == weapon)
+        else if (currentHandType == HandType.Left && currentRightWeapon == weapon)
         {
             SwapWeapons();
-            return;
         }
-
-        if (currentHandType == HandType.Right)
+        else if (currentHandType == HandType.Right)
         {
             if (currentRightWeapon != WeaponType.None)
+            {
                 KeepGunAway(currentRightWeapon);
-
+            }
             SetGunToHand(weapon, rightHandTransform, HandType.Right);
             currentRightWeapon = weapon;
         }
         else if (currentHandType == HandType.Left)
         {
             if (currentLeftWeapon != WeaponType.None)
+            {
                 KeepGunAway(currentLeftWeapon);
-
+            }
             SetGunToHand(weapon, leftHandTransform, HandType.Left);
             currentLeftWeapon = weapon;
         }
@@ -73,29 +55,24 @@ public class GunSystem : MonoBehaviour
 
     private void KeepGunAway(WeaponType weapon)
     {
-        guns[(int)weapon].transform.SetParent(keepWeapon);
-        guns[(int)weapon].transform.localPosition = Vector3.zero;
-        guns[(int)weapon].transform.localRotation = Quaternion.identity;
-        guns[(int)weapon].SetCurrentHandType(HandType.None);
+        SetGunToHand(weapon, keepWeapon, HandType.None);
     }
 
     private void SetGunToHand(WeaponType weapon, Transform hand, HandType handType)
     {
-        guns[(int)weapon].transform.SetParent(hand);
-        guns[(int)weapon].transform.localPosition = Vector3.zero;
-        guns[(int)weapon].transform.localRotation = Quaternion.identity;
-        guns[(int)weapon].SetCurrentHandType(handType);
+        GetGun((int)weapon).transform.SetParent(hand);
+        GetGun((int)weapon).transform.localPosition = Vector3.zero;
+        GetGun((int)weapon).transform.localRotation = Quaternion.identity;
+        GetGun((int)weapon).SetCurrentHandType(handType);
     }
 
     private void SwapWeapons()
     {
         WeaponType temp = currentLeftWeapon;
-
-        SetGunToHand(currentRightWeapon, leftHandTransform, HandType.Left);
-        SetGunToHand(temp, rightHandTransform, HandType.Right);
-
         currentLeftWeapon = currentRightWeapon;
         currentRightWeapon = temp;
+        SetGunToHand(currentLeftWeapon, leftHandTransform, HandType.Left);
+        SetGunToHand(currentRightWeapon, rightHandTransform, HandType.Right);
     }
 
     public Gun GetGun(int index)

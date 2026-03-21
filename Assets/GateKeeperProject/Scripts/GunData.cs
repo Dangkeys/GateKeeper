@@ -1,4 +1,6 @@
 using UnityEngine;
+using MoreMountains.Feedbacks;
+
 [CreateAssetMenu(fileName = "WeaponData", menuName = "Scriptable Objects/Weapon Data")]
 public class GunData : ScriptableObject
 {
@@ -63,6 +65,9 @@ public class GunData : ScriptableObject
     [Header("Hit Effects")]
     public GameObject enemyHitEffectPrefab;
     public GameObject wallHitEffectPrefab;
+
+    [Header("Feedbacks")]
+    [field: SerializeField] public MMF_Player EmptyFiringPrefab { get; private set; }
 
     public bool CanChangeStat(WeaponStatType stat)
     {
