@@ -3239,6 +3239,7 @@ MonoBehaviour:
   autoInjectGameObjects:
   - {fileID: 1651217063}
   - {fileID: 1407155494}
+  - {fileID: 719454839}
 --- !u!4 &1727369443
 Transform:
   m_ObjectHideFlags: 0
