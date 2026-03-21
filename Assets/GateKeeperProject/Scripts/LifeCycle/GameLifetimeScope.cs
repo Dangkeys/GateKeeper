@@ -17,5 +17,6 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterComponentInHierarchy<BlessingUI>();
         builder.RegisterComponentInHierarchy<GameManager>();
         builder.RegisterComponentInHierarchy<ScoreManager>();
+        builder.RegisterComponentInHierarchy<SaveManager>();
     }
 }
