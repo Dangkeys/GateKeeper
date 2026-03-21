@@ -26,6 +26,7 @@ public class Gun : MonoBehaviour
     [Header("Feel")]
     [SerializeField] private MMF_Player fireFeedbacks;
     [SerializeField] private MMF_Player reloadFeedbacks;
+    
     private float recoilTarget;
     private float currentRecoil;
     private float nextFireTime;
@@ -35,6 +36,7 @@ public class Gun : MonoBehaviour
     private float currentRecoveryTime;
     private bool isRecovery;
     private bool isReload;
+    private MMF_Player _emptyFiringFeedback;
     
     void Start()
     {
@@ -42,6 +44,8 @@ public class Gun : MonoBehaviour
         currentAmmo = data.magazineSize;
         totalAmmo = ammoSystem.GetAmmo(data.type);
         UpdateAmmoUI();
+        if (data.EmptyFiringPrefab != null)
+            _emptyFiringFeedback = Instantiate(data.EmptyFiringPrefab, transform);
     }
 
     void OnEnable()
@@ -94,9 +98,13 @@ public class Gun : MonoBehaviour
     {
 
         if (Time.time < nextFireTime) return;
-        if (currentAmmo <= 0) return;
-
         nextFireTime = Time.time + 1f / data.fireRate;
+        if (currentAmmo <= 0) 
+        {
+            if (_emptyFiringFeedback != null)
+                _emptyFiringFeedback.PlayFeedbacks();
+            return;
+        }
 
         if (data.freeAmmoPercent <= 0f || Random.Range(0f, 100f) > data.freeAmmoPercent)
         {
