@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using VContainer;
 using VContainer.Unity;
 using Random = UnityEngine.Random;
+using MoreMountains.Feedbacks;
 
 public class WaveHandler : MonoBehaviour
 {
     [SerializeField] private WaveSettingsSO settings;
     [SerializeField] private Transform playerTransform;
-
+    [Header("Feedbacks")]
+    [SerializeField] private MMF_Player waveClearFeedbacks;
 
     public event Action OnWaveComplete;
 
@@ -45,12 +47,17 @@ public class WaveHandler : MonoBehaviour
 
     public void StartNextWave()
     {
+
         if (!isWaveComplete && WaveNumber > 1)
         {
             Debug.LogWarning("Cannot start next wave: Current wave is still active!");
             return;
         }
         Debug.Log("Starting next wave");
+        if (waveClearFeedbacks != null && WaveNumber > 0)
+        {
+            waveClearFeedbacks?.PlayFeedbacks();
+        }
         isWaveComplete = false;
         currentBudget = Mathf.Min(settings.baseWaveBudget + (WaveNumber * settings.budgetIncreasePerWave),
             settings.maxWaveBudget);
