@@ -110,20 +110,22 @@ public class Enemy : MonoBehaviour, IAttackable
         EnemyHealth.InitAndSetMaxHealth(currentStat.MaxHealth * _enemyStatModifiers.healthMultiplier);
         InitializeColliders();
         InitializeAgent();
-        InitializeBehaviorGraphAgent();
         InitializeAttackFeedback();
+        InitializeBehaviorGraphAgent();
     }
 
     private void InitializeAttackFeedback()
     {
         if (currentStat.AttackFeedbackPrefab == null) return;
         _attackFeedback = Instantiate(currentStat.AttackFeedbackPrefab, transform);
+        _attackFeedback.Initialization();
     }
 
     public void OnAttack()
     {
         _attackFeedback?.PlayFeedbacks();
     }
+
     private void InitializeAgent()
     {
         // 2. Map NavMesh Agent Settings
