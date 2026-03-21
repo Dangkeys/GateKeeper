@@ -17,6 +17,8 @@ public class Sprint : MonoBehaviour
     [SerializeField] private float speedReward = 2f;
     private float currentSprintDuration;
     private bool isSprint;
+    [SerializeField] private float timeBeforeRecovery = 2f;
+    private float currentTimeBeforeRecovery = 0f;
 
     void Start()
     {
@@ -44,6 +46,7 @@ public class Sprint : MonoBehaviour
             if(currentSprintDuration > 0f)
             {
                 currentSprintDuration -= Time.deltaTime;
+                currentTimeBeforeRecovery = 0f;
                 UpdateSprintScrollBar();
             }
             else
@@ -56,10 +59,17 @@ public class Sprint : MonoBehaviour
         }
         else
         {
-            if(currentSprintDuration < sprintDuration)
+            if(currentTimeBeforeRecovery < timeBeforeRecovery)
             {
-                currentSprintDuration += Time.deltaTime * speedRecovery;
-                UpdateSprintScrollBar();
+                currentTimeBeforeRecovery += Time.deltaTime;
+            }
+            else
+            {
+                if(currentSprintDuration < sprintDuration)
+                {
+                    currentSprintDuration += Time.deltaTime * speedRecovery;
+                    UpdateSprintScrollBar();
+                }  
             }
         }
     }
