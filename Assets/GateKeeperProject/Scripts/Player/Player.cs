@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VContainer;
 
 namespace GateKeeperProject.Scripts
 {
@@ -8,7 +9,13 @@ namespace GateKeeperProject.Scripts
     public class Player : MonoBehaviour
     {
         public Health PlayerHealth { get; private set; }
+        private SaveManager _saveManager;
 
+        [Inject]
+        public void Construct(SaveManager saveManager)
+        {
+            _saveManager = saveManager;
+        }
         private void OnTriggerEnter(Collider col)
         {
             PlayerHealth.TryToTakeDamage(col);
@@ -32,10 +39,17 @@ namespace GateKeeperProject.Scripts
         {
         }
 
-        private void DeathEvent()
+        private async void DeathEvent()
         {
-            //Play Fade  MMFeedback
-            SceneManager.LoadScene("Main Menu");
+            // 1. Play Fade MMFeedback
+            // playFeedback();
+
+            if (_saveManager != null)
+            {
+                await _saveManager.SaveGameAsync();
+            }
+
+            SceneManager.LoadSceneAsync("ScoreScene");
         }
 
 

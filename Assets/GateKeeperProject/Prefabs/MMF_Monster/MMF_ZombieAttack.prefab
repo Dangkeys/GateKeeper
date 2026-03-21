@@ -139,7 +139,7 @@ MonoBehaviour:
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   RestoreInitialValuesOnDisable: 0
-  StopFeedbacksOnDisable: 0
+  StopFeedbacksOnDisable: 1
   PlayCount: 0
   MMF_ChannelMode: 0
   MMF_Channel: 0
