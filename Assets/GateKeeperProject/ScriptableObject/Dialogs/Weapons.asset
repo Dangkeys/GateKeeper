@@ -16,5 +16,5 @@ MonoBehaviour:
   description: "1. Pistol \u2013 Starter weapon  \\n2. Assault Rifle \u2013 Balanced
     weapon  \\n3. SMG \u2013 Very fast shooting  \\n4. Shotgun \u2013 High damage
     at close range  \\n5. Sniper \u2013 High precision damage"
-  dialogSO: {fileID: 11400000, guid: 198e84b415d48ef4691ac43c9c40f82c, type: 2}
+  dialogSO: {fileID: 11400000, guid: 2783212abb02f9b42860382545cd6835, type: 2}
   image: {fileID: 0}

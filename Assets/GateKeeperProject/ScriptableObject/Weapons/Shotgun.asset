@@ -18,9 +18,9 @@ MonoBehaviour:
   isAutoGun: 0
   type: 3
   flatDamage: 20
-  headshotMultiplier: 1.5
+  headshotMultiplier: 1.8
   range: 20
-  penetration: 1
+  penetration: 2
   damagePenetrationReduction: 0.7
   fireRate: 1.2
   recoil: 5

@@ -3,6 +3,7 @@ using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
+using MoreMountains.Feedbacks;
 
 [CreateAssetMenu(fileName = "EnemyStatSO", menuName = "Scriptable Objects/EnemyStatSO")]
 public class EnemyStatSO : ScriptableObject
@@ -38,6 +39,9 @@ public class EnemyStatSO : ScriptableObject
     [field: SerializeField] public float AttackRange { get; private set; } = 2f;
     [field: SerializeField] public float AttackCooldown { get; private set; } = 1.5f;
      [field: SerializeField] public AgentType Type { get; private set; } = AgentType.Humanoid;
+
+    [Header("Feedbacks")]
+    [field: SerializeField] public MMF_Player AttackFeedbackPrefab { get; private set; }
 
     [Header("Roguelike / Rewards")]
     [field: SerializeField] public int scoreValue { get; private set; } = 100;
