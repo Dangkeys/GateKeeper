@@ -24,7 +24,8 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 250
   <DamageReductionRate>k__BackingField: 0
   <MoveSpeed>k__BackingField: 2.8
-  <StoppingDistance>k__BackingField: 0
+  <RandomMoveSpeedOffset>k__BackingField: 0.25
+  <StoppingDistance>k__BackingField: 0.25
   <RotationSpeed>k__BackingField: 130
   <DealDamageAmount>k__BackingField: 4
   <AttackRange>k__BackingField: 0

@@ -31,6 +31,7 @@ public class EnemyStatSO : ScriptableObject
 
     [Header("Movement")]
     [field: SerializeField] public float MoveSpeed { get; private set; } = 3.5f;
+    [field: SerializeField] public float RandomMoveSpeedOffset { get; private set; } = 0.5f;
     [field: SerializeField] public float StoppingDistance { get; private set; } = 1.5f;
     [field: SerializeField] public float RotationSpeed { get; private set; } = 120f;
 

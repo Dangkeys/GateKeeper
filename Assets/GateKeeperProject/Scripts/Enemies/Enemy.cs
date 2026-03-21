@@ -123,6 +123,11 @@ public class Enemy : MonoBehaviour, IAttackable
 
     public void OnAttack()
     {
+        if (_attackFeedback != null && _attackFeedback.IsPlaying)
+        {
+            return;
+        }
+
         _attackFeedback?.PlayFeedbacks();
     }
 
@@ -177,9 +182,11 @@ public class Enemy : MonoBehaviour, IAttackable
 
     private void InitializeBehaviorGraphAgent()
     {
+        var randomSpeed = currentStat.RandomMoveSpeedOffset;
         behaviorGraphAgent.SetVariableValue(AnimatorVariable, GetComponentInChildren<Animator>());
         behaviorGraphAgent.SetVariableValue(MoveSpeedVariable,
-            currentStat.MoveSpeed * _enemyStatModifiers.moveSpeedMultiplier);
+            (currentStat.MoveSpeed + Random.Range(-randomSpeed, randomSpeed)) *
+            _enemyStatModifiers.moveSpeedMultiplier);
         behaviorGraphAgent.SetVariableValue(DistanceThresholdVariable, currentStat.StoppingDistance);
         behaviorGraphAgent.SetVariableValue(AnimatorSpeedVariable, "velocity");
         behaviorGraphAgent.SetVariableValue(EnemyVariable, this);

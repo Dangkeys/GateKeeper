@@ -56,7 +56,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 1
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &9107222080580354847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,3 +114,4 @@ MonoBehaviour:
   <CurrentHealth>k__BackingField: 0
   <IsAlive>k__BackingField: 1
   <DamageTakenMultiplier>k__BackingField: 1
+  healthScrollbar: {fileID: 0}
