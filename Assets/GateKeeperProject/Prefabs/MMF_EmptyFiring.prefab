@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4496816605638041624
+--- !u!1 &1048895036158112338
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3409679271155305440}
-  - component: {fileID: 6550545587374452516}
+  - component: {fileID: 7430911145548674937}
+  - component: {fileID: 1079518944062936621}
   m_Layer: 0
-  m_Name: MMF_OrcAttack
+  m_Name: MMF_EmptyFiring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3409679271155305440
+--- !u!4 &7430911145548674937
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4496816605638041624}
+  m_GameObject: {fileID: 1048895036158112338}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,13 +32,13 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6550545587374452516
+--- !u!114 &1079518944062936621
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4496816605638041624}
+  m_GameObject: {fileID: 1048895036158112338}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6da43522623d4704e979466dc7650b65, type: 3}
@@ -135,7 +135,7 @@ MonoBehaviour:
   DebugActive: 0
   InScriptDrivenPause: 0
   FeedbacksList:
-  - rid: 7914174113441120258
+  - rid: 7914174113441120347
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   RestoreInitialValuesOnDisable: 0
@@ -147,11 +147,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7914174113441120258
+    - rid: 7914174113441120347
       type: {class: MMF_Sound, ns: MoreMountains.Feedbacks, asm: MoreMountains.Tools}
       data:
         Active: 1
-        UniqueID: -1915507566
+        UniqueID: 1256526973
         Label: Sound
         OriginalLabel: Sound
         ChannelMode: 0
@@ -219,9 +219,9 @@ MonoBehaviour:
         RemapRangeFalloff: {x: 0, y: 1}
         AutomaticShakerSetupButton:
           ButtonText: Automatic Shaker Setup
-        Owner: {fileID: 6550545587374452516}
+        Owner: {fileID: 1079518944062936621}
         DebugActive: 0
-        Sfx: {fileID: 8300000, guid: 4edef1217e15f44e2b066a1ad5a4d06b, type: 3}
+        Sfx: {fileID: 8300000, guid: a7af3384c4c1b43d1bf74dc2bb01a423, type: 3}
         RandomSfx: []
         TestPlayButton:
           ButtonText: Debug Play Sound
@@ -231,9 +231,9 @@ MonoBehaviour:
         PoolSize: 10
         UseLegacyEventsMode: 0
         StopSoundOnFeedbackStop: 1
-        MinVolume: 0.87
-        MaxVolume: 1.1
-        MinPitch: 0.7
+        MinVolume: 0.7
+        MaxVolume: 0.95
+        MinPitch: 0.8
         MaxPitch: 1.1
         SfxAudioMixerGroup: {fileID: 0}
         Priority: 128
