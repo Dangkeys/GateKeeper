@@ -3341,12 +3341,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4427298781944890467, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: sprintDuration
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4427298781944890467, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: sprintScrollBar
       value: 
       objectReference: {fileID: 1472377072}
+    - target: {fileID: 4427298781944890467, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      propertyPath: timeBeforeRecovery
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4427298781944890467, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       propertyPath: sprintDurationReward
       value: 0.2

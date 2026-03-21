@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveSettingsSO
   enemyPrefab: {fileID: 7693366073175486830, guid: d73ee81a417e7744db5d0e11bf5819d0, type: 3}
   randomSpawnOffset: 0
-  minimumSpawnDistanceOffset: 100
-  maximumSpawnDistanceOffset: 250
+  minimumSpawnDistanceOffset: 40
+  maximumSpawnDistanceOffset: 120
   enemyPool:
   - stat: {fileID: 11400000, guid: 1be43b6e5de6d3642bf80f7063025c39, type: 2}
     cost: 8
@@ -60,3 +60,4 @@ MonoBehaviour:
     maxMoveSpeedMultiplier: 1.5
     ammoRateDropMultiplier: 0.05
     maxAmmoRateDropMultiplier: 1
+    scoreMultiplier: 0.1
