@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GateKeeperProject.Scripts;
 using GateKeeperProject.Scripts.Enemies;
 using JetBrains.Annotations;
+using MoreMountains.Feedbacks;
 using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
@@ -19,6 +20,8 @@ public class Enemy : MonoBehaviour, IAttackable
     private const string MoveSpeedVariable = "moveSpeed";
     private const string DistanceThresholdVariable = "distanceThreshold";
     private const string AnimatorSpeedVariable = "animatorSpeedParam";
+    private const string EnemyVariable = "enemy";
+    private MMF_Player _attackFeedback;
 
     private EnemyStatModifiers _enemyStatModifiers;
 
@@ -33,7 +36,7 @@ public class Enemy : MonoBehaviour, IAttackable
     public EnemyHitFlash GetHitFlash() => hitFlash;
 
     [Inject]
-    private void Construct(WaveHandler waveHandler, AmmoDropSystem ammoDropSystem, ScoreManager scoreManager )
+    private void Construct(WaveHandler waveHandler, AmmoDropSystem ammoDropSystem, ScoreManager scoreManager)
     {
         _waveHandler = waveHandler;
         _ammoDropSystem = ammoDropSystem;
@@ -64,7 +67,7 @@ public class Enemy : MonoBehaviour, IAttackable
     {
         agent.enabled = false;
         TrySpawnAmmo();
-        
+
         _scoreManager.AddScore(Mathf.RoundToInt(_waveHandler.StatModifiers.scoreMultiplier * currentStat.Score));
 
         Destroy(gameObject);
@@ -105,12 +108,23 @@ public class Enemy : MonoBehaviour, IAttackable
         hitFlash = gameObject.AddComponent<EnemyHitFlash>();
         hitFlash.Initialize(enemyVisual);
         EnemyHealth.InitAndSetMaxHealth(currentStat.MaxHealth * _enemyStatModifiers.healthMultiplier);
-
         InitializeColliders();
         InitializeAgent();
+        InitializeAttackFeedback();
         InitializeBehaviorGraphAgent();
     }
 
+    private void InitializeAttackFeedback()
+    {
+        if (currentStat.AttackFeedbackPrefab == null) return;
+        _attackFeedback = Instantiate(currentStat.AttackFeedbackPrefab, transform);
+        _attackFeedback.Initialization();
+    }
+
+    public void OnAttack()
+    {
+        _attackFeedback?.PlayFeedbacks();
+    }
 
     private void InitializeAgent()
     {
@@ -168,6 +182,7 @@ public class Enemy : MonoBehaviour, IAttackable
             currentStat.MoveSpeed * _enemyStatModifiers.moveSpeedMultiplier);
         behaviorGraphAgent.SetVariableValue(DistanceThresholdVariable, currentStat.StoppingDistance);
         behaviorGraphAgent.SetVariableValue(AnimatorSpeedVariable, "velocity");
+        behaviorGraphAgent.SetVariableValue(EnemyVariable, this);
         agent.angularSpeed = currentStat.RotationSpeed;
     }
 

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using MoreMountains.Feedbacks;
+using VContainer;
 
 namespace GateKeeperProject.Scripts
 {
@@ -9,10 +10,16 @@ namespace GateKeeperProject.Scripts
     public class Player : MonoBehaviour
     {
         public Health PlayerHealth { get; private set; }
+        private SaveManager _saveManager;
 
         [Header("Feedbacks")]
         [SerializeField] private MMF_Player hurtFeedbacks;
 
+        [Inject]
+        public void Construct(SaveManager saveManager)
+        {
+            _saveManager = saveManager;
+        }
         private void OnTriggerEnter(Collider col)
         {
             PlayerHealth.TryToTakeDamage(col);
@@ -37,9 +44,18 @@ namespace GateKeeperProject.Scripts
             hurtFeedbacks?.PlayFeedbacks();
         }
 
-        private void DeathEvent()
+        private async void DeathEvent()
         {
             SceneManager.LoadScene("Main Menu");
+            // 1. Play Fade MMFeedback
+            // playFeedback();
+
+            if (_saveManager != null)
+            {
+                await _saveManager.SaveGameAsync();
+            }
+
+            SceneManager.LoadSceneAsync("ScoreScene");
         }
 
         public void IncreaseMaxHealth()
