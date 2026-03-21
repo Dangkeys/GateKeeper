@@ -53,19 +53,11 @@ public class Gun : MonoBehaviour
         ammoSystem.OnAmmoChanged += UpdateAmmo;
         totalAmmo = ammoSystem.GetAmmo(data.type);
         UpdateAmmoUI();
-        reloadInputLeft.action.Enable();
-        reloadInputLeft.action.started += ReloadInLeft;
-        reloadInputRight.action.Enable();
-        reloadInputRight.action.started += ReloadInRight;
     }
 
     void OnDisable()
     {
         ammoSystem.OnAmmoChanged -= UpdateAmmo;
-        reloadInputLeft.action.Disable();
-        reloadInputLeft.action.started -= ReloadInLeft;
-        reloadInputRight.action.Disable();
-        reloadInputRight.action.started -= ReloadInRight;
     }
 
     void Update()
@@ -260,7 +252,17 @@ public class Gun : MonoBehaviour
 
     public void SetCurrentHandType(HandType hand)
     {
+        reloadInputLeft.action.started -= ReloadInLeft;
+        reloadInputRight.action.started -= ReloadInRight;
         currentHandType = hand;
+        if (hand == HandType.Left)
+        {
+            reloadInputLeft.action.started += ReloadInLeft;
+        }
+        else if (hand == HandType.Right)
+        {
+            reloadInputRight.action.started += ReloadInRight;
+        }
     }
 
     public GunData GetGunData()
