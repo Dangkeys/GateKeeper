@@ -236,8 +236,8 @@ MonoBehaviour:
         UseLegacyEventsMode: 0
         StopSoundOnFeedbackStop: 1
         MinVolume: 0.9
-        MaxVolume: 1.1
-        MinPitch: 0.7
+        MaxVolume: 1.2
+        MinPitch: 0.85
         MaxPitch: 1.1
         SfxAudioMixerGroup: {fileID: 0}
         Priority: 128
