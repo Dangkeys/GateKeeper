@@ -53,7 +53,7 @@ public class AmmoGlowEffect : MonoBehaviour
 
         if (enableBobbing)
         {
-            float newY = _startPos.y + floatHeight + Mathf.Sin(t * bobSpeed) * bobHeight;
+            float newY = 0.3f + floatHeight + Mathf.Sin(t * bobSpeed) * bobHeight;
             transform.position = new Vector3(_startPos.x, newY, _startPos.z);
         }
 
