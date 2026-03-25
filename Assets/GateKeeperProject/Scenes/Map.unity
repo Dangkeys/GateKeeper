@@ -3136,8 +3136,8 @@ MonoBehaviour:
   pulseSpeed: 2
   pulseAmount: 0.6
   enableBobbing: 1
-  floatHeight: 0.1
-  bobHeight: 0.05
+  floatHeight: 0
+  bobHeight: 0.1
   bobSpeed: 1
   enableRotation: 1
   rotationSpeed: 90
@@ -3478,8 +3478,8 @@ MonoBehaviour:
   pulseSpeed: 2
   pulseAmount: 0.6
   enableBobbing: 1
-  floatHeight: 0.1
-  bobHeight: 0.05
+  floatHeight: 0
+  bobHeight: 0.1
   bobSpeed: 1
   enableRotation: 1
   rotationSpeed: 90
@@ -4097,8 +4097,8 @@ MonoBehaviour:
   pulseSpeed: 2
   pulseAmount: 0.6
   enableBobbing: 1
-  floatHeight: 0.1
-  bobHeight: 0.05
+  floatHeight: 0
+  bobHeight: 0.1
   bobSpeed: 1
   enableRotation: 1
   rotationSpeed: 90
@@ -4707,8 +4707,8 @@ MonoBehaviour:
   pulseSpeed: 2
   pulseAmount: 0.6
   enableBobbing: 1
-  floatHeight: 0.1
-  bobHeight: 0.05
+  floatHeight: 0
+  bobHeight: 0.1
   bobSpeed: 1
   enableRotation: 1
   rotationSpeed: 90
@@ -5310,8 +5310,8 @@ MonoBehaviour:
   pulseSpeed: 2
   pulseAmount: 0.6
   enableBobbing: 1
-  floatHeight: 0.1
-  bobHeight: 0.05
+  floatHeight: 0
+  bobHeight: 0.1
   bobSpeed: 1
   enableRotation: 1
   rotationSpeed: 90
